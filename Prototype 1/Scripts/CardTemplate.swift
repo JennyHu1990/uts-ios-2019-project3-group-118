@@ -16,12 +16,21 @@ enum CardType :Int {
     skills
 }
 
+
+enum CardLevel :CGFloat {
+    case board = 10
+    case moving = 100
+    case enlarged = 200
+}
+
+
 // 1
 class CardTemplate: SKSpriteNode {
     
     let cardType :CardType
     let frontTexture :SKTexture
     let backTexture :SKTexture
+    let chosen :Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")

@@ -35,14 +35,11 @@ class StrategicScene: SKScene {
         let card1 = CardTemplate(cardType: .defense)
 
         card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
-        card1.zPosition = CardLevel.board.rawValue
-        print(-size.width/2 + card1.size.width)
         gameManager.add(card1)
         
         // 3
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
-        card2.zPosition = CardLevel.board.rawValue
         gameManager.add(card2)
     }
     
@@ -50,7 +47,6 @@ class StrategicScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let card = atPoint(location) as? CardTemplate {
-//                if card.enlarged { return }
                 card.position = location
             }
         }
@@ -73,27 +69,35 @@ class StrategicScene: SKScene {
                 card.removeFromParent()
                 addChild(card)
             }
+            if let button = atPoint(location) as? SKSpriteNode {
+                if button.name == "Start" {
+                    let revealGameScene = SKTransition.fade(withDuration: 0.5)
+                    let goToGameScene = GameScene(fileNamed: "GameScene")
+                    goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
+                    self.view?.presentScene(goToGameScene!, transition:revealGameScene)
+                }
+            }
         }
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
-            self.lastUpdateTime = currentTime
-        }
-        
-        // Calculate time since last update
-        let dt = currentTime - self.lastUpdateTime
-        
-        // Update entities
-        for entity in self.entities {
-            entity.update(deltaTime: dt)
-        }
-        
-        self.lastUpdateTime = currentTime
-    }
+//    override func update(_ currentTime: TimeInterval) {
+//        // Called before each frame is rendered
+//        
+//        // Initialize _lastUpdateTime if it has not already been
+//        if (self.lastUpdateTime == 0) {
+//            self.lastUpdateTime = currentTime
+//        }
+//        
+//        // Calculate time since last update
+//        let dt = currentTime - self.lastUpdateTime
+//        
+//        // Update entities
+//        for entity in self.entities {
+//            entity.update(deltaTime: dt)
+//        }
+//        
+//        self.lastUpdateTime = currentTime
+//    }
 }
 
 

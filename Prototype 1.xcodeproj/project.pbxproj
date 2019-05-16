@@ -19,7 +19,6 @@
 		BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */; };
 		BACA519B228D2C17009CBE7A /* StrategicScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BACA519A228D2C17009CBE7A /* StrategicScene.sks */; };
 		BACA519D228D3025009CBE7A /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA519C228D3025009CBE7A /* GameManager.swift */; };
-		BACA519F228D3219009CBE7A /* ObjectsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA519E228D3219009CBE7A /* ObjectsComponents.swift */; };
 		BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA51A0228D324B009CBE7A /* CardTemplate.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +37,6 @@
 		BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicSceneController.swift; sourceTree = "<group>"; };
 		BACA519A228D2C17009CBE7A /* StrategicScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StrategicScene.sks; sourceTree = "<group>"; };
 		BACA519C228D3025009CBE7A /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
-		BACA519E228D3219009CBE7A /* ObjectsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsComponents.swift; sourceTree = "<group>"; };
 		BACA51A0228D324B009CBE7A /* CardTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTemplate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,7 +94,6 @@
 				BACA5199228D2A54009CBE7A /* Scenes */,
 				BACA5198228D2A48009CBE7A /* Controllers */,
 				BACA519C228D3025009CBE7A /* GameManager.swift */,
-				BACA519E228D3219009CBE7A /* ObjectsComponents.swift */,
 				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
 			);
 			path = Scripts;
@@ -221,7 +218,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BACA519F228D3219009CBE7A /* ObjectsComponents.swift in Sources */,
 				BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */,
 				BACA519D228D3025009CBE7A /* GameManager.swift in Sources */,
 				BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */,
