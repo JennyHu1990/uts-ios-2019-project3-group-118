@@ -47,6 +47,8 @@ class StrategicScene: SKScene {
             if let card = atPoint(location) as? CardTemplate {
                 currentCard = card
                 currentCard?.zPosition = CardLevel.moving.rawValue
+                currentCard?.removeAction(forKey: "drop")
+                currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
             }
         }
     }
@@ -73,6 +75,8 @@ class StrategicScene: SKScene {
             let location = touch.location(in: self)
             if currentCard != nil {
                 currentCard?.zPosition = CardLevel.board.rawValue
+                currentCard?.removeAction(forKey: "pickup")
+                currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
                 currentCard = nil
 //                card.removeFromParent()
 //                addChild(card)
