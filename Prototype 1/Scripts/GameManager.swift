@@ -13,7 +13,7 @@ import GameplayKit
 class GameManager {
     
     // 1
-    var entities = Set<GKEntity>()
+    var entities = Set<SKSpriteNode>()
     let scene: SKScene
     
     // 2
@@ -22,20 +22,17 @@ class GameManager {
     }
     
     // 3
-    func add(_ entity: GKEntity) {
+    func add(_ entity: SKSpriteNode) {
         entities.insert(entity)
+
+        scene.addChild(entity)
         
-        if let spriteNode = entity.component(ofType: ObjectComponents.self)?.node {
-            scene.addChild(spriteNode)
-        }
     }
     
     // 4
-    func remove(_ entity: GKEntity) {
-        if let spriteNode = entity.component(ofType: ObjectComponents.self)?.node {
-            spriteNode.removeFromParent()
-        }
+    func remove(_ entity: SKSpriteNode) {
         
+        entity.removeFromParent()
         entities.remove(entity)
     }
 }

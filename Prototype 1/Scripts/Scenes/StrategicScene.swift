@@ -32,19 +32,48 @@ class StrategicScene: SKScene {
         gameManager = GameManager(scene: self)
         
         // 2
-        let card1 = CardTemplate(imageName: "CardBackground")
-        if let spriteComponent = card1.component(ofType: ObjectComponents.self) {
-            spriteComponent.node.position = CGPoint(x: -size.width/2 + 2*spriteComponent.node.size.width, y: 200)
-            print(-size.width/2 + spriteComponent.node.size.width)
-        }
+        let card1 = CardTemplate(cardType: .defense)
+
+        card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
+        card1.zPosition = CardLevel.board.rawValue
+        print(-size.width/2 + card1.size.width)
         gameManager.add(card1)
         
         // 3
-        let card2 = CardTemplate(imageName: "CardBackground")
-        if let spriteComponent = card2.component(ofType: ObjectComponents.self) {
-            spriteComponent.node.position = CGPoint(x: size.width/2 - spriteComponent.node.size.width, y:200)
-        }
+        let card2 = CardTemplate(cardType: .attack)
+        card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
+        card2.zPosition = CardLevel.board.rawValue
         gameManager.add(card2)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let card = atPoint(location) as? CardTemplate {
+//                if card.enlarged { return }
+                card.position = location
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let card = atPoint(location) as? CardTemplate {
+                card.zPosition = CardLevel.moving.rawValue
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let card = atPoint(location) as? CardTemplate {
+                card.zPosition = CardLevel.board.rawValue
+                card.removeFromParent()
+                addChild(card)
+            }
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {

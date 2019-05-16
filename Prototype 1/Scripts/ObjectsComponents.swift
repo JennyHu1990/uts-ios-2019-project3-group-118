@@ -17,39 +17,16 @@ enum CardLevel :CGFloat {
     case enlarged = 200
 }
 
-class cardSpriteNode: SKSpriteNode {
-
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self)
-            if let card = atPoint(location) as? cardSpriteNode {
-                card.zPosition = CardLevel.moving.rawValue
-            }
-        }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self)
-            if let card = atPoint(location) as? cardSpriteNode {
-                card.zPosition = CardLevel.board.rawValue
-                card.removeFromParent()
-                addChild(card)
-            }
-        }
-    }
-}
 
 // 2
 class ObjectComponents: GKComponent {
     
     // 3
-    let node: cardSpriteNode
+    let node: SKSpriteNode
     
     // 4
     init(texture: SKTexture) {
-        node = cardSpriteNode(texture: texture, color: .white, size: texture.size())
+        node = SKSpriteNode(texture: texture, color: .white, size: texture.size())
         super.init()
     }
     
