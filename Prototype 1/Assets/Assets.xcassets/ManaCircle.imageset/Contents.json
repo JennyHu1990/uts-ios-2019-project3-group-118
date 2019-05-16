@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ManaCircle.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ManaCircle.png",
       "scale" : "2x"
     },
     {

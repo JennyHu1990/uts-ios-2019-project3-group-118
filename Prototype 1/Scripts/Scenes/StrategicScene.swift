@@ -12,15 +12,12 @@ import SpriteKit
 import GameplayKit
 
 class StrategicScene: SKScene {
-    
-    var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
+
     
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
     var gameManager: GameManager!
-
+    var currentCard: CardTemplate?
     
     override func sceneDidLoad() {
         
@@ -33,7 +30,7 @@ class StrategicScene: SKScene {
         
         // 2
         let card1 = CardTemplate(cardType: .defense)
-
+        card1.name = "card1"
         card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
         gameManager.add(card1)
         
@@ -43,31 +40,42 @@ class StrategicScene: SKScene {
         gameManager.add(card2)
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self)
-            if let card = atPoint(location) as? CardTemplate {
-                card.position = location
-            }
-        }
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
+        if let touch = touches.first {
             let location = touch.location(in: self)
             if let card = atPoint(location) as? CardTemplate {
-                card.zPosition = CardLevel.moving.rawValue
+                currentCard = card
+                currentCard?.zPosition = CardLevel.moving.rawValue
             }
         }
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchedPoint = touches.first!
+        let pointToMove = touchedPoint.location(in: self)
+        let moveAction = SKAction.move(to: pointToMove, duration: 0.1)// play with the duration to get a smooth movement
+//        if let card = atPoint(pointToMove) as? CardTemplate {
+        if currentCard != nil{
+            currentCard?.run(moveAction)
+        }
+//        }
+//        node.run(moveAction)
+//        for touch in touches{
+//            let location = touch.location(in: self)
+        
+        
+    }
+
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
+        if let touch = touches.first {
             let location = touch.location(in: self)
-            if let card = atPoint(location) as? CardTemplate {
-                card.zPosition = CardLevel.board.rawValue
-                card.removeFromParent()
-                addChild(card)
+            if currentCard != nil {
+                currentCard?.zPosition = CardLevel.board.rawValue
+                currentCard = nil
+//                card.removeFromParent()
+//                addChild(card)
             }
             if let button = atPoint(location) as? SKSpriteNode {
                 if button.name == "Start" {
