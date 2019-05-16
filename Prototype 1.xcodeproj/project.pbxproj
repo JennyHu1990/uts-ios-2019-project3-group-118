@@ -15,6 +15,12 @@
 		2BE19171228D00EA00694D2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1916F228D00EA00694D2F /* Main.storyboard */; };
 		2BE19173228D00EC00694D2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19172228D00EC00694D2F /* Assets.xcassets */; };
 		2BE19176228D00EC00694D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19174228D00EC00694D2F /* LaunchScreen.storyboard */; };
+		BACA5195228D2A24009CBE7A /* StrategicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5194228D2A24009CBE7A /* StrategicScene.swift */; };
+		BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */; };
+		BACA519B228D2C17009CBE7A /* StrategicScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BACA519A228D2C17009CBE7A /* StrategicScene.sks */; };
+		BACA519D228D3025009CBE7A /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA519C228D3025009CBE7A /* GameManager.swift */; };
+		BACA519F228D3219009CBE7A /* ObjectsComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA519E228D3219009CBE7A /* ObjectsComponents.swift */; };
+		BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA51A0228D324B009CBE7A /* CardTemplate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,12 @@
 		2BE19172228D00EC00694D2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BE19175228D00EC00694D2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BE19177228D00EC00694D2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BACA5194228D2A24009CBE7A /* StrategicScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicScene.swift; sourceTree = "<group>"; };
+		BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicSceneController.swift; sourceTree = "<group>"; };
+		BACA519A228D2C17009CBE7A /* StrategicScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StrategicScene.sks; sourceTree = "<group>"; };
+		BACA519C228D3025009CBE7A /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		BACA519E228D3219009CBE7A /* ObjectsComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsComponents.swift; sourceTree = "<group>"; };
+		BACA51A0228D324B009CBE7A /* CardTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTemplate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +93,11 @@
 		BACA5190228D28D2009CBE7A /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				2BE1916B228D00EA00694D2F /* GameScene.swift */,
-				2BE1916D228D00EA00694D2F /* GameViewController.swift */,
+				BACA5199228D2A54009CBE7A /* Scenes */,
+				BACA5198228D2A48009CBE7A /* Controllers */,
+				BACA519C228D3025009CBE7A /* GameManager.swift */,
+				BACA519E228D3219009CBE7A /* ObjectsComponents.swift */,
+				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -91,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE19167228D00EA00694D2F /* GameScene.sks */,
+				BACA519A228D2C17009CBE7A /* StrategicScene.sks */,
 				2BE19169228D00EA00694D2F /* Actions.sks */,
 			);
 			path = Scenes;
@@ -111,6 +127,24 @@
 				2BE19174228D00EC00694D2F /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		BACA5198228D2A48009CBE7A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */,
+				2BE1916D228D00EA00694D2F /* GameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BACA5199228D2A54009CBE7A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				2BE1916B228D00EA00694D2F /* GameScene.swift */,
+				BACA5194228D2A24009CBE7A /* StrategicScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BE19171228D00EA00694D2F /* Main.storyboard in Resources */,
+				BACA519B228D2C17009CBE7A /* StrategicScene.sks in Resources */,
 				2BE19168228D00EA00694D2F /* GameScene.sks in Resources */,
 				2BE19173228D00EC00694D2F /* Assets.xcassets in Resources */,
 				2BE19176228D00EC00694D2F /* LaunchScreen.storyboard in Resources */,
@@ -186,9 +221,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BACA519F228D3219009CBE7A /* ObjectsComponents.swift in Sources */,
+				BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */,
+				BACA519D228D3025009CBE7A /* GameManager.swift in Sources */,
+				BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */,
 				2BE1916C228D00EA00694D2F /* GameScene.swift in Sources */,
 				2BE1916E228D00EA00694D2F /* GameViewController.swift in Sources */,
 				2BE19166228D00EA00694D2F /* AppDelegate.swift in Sources */,
+				BACA5195228D2A24009CBE7A /* StrategicScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YSGJGW686D;
 				INFOPLIST_FILE = "Prototype 1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -352,6 +393,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YSGJGW686D;
 				INFOPLIST_FILE = "Prototype 1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

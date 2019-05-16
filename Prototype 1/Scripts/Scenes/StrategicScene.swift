@@ -1,15 +1,17 @@
 //
-//  GameScene.swift
+//  StrategicScene.swift
 //  Prototype 1
 //
-//  Created by 陳修雯 on 16/5/19.
+//  Created by 胡健妮 on 16/5/19.
 //  Copyright © 2019 Siou-Wun Chen. All rights reserved.
 //
+
+import Foundation
 
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class StrategicScene: SKScene {
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -17,15 +19,62 @@ class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    var gameManager: GameManager!
+
     
     override func sceneDidLoad() {
-
+        
         self.lastUpdateTime = 0
     }
-        // Create shape node to use during mouse interaction
+    
+    override func didMove(to view: SKView) {
+        // 1
+        gameManager = GameManager(scene: self)
+        
+        // 2
+        let card1 = CardTemplate(imageName: "CardBackground")
+        if let spriteComponent = card1.component(ofType: ObjectComponents.self) {
+            spriteComponent.node.position = CGPoint(x: -size.width/2 + 2*spriteComponent.node.size.width, y: 200)
+            print(-size.width/2 + spriteComponent.node.size.width)
+        }
+        gameManager.add(card1)
+        
+        // 3
+        let card2 = CardTemplate(imageName: "CardBackground")
+        if let spriteComponent = card2.component(ofType: ObjectComponents.self) {
+            spriteComponent.node.position = CGPoint(x: size.width/2 - spriteComponent.node.size.width, y:200)
+        }
+        gameManager.add(card2)
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
+        
+        // Initialize _lastUpdateTime if it has not already been
+        if (self.lastUpdateTime == 0) {
+            self.lastUpdateTime = currentTime
+        }
+        
+        // Calculate time since last update
+        let dt = currentTime - self.lastUpdateTime
+        
+        // Update entities
+        for entity in self.entities {
+            entity.update(deltaTime: dt)
+        }
+        
+        self.lastUpdateTime = currentTime
+    }
+}
+
+
+
+
+
+// Create shape node to use during mouse interaction
 //        let w = (self.size.width + self.size.height) * 0.05
 //        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
+
 //        if let spinnyNode = self.spinnyNode {
 //            spinnyNode.lineWidth = 2.5
 //
@@ -35,8 +84,8 @@ class GameScene: SKScene {
 //                                              SKAction.removeFromParent()]))
 //        }
 //    }
-    
-    
+
+
 //    func touchDown(atPoint pos : CGPoint) {
 //        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
 //            n.position = pos
@@ -80,24 +129,4 @@ class GameScene: SKScene {
 //    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
 //    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
-            self.lastUpdateTime = currentTime
-        }
-        
-        // Calculate time since last update
-        let dt = currentTime - self.lastUpdateTime
-        
-        // Update entities
-        for entity in self.entities {
-            entity.update(deltaTime: dt)
-        }
-        
-        self.lastUpdateTime = currentTime
-    }
-}
+
