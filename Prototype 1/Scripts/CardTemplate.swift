@@ -54,9 +54,7 @@ class CardTemplate: SKSpriteNode {
             frontTexture = SKTexture(imageNamed: "ManaCircle")
         case .skills:
             frontTexture = SKTexture(imageNamed: "CardBackground")
-            
         }
-        
         super.init(texture: frontTexture, color: .clear, size: frontTexture.size())
     }
     
@@ -89,23 +87,3 @@ class CardTemplate: SKSpriteNode {
     }
 }
 
-class attack: CardTemplate {
-    var energy = Int()
-    var backImage = SKTexture.self
-    var cardDescription = String()
-    var used = false
-    // may accept arguments of enemies?
-    func attack() {
-        print("Attack")
-    }
-}
-
-class defense: CardTemplate {
-    var energy = Int()
-    var backImage = SKTexture.self
-    var cardDescription = String()
-    var used = false
-    func defense() {
-        print("Defense")
-    }
-}

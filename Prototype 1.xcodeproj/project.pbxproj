@@ -15,13 +15,13 @@
 		2BE19173228D00EC00694D2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19172228D00EC00694D2F /* Assets.xcassets */; };
 		2BE19176228D00EC00694D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19174228D00EC00694D2F /* LaunchScreen.storyboard */; };
 		BA94ACC3228E69BF0056B82B /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA94ACC2228E69BF0056B82B /* Enemy.swift */; };
-		BA94ACC6228E6ABB0056B82B /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA94ACC5228E6ABB0056B82B /* SpriteComponent.swift */; };
-		BA94ACC8228E6DDD0056B82B /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA94ACC7228E6DDD0056B82B /* EntityManager.swift */; };
 		BACA5195228D2A24009CBE7A /* StrategicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5194228D2A24009CBE7A /* StrategicScene.swift */; };
 		BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */; };
-		BACA519B228D2C17009CBE7A /* StrategicScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BACA519A228D2C17009CBE7A /* StrategicScene.sks */; };
 		BACA519D228D3025009CBE7A /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA519C228D3025009CBE7A /* GameManager.swift */; };
 		BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA51A0228D324B009CBE7A /* CardTemplate.swift */; };
+		F50AC45B228EBD6800CF5C43 /* AttackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50AC45A228EBD6800CF5C43 /* AttackCard.swift */; };
+		F50AC45D228EBD8E00CF5C43 /* DefendCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */; };
+		F50AC45F228ECA0000CF5C43 /* StrategicScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F50AC45E228ECA0000CF5C43 /* StrategicScene.sks */; };
 		F568189A228EB61700765006 /* SceneClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5681899228EB61700765006 /* SceneClass.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,13 +36,13 @@
 		2BE19175228D00EC00694D2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BE19177228D00EC00694D2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA94ACC2228E69BF0056B82B /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
-		BA94ACC5228E6ABB0056B82B /* SpriteComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
-		BA94ACC7228E6DDD0056B82B /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		BACA5194228D2A24009CBE7A /* StrategicScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicScene.swift; sourceTree = "<group>"; };
 		BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicSceneController.swift; sourceTree = "<group>"; };
-		BACA519A228D2C17009CBE7A /* StrategicScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StrategicScene.sks; sourceTree = "<group>"; };
 		BACA519C228D3025009CBE7A /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		BACA51A0228D324B009CBE7A /* CardTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTemplate.swift; sourceTree = "<group>"; };
+		F50AC45A228EBD6800CF5C43 /* AttackCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackCard.swift; sourceTree = "<group>"; };
+		F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefendCard.swift; sourceTree = "<group>"; };
+		F50AC45E228ECA0000CF5C43 /* StrategicScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StrategicScene.sks; sourceTree = "<group>"; };
 		F5681899228EB61700765006 /* SceneClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,32 +86,6 @@
 			path = "Prototype 1";
 			sourceTree = "<group>";
 		};
-		BA94ACC0228E637C0056B82B /* ECS */ = {
-			isa = PBXGroup;
-			children = (
-				BA94ACC4228E6A9C0056B82B /* Component */,
-				BA94ACC1228E67260056B82B /* Entity */,
-				BA94ACC7228E6DDD0056B82B /* EntityManager.swift */,
-			);
-			path = ECS;
-			sourceTree = "<group>";
-		};
-		BA94ACC1228E67260056B82B /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				BA94ACC2228E69BF0056B82B /* Enemy.swift */,
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
-		BA94ACC4228E6A9C0056B82B /* Component */ = {
-			isa = PBXGroup;
-			children = (
-				BA94ACC5228E6ABB0056B82B /* SpriteComponent.swift */,
-			);
-			path = Component;
-			sourceTree = "<group>";
-		};
 		BACA518F228D28C4009CBE7A /* Template */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,11 +97,13 @@
 		BACA5190228D28D2009CBE7A /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				BA94ACC0228E637C0056B82B /* ECS */,
 				BACA5199228D2A54009CBE7A /* Scenes */,
 				BACA5198228D2A48009CBE7A /* Controllers */,
 				BACA519C228D3025009CBE7A /* GameManager.swift */,
 				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
+				F50AC45A228EBD6800CF5C43 /* AttackCard.swift */,
+				F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */,
+				BA94ACC2228E69BF0056B82B /* Enemy.swift */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -136,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE19167228D00EA00694D2F /* GameScene.sks */,
-				BACA519A228D2C17009CBE7A /* StrategicScene.sks */,
+				F50AC45E228ECA0000CF5C43 /* StrategicScene.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -236,7 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BE19171228D00EA00694D2F /* Main.storyboard in Resources */,
-				BACA519B228D2C17009CBE7A /* StrategicScene.sks in Resources */,
+				F50AC45F228ECA0000CF5C43 /* StrategicScene.sks in Resources */,
 				2BE19168228D00EA00694D2F /* GameScene.sks in Resources */,
 				2BE19173228D00EC00694D2F /* Assets.xcassets in Resources */,
 				2BE19176228D00EC00694D2F /* LaunchScreen.storyboard in Resources */,
@@ -251,10 +227,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */,
-				BA94ACC6228E6ABB0056B82B /* SpriteComponent.swift in Sources */,
-				BA94ACC8228E6DDD0056B82B /* EntityManager.swift in Sources */,
+				F50AC45B228EBD6800CF5C43 /* AttackCard.swift in Sources */,
 				BACA519D228D3025009CBE7A /* GameManager.swift in Sources */,
 				BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */,
+				F50AC45D228EBD8E00CF5C43 /* DefendCard.swift in Sources */,
 				2BE1916C228D00EA00694D2F /* GameScene.swift in Sources */,
 				2BE1916E228D00EA00694D2F /* GameViewController.swift in Sources */,
 				BA94ACC3228E69BF0056B82B /* Enemy.swift in Sources */,
