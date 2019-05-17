@@ -96,10 +96,10 @@ class attack: CardTemplate {
     var backImage = SKTexture.self
     var cardDescription = String()
     var used = false
+    // may accept arguments of enemies?
     func attack() {
         print("Attack")
     }
-    
 }
 
 class defense: CardTemplate {
