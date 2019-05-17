@@ -11,13 +11,13 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class StrategicScene: SKScene {
+class StrategicScene: SceneClass {
 
     
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
-    var gameManager: GameManager!
-    var currentCard: CardTemplate?
+//    var gameManager: GameManager!
+
     
     override func sceneDidLoad() {
         
@@ -26,71 +26,21 @@ class StrategicScene: SKScene {
     
     override func didMove(to view: SKView) {
         // 1
-        gameManager = GameManager(scene: self)
+        super.gameManager = GameManager(scene: self)
         
         // 2
         let card1 = CardTemplate(cardType: .defense)
         card1.name = "card1"
         card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
-        gameManager.add(card1)
+        super.gameManager.add(card1)
         
         // 3
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
-        gameManager.add(card2)
+        super.gameManager.add(card2)
     }
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let location = touch.location(in: self)
-            if let card = atPoint(location) as? CardTemplate {
-                currentCard = card
-                currentCard?.zPosition = CardLevel.moving.rawValue
-                currentCard?.removeAction(forKey: "drop")
-                currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
-            }
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchedPoint = touches.first!
-        let pointToMove = touchedPoint.location(in: self)
-        let moveAction = SKAction.move(to: pointToMove, duration: 0.1)// play with the duration to get a smooth movement
-//        if let card = atPoint(pointToMove) as? CardTemplate {
-        if currentCard != nil{
-            currentCard?.run(moveAction)
-        }
-//        }
-//        node.run(moveAction)
-//        for touch in touches{
-//            let location = touch.location(in: self)
-        
-        
-    }
-
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let location = touch.location(in: self)
-            if currentCard != nil {
-                currentCard?.zPosition = CardLevel.board.rawValue
-                currentCard?.removeAction(forKey: "pickup")
-                currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
-                currentCard = nil
-//                card.removeFromParent()
-//                addChild(card)
-            }
-            if let button = atPoint(location) as? SKSpriteNode {
-                if button.name == "Start" {
-                    let revealGameScene = SKTransition.fade(withDuration: 0.5)
-                    let goToGameScene = GameScene(fileNamed: "GameScene")
-                    goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
-                    self.view?.presentScene(goToGameScene!, transition:revealGameScene)
-                }
-            }
-        }
-    }
     
 //    override func update(_ currentTime: TimeInterval) {
 //        // Called before each frame is rendered

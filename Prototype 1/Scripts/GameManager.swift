@@ -24,9 +24,7 @@ class GameManager {
     // 3
     func add(_ entity: SKSpriteNode) {
         entities.insert(entity)
-
         scene.addChild(entity)
-        
     }
     
     // 4
