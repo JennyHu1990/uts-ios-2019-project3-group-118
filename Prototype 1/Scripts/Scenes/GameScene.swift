@@ -14,6 +14,8 @@ class GameScene: SKScene {
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
+    var entityManager: EntityManager!
+    
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
@@ -21,6 +23,17 @@ class GameScene: SKScene {
     override func sceneDidLoad() {
         self.backgroundColor = .red
         self.lastUpdateTime = 0
+    }
+    
+    override func didMove(to view: SKView) {
+        entityManager = EntityManager(scene: self)
+        
+
+        let spiderEnemy = Enemy(imageName: "FightIcon", name: "Spider", hp: 30)
+        if let spriteComponent = spiderEnemy.component(ofType: SpriteComponent.self) {
+            spriteComponent.node.position = CGPoint(x: spriteComponent.node.size.width/2, y: size.height/2)
+        }
+        entityManager.add(spiderEnemy)
     }
 
     
