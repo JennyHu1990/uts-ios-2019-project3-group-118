@@ -16,7 +16,7 @@ class attack: CardTemplate {
     var cardDescription = String()
     var used = false
     // may accept arguments of enemies?
-    func attack() {
-        print("Attack")
+    func attack() -> Int {
+        return energy;
     }
 }

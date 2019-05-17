@@ -54,9 +54,7 @@ class CardTemplate: SKSpriteNode {
             frontTexture = SKTexture(imageNamed: "ManaCircle")
         case .skills:
             frontTexture = SKTexture(imageNamed: "CardBackground")
-            
         }
-        
         super.init(texture: frontTexture, color: .clear, size: frontTexture.size())
     }
     
