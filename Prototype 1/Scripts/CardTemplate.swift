@@ -13,8 +13,7 @@ import GameplayKit
 enum CardType :Int {
     case attack,
     defense,
-    skills,
-    pet
+    skills
 }
 
 
@@ -48,8 +47,7 @@ class CardTemplate: SKSpriteNode {
             frontTexture = SKTexture(imageNamed: "ManaCircle")
         case .skills:
             frontTexture = SKTexture(imageNamed: "CardBackground")
-        case .pet:
-            frontTexture = SKTexture(imageNamed: "ManaCircle")
+            
         }
         
         super.init(texture: frontTexture, color: .clear, size: frontTexture.size())
