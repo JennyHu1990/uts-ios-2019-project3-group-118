@@ -13,7 +13,8 @@ import GameplayKit
 
 class StrategicScene: SceneClass {
 
-    
+    var entities = [GKEntity]()
+    var graphs = [String : GKGraph]()
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
 //    var gameManager: GameManager!
@@ -29,7 +30,7 @@ class StrategicScene: SceneClass {
         super.gameManager = GameManager(scene: self)
         
         // 2
-        let card1 = CardTemplate(cardType: .defense)
+        let card1 = defense(cardType: .defense)
         card1.name = "card1"
         card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
         super.gameManager.add(card1)
