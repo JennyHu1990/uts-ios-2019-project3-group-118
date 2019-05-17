@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B601A4D228EE67B003B814C /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B601A4C228EE67B003B814C /* CardDeck.swift */; };
 		2BE19166228D00EA00694D2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE19165228D00EA00694D2F /* AppDelegate.swift */; };
 		2BE19168228D00EA00694D2F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19167228D00EA00694D2F /* GameScene.sks */; };
 		2BE1916C228D00EA00694D2F /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1916B228D00EA00694D2F /* GameScene.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B601A4C228EE67B003B814C /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 		2BE19162228D00EA00694D2F /* Prototype 1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Prototype 1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE19165228D00EA00694D2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BE19167228D00EA00694D2F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				BACA5198228D2A48009CBE7A /* Controllers */,
 				BACA519C228D3025009CBE7A /* GameManager.swift */,
 				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
+				2B601A4C228EE67B003B814C /* CardDeck.swift */,
 				F50AC45A228EBD6800CF5C43 /* AttackCard.swift */,
 				F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */,
 				BA94ACC2228E69BF0056B82B /* Enemy.swift */,
@@ -232,6 +235,7 @@
 				BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */,
 				F50AC45D228EBD8E00CF5C43 /* DefendCard.swift in Sources */,
 				2BE1916C228D00EA00694D2F /* GameScene.swift in Sources */,
+				2B601A4D228EE67B003B814C /* CardDeck.swift in Sources */,
 				2BE1916E228D00EA00694D2F /* GameViewController.swift in Sources */,
 				BA94ACC3228E69BF0056B82B /* Enemy.swift in Sources */,
 				2BE19166228D00EA00694D2F /* AppDelegate.swift in Sources */,

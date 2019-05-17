@@ -16,6 +16,7 @@ class SceneClass: SKScene {
 
     var currentCard: CardTemplate?
     var gameManager: GameManager!
+    var deck: CardDeck?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -25,6 +26,7 @@ class SceneClass: SKScene {
                 currentCard?.zPosition = CardLevel.moving.rawValue
                 currentCard?.removeAction(forKey: "drop")
                 currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
+                deck?.addCard(card: currentCard!)
             }
         }
     }
