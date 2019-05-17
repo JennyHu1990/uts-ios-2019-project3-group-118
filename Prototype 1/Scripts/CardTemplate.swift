@@ -109,6 +109,3 @@ class defense: CardTemplate {
         print("Defense")
     }
 }
-
-
-
