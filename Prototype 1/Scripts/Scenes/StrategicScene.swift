@@ -39,6 +39,14 @@ class StrategicScene: SceneClass {
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
         super.gameManager.add(card2)
+        // 4
+        let card3 = CardTemplate(cardType: .buff)
+        card3.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
+        super.gameManager.add(card3)
+        // 5
+        let card4 = CardTemplate(cardType: .debuff)
+        card4.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
+        super.gameManager.add(card4)
     }
     
     

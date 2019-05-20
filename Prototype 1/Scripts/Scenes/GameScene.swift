@@ -34,7 +34,18 @@ class GameScene: SceneClass {
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
         super.gameManager.add(card2)
+        // 4
+        let card3 = CardTemplate(cardType: .buff)
+        card3.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
+        super.gameManager.add(card3)
+        // 3
+        let card4 = CardTemplate(cardType: .debuff)
+        card4.position = CGPoint(x: size.width/2 - card4.size.width, y:200)
+        super.gameManager.add(card4)
         
+        let enemy = Enemy(health: 100, enemyType: .bossFirst)
+        enemy.position = CGPoint(x: size.width/2 - card4.size.width, y:200)
+        super.gameManager.add(enemy)
 //        let spiderEnemy = Enemy(imageName: "FightIcon", name: "Spider", hp: 30)
 //        if let spriteComponent = spiderEnemy.component(ofType: SpriteComponent.self) {
 //            spriteComponent.node.position = CGPoint(x: spriteComponent.node.size.width/2, y: size.height/2)
