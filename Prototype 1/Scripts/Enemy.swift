@@ -33,9 +33,9 @@ class Enemy: SKSpriteNode {
         self.hp = health
         switch enemyType {
         case .bossFirst:
-            frontTexture = SKTexture(imageNamed: "CardBackground")
+            frontTexture = SKTexture(imageNamed: "Enemy1")
         case .bossSecond:
-            frontTexture = SKTexture(imageNamed: "ManaCircle")
+            frontTexture = SKTexture(imageNamed: "Enemy2")
         }
         
         super.init(texture: frontTexture, color: .clear, size: frontTexture.size())

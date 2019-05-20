@@ -13,7 +13,8 @@ import GameplayKit
 enum CardType :Int {
     case attack,
     defense,
-    skills
+    buff,
+    debuff
 }
 
 
@@ -49,11 +50,13 @@ class CardTemplate: SKSpriteNode {
         
         switch cardType {
         case .attack:
-            frontTexture = SKTexture(imageNamed: "CardBackground")
+            frontTexture = SKTexture(imageNamed: "CardAttack")
         case .defense:
-            frontTexture = SKTexture(imageNamed: "ManaCircle")
-        case .skills:
-            frontTexture = SKTexture(imageNamed: "CardBackground")
+            frontTexture = SKTexture(imageNamed: "CardHeal")
+        case .buff:
+            frontTexture = SKTexture(imageNamed: "CardBuff")
+        case .debuff:
+            frontTexture = SKTexture(imageNamed: "CardDebuff")
         }
         super.init(texture: frontTexture, color: .clear, size: frontTexture.size())
     }

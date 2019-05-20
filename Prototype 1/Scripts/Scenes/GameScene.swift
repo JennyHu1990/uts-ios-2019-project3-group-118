@@ -35,6 +35,12 @@ class GameScene: SceneClass {
         card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
         super.gameManager.add(card2)
         
+        let enemy1 = Enemy(health: 20, enemyType: .bossFirst)
+        enemy1.name = "boss1"
+        enemy1.position = CGPoint(x: 320, y: 0)
+        super.gameManager.add(enemy1)
+        
+        
 //        let spiderEnemy = Enemy(imageName: "FightIcon", name: "Spider", hp: 30)
 //        if let spriteComponent = spiderEnemy.component(ofType: SpriteComponent.self) {
 //            spriteComponent.node.position = CGPoint(x: spriteComponent.node.size.width/2, y: size.height/2)
