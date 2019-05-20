@@ -27,27 +27,29 @@ class GameScene: SceneClass {
         super.gameManager = GameManager(scene: self)
         let card1 = CardTemplate(cardType: .defense)
         card1.name = "card1"
-        card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
+        card1.position = CGPoint(x: -320, y: -300)
         super.gameManager.add(card1)
         
         // 3
         let card2 = CardTemplate(cardType: .attack)
-        card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
+        card2.position = CGPoint(x: -160, y:-300)
         super.gameManager.add(card2)
         // 4
         let card3 = CardTemplate(cardType: .buff)
-        card3.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
+        card3.position = CGPoint(x: 0, y:-200)
         super.gameManager.add(card3)
         // 3
         let card4 = CardTemplate(cardType: .debuff)
-        card4.position = CGPoint(x: size.width/2 - card4.size.width, y:200)
+        card4.position = CGPoint(x: 160, y:-300)
         super.gameManager.add(card4)
         
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)
         super.gameManager.add(enemy)
+        
         let player = Player(health: 50, playerType: .player1)
-        player.position = CGPoint(x: 0, y:0)
+        player.position = CGPoint(x: -320, y:-100)
+        player.zPosition = 1
         super.gameManager.add(player)
 //        let spiderEnemy = Enemy(imageName: "FightIcon", name: "Spider", hp: 30)
 //        if let spriteComponent = spiderEnemy.component(ofType: SpriteComponent.self) {

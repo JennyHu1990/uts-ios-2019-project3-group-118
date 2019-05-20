@@ -32,6 +32,7 @@ class CardTemplate: SKSpriteNode {
     let frontTexture :SKTexture
     let backTexture :SKTexture
     var chosen :Bool = false
+    var cardSize : CGSize
     
 
     var enlarged = false
@@ -47,7 +48,7 @@ class CardTemplate: SKSpriteNode {
     init(cardType: CardType) {
         self.cardType = cardType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
-        
+        self.cardSize = CGSize.init(width: 120, height: 190)
         switch cardType {
         case .attack:
             frontTexture = SKTexture(imageNamed: "CardAttack")
@@ -56,9 +57,9 @@ class CardTemplate: SKSpriteNode {
         case .buff:
             frontTexture = SKTexture(imageNamed: "CardBuff")
         case .debuff:
-            frontTexture = SKTexture(imageNamed: "CardDebuff")
+            frontTexture = SKTexture(imageNamed: "CardDeBuff")
         }
-        super.init(texture: frontTexture, color: .clear, size: frontTexture.size())
+        super.init(texture: frontTexture, color: .clear, size: cardSize)
     }
     
     func enlarge() {
