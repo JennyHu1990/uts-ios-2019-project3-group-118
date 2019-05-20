@@ -44,7 +44,7 @@ class GameScene: SceneClass {
         super.gameManager.add(card4)
         
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
-        enemy.position = CGPoint(x: size.width/2 - card4.size.width, y:200)
+        enemy.position = CGPoint(x: 320, y:0)
         super.gameManager.add(enemy)
         let player = Player(health: 50, playerType: .player1)
         player.position = CGPoint(x: 0, y:0)
