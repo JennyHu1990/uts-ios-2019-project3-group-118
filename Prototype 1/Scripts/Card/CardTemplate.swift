@@ -44,7 +44,7 @@ class CardTemplate: SKSpriteNode {
     init(cardType: CardType) {
         self.cardType = cardType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
-        self.cardSize = CGSize.init(width: 120, height: 190)
+        self.cardSize = CGSize.init(width: 130, height: 190)
         switch cardType {
         case .attack:
             frontTexture = SKTexture(imageNamed: "CardAttack")

@@ -31,6 +31,9 @@ class GameScene: SceneClass {
         addChild(card1)
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
+        
+
+        
         // 3
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: -160, y:-300)
@@ -38,11 +41,11 @@ class GameScene: SceneClass {
         // 4
         let card3 = CardTemplate(cardType: .buff)
         card3.position = CGPoint(x: 0, y:-200)
-        super.gameManager.add(card3)
+        //super.gameManager.add(card3)
         // 3
         let card4 = CardTemplate(cardType: .debuff)
         card4.position = CGPoint(x: 160, y:-300)
-        super.gameManager.add(card4)
+        //super.gameManager.add(card4)
         
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)

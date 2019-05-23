@@ -1,5 +1,5 @@
 //
-//  AttackCard.swift
+//  DefendCard.swift
 //  Prototype 1
 //
 //  Created by Huu Nguyen on 17/5/19.
@@ -8,15 +8,16 @@
 
 import Foundation
 import SpriteKit
-import GameplayKit
 
-class attack: CardTemplate {
+
+class defense: CardTemplate {
     var energy = Int()
     var backImage = SKTexture.self
     var cardDescription = String()
     var used = false
-    // may accept arguments of enemies?
-    func attack() -> Int {
-        return energy;
+    func defense() {
+        print("Defense")
     }
 }
+
+

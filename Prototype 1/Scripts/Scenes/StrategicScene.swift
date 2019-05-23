@@ -28,17 +28,39 @@ class StrategicScene: SceneClass {
     override func didMove(to view: SKView) {
         // 1
         super.gameManager = GameManager(scene: self)
+        physicsWorld.gravity = .zero
         
-        // 2
-        let card1 = defense(cardType: .defense)
-        card1.name = "card1"
-        card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
-        super.gameManager.add(card1)
+        // cardDefense
+        let cardDefense1 = defense(cardType: .defense)
+        let cardDefense2 = defense(cardType: .defense)
+        let cardDefense3 = defense(cardType: .defense)
+        let cardDefense4 = defense(cardType: .defense)
+        let cardDefense5 = defense(cardType: .defense)
+//        cardDefense1.name = "cardDefense1"
+        cardDefense1.position = CGPoint(x: -size.width/2 + 3*cardDefense1.size.width, y: size.height/2 - cardDefense1.size.height)
+        cardDefense2.position = CGPoint(x: -size.width/2 + cardDefense1.size.width, y: size.height/2 - cardDefense2.size.height)
+        cardDefense3.position = CGPoint(x: 0,  y: size.height/2 - cardDefense3.size.height)
+        cardDefense4.position = CGPoint(x: size.width/2 - cardDefense1.size.width, y: size.height/2 - cardDefense4.size.height)
+        cardDefense5.position = CGPoint(x: size.width/2 - 3*cardDefense1.size.width, y: size.height/2 - cardDefense5.size.height)
+        super.gameManager.add(cardDefense1)
+        super.gameManager.add(cardDefense2)
+        super.gameManager.add(cardDefense3)
+        super.gameManager.add(cardDefense4)
+        super.gameManager.add(cardDefense5)
         
-        // 3
-        let card2 = CardTemplate(cardType: .attack)
-        card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
-        super.gameManager.add(card2)
+        // cardAttak
+        let cardAttackkItem1 = cardAttack1()
+//        let cardAttackkItem2 = cardAttack2()
+//        let cardAttackkItem3 = cardAttack3()
+//        let cardAttackkItem4 = cardAttack4()
+//        let cardAttackkItem5 = cardAttack5()
+        cardAttackkItem1.position = CGPoint(x: -size.width/2 + 3*cardDefense1.size.width, y: size.height/2 - 2 * cardAttackkItem1.size.height)
+//        cardAttack2.position = CGPoint(x: -size.width/2 + cardDefense1.size.width, y: size.height/2 - 2*cardAttack2.size.height)
+//        cardAttack3.position = CGPoint(x: 0,  y: size.height/2 - 2*cardAttack3.size.height)
+//        cardAttack4.position = CGPoint(x: size.width/2 - cardDefense1.size.width, y: size.height/2 - 2*cardAttack4.size.height)
+//        cardAttack5.position = CGPoint(x: size.width/2 - 3*cardDefense1.size.width, y: size.height/2 - 2*cardAttack5.size.height)
+        super.gameManager.add(cardAttackkItem1)
+
         // 4
         let card3 = CardTemplate(cardType: .buff)
         card3.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
