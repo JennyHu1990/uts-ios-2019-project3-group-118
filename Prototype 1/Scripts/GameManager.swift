@@ -29,7 +29,6 @@ class GameManager {
     
     // 4
     func remove(_ entity: SKSpriteNode) {
-        
         entity.removeFromParent()
         entities.remove(entity)
     }

@@ -28,12 +28,13 @@ class GameScene: SceneClass {
         let card1 = CardTemplate(cardType: .defense)
         card1.name = "card1"
         card1.position = CGPoint(x: -320, y: -300)
-        super.gameManager.add(card1)
-        
+        addChild(card1)
+        physicsWorld.gravity = .zero
+        physicsWorld.contactDelegate = self
         // 3
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: -160, y:-300)
-        super.gameManager.add(card2)
+        addChild(card2)
         // 4
         let card3 = CardTemplate(cardType: .buff)
         card3.position = CGPoint(x: 0, y:-200)
@@ -45,7 +46,8 @@ class GameScene: SceneClass {
         
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)
-        super.gameManager.add(enemy)
+        enemy.zPosition = 10
+        addChild(enemy)
         
         let player = Player(health: 50, playerType: .player1)
         player.position = CGPoint(x: -320, y:-100)
@@ -57,32 +59,57 @@ class GameScene: SceneClass {
 //        }
 //        super.gameManager.add(spiderEnemy)
     }
+    func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
 
-    
-//    override func update(_ currentTime: TimeInterval) {
-//        // Called before each frame is rendered
-//        
-//        // Initialize _lastUpdateTime if it has not already been
-//        if (self.lastUpdateTime == 0) {
-//            self.lastUpdateTime = currentTime
-//        }
-//        
-//        // Calculate time since last update
-//        let dt = currentTime - self.lastUpdateTime
-//        
-//        // Update entities
-//        for entity in self.entities {
-//            entity.update(deltaTime: dt)
-//        }
-//        
-//        self.lastUpdateTime = currentTime
-//    }
+        card.removeFromParent()
+        other.removeFromParent()
+        print("hit")
+    }
+
+}
+extension GameScene: SKPhysicsContactDelegate{
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if ((firstBody.categoryBitMask & Physics.card != 0) &&
+            (secondBody.categoryBitMask & Physics.enemy != 0)) {
+            if let card = firstBody.node as? SKSpriteNode,
+                let enemy = secondBody.node as? SKSpriteNode {
+                cardHitOther(card: card, other: enemy)
+            }
+        }
+    }
 }
 
 
 
 
-
+//    override func update(_ currentTime: TimeInterval) {
+//        // Called before each frame is rendered
+//
+//        // Initialize _lastUpdateTime if it has not already been
+//        if (self.lastUpdateTime == 0) {
+//            self.lastUpdateTime = currentTime
+//        }
+//
+//        // Calculate time since last update
+//        let dt = currentTime - self.lastUpdateTime
+//
+//        // Update entities
+//        for entity in self.entities {
+//            entity.update(deltaTime: dt)
+//        }
+//
+//        self.lastUpdateTime = currentTime
+//    }
         // Create shape node to use during mouse interaction
 //        let w = (self.size.width + self.size.height) * 0.05
 //        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)

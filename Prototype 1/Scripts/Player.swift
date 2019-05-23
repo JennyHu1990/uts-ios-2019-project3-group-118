@@ -38,6 +38,11 @@ class Player: SKSpriteNode {
         }
         
         super.init(texture: frontTexture, color: .clear, size: playerSize)
+        self.physicsBody = SKPhysicsBody(rectangleOf: playerSize)
+        self.physicsBody?.isDynamic = true
+        self.physicsBody?.categoryBitMask = Physics.player
+        self.physicsBody?.contactTestBitMask = Physics.card | Physics.enemy
+        self.physicsBody?.collisionBitMask = Physics.none
     }
     
     required init?(coder aDecoder: NSCoder) {

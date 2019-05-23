@@ -33,13 +33,9 @@ class CardTemplate: SKSpriteNode {
     let backTexture :SKTexture
     var chosen :Bool = false
     var cardSize : CGSize
-    
-
     var enlarged = false
     var savedPosition = CGPoint.zero
     var chosenCard = [Int]()
-    
-    var maxNumberOfCard = 1
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -60,6 +56,19 @@ class CardTemplate: SKSpriteNode {
             frontTexture = SKTexture(imageNamed: "CardDeBuff")
         }
         super.init(texture: frontTexture, color: .clear, size: cardSize)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
+            self.physicsBody = SKPhysicsBody(rectangleOf: self.cardSize)
+            self.physicsBody?.isDynamic = true
+            self.physicsBody?.categoryBitMask = Physics.card
+            self.physicsBody?.contactTestBitMask = Physics.enemy
+            self.physicsBody?.collisionBitMask = Physics.none
+//        }
+        
+//        super.init(texture: frontTexture, color: .clear, size: cardSize)
+    }
+    
+    func activateCard() {
+        
     }
     
     func enlarge() {

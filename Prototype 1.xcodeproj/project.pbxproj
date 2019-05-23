@@ -16,6 +16,7 @@
 		2BE19171228D00EA00694D2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1916F228D00EA00694D2F /* Main.storyboard */; };
 		2BE19173228D00EC00694D2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19172228D00EC00694D2F /* Assets.xcassets */; };
 		2BE19176228D00EC00694D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19174228D00EC00694D2F /* LaunchScreen.storyboard */; };
+		BA27069E22965A6E002CA766 /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA27069D22965A6E002CA766 /* Physics.swift */; };
 		BA94ACC3228E69BF0056B82B /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA94ACC2228E69BF0056B82B /* Enemy.swift */; };
 		BACA5195228D2A24009CBE7A /* StrategicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5194228D2A24009CBE7A /* StrategicScene.swift */; };
 		BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */; };
@@ -39,6 +40,7 @@
 		2BE19172228D00EC00694D2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BE19175228D00EC00694D2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BE19177228D00EC00694D2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA27069D22965A6E002CA766 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
 		BA94ACC2228E69BF0056B82B /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		BACA5194228D2A24009CBE7A /* StrategicScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicScene.swift; sourceTree = "<group>"; };
 		BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicSceneController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				2BAC53FD22927EA400B1A4CC /* Player.swift */,
 				F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */,
 				BA94ACC2228E69BF0056B82B /* Enemy.swift */,
+				BA27069D22965A6E002CA766 /* Physics.swift */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				BACA519D228D3025009CBE7A /* GameManager.swift in Sources */,
 				BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */,
 				F50AC45D228EBD8E00CF5C43 /* DefendCard.swift in Sources */,
+				BA27069E22965A6E002CA766 /* Physics.swift in Sources */,
 				2BAC53FE22927EA400B1A4CC /* Player.swift in Sources */,
 				2BE1916C228D00EA00694D2F /* GameScene.swift in Sources */,
 				2B601A4D228EE67B003B814C /* CardDeck.swift in Sources */,

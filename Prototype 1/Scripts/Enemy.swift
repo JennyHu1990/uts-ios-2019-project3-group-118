@@ -41,6 +41,15 @@ class Enemy: SKSpriteNode {
         }
         
         super.init(texture: frontTexture, color: .clear, size: enemySize)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
+            self.physicsBody = SKPhysicsBody(rectangleOf: self.enemySize)
+            self.physicsBody?.isDynamic = true
+            self.physicsBody?.categoryBitMask = Physics.enemy
+            self.physicsBody?.contactTestBitMask = Physics.card
+            self.physicsBody?.collisionBitMask = Physics.none
+            print(self.physicsBody)
+//        }
+
     }
     
     required init?(coder aDecoder: NSCoder) {
