@@ -44,7 +44,7 @@ class CardTemplate: SKSpriteNode {
     init(cardType: CardType) {
         self.cardType = cardType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
-        self.cardSize = CGSize.init(width: 120, height: 190)
+        self.cardSize = CGSize.init(width: 130, height: 190)
         switch cardType {
         case .attack:
             frontTexture = SKTexture(imageNamed: "CardAttack")
@@ -56,15 +56,15 @@ class CardTemplate: SKSpriteNode {
             frontTexture = SKTexture(imageNamed: "CardDeBuff")
         }
         super.init(texture: frontTexture, color: .clear, size: cardSize)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
-            self.physicsBody = SKPhysicsBody(rectangleOf: self.cardSize)
-            self.physicsBody?.isDynamic = true
-            self.physicsBody?.categoryBitMask = Physics.card
-            self.physicsBody?.contactTestBitMask = Physics.enemy
-            self.physicsBody?.collisionBitMask = Physics.none
-//        }
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.cardSize)
+        self.physicsBody?.isDynamic = true
+        self.physicsBody?.categoryBitMask = Physics.card
+        self.physicsBody?.contactTestBitMask = Physics.enemy
+        self.physicsBody?.collisionBitMask = Physics.none
+        //        }
         
-//        super.init(texture: frontTexture, color: .clear, size: cardSize)
+        //        super.init(texture: frontTexture, color: .clear, size: cardSize)
     }
     
     func activateCard() {

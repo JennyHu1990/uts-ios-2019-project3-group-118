@@ -92,6 +92,16 @@
 			path = "Prototype 1";
 			sourceTree = "<group>";
 		};
+		BA91732E2297A0B500E939B0 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
+				F50AC45A228EBD6800CF5C43 /* AttackCard.swift */,
+				F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		BACA518F228D28C4009CBE7A /* Template */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,11 +116,9 @@
 				BACA5199228D2A54009CBE7A /* Scenes */,
 				BACA5198228D2A48009CBE7A /* Controllers */,
 				BACA519C228D3025009CBE7A /* GameManager.swift */,
-				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
+				BA91732E2297A0B500E939B0 /* Card */,
 				2B601A4C228EE67B003B814C /* CardDeck.swift */,
-				F50AC45A228EBD6800CF5C43 /* AttackCard.swift */,
 				2BAC53FD22927EA400B1A4CC /* Player.swift */,
-				F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */,
 				BA94ACC2228E69BF0056B82B /* Enemy.swift */,
 				BA27069D22965A6E002CA766 /* Physics.swift */,
 			);
