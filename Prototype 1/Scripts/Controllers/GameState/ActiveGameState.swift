@@ -10,6 +10,12 @@ import Foundation
 import GameplayKit
 import SpriteKit
 
+enum gameTurn: Int {
+    case playerTurn,
+    enemyTurn
+}
+
+
 class ActiveGameState: GKState{
     var scene: GameScene?
     var waitingOnPlayer: Bool
@@ -40,8 +46,18 @@ class ActiveGameState: GKState{
     func updateGameState(){
         assert(scene != nil, "Scene must not be nil")
         
-        self.waitingOnPlayer = false
-        self.scene?.isUserInteractionEnabled = true
+        switch self.scene?.currentTurnOrder() {
+        case gameTurn.playerTurn.rawValue:
+            self.waitingOnPlayer = false
+            self.scene?.isUserInteractionEnabled = true
+        case gameTurn.enemyTurn.rawValue:
+            self.waitingOnPlayer = true
+            self.scene?.isUserInteractionEnabled = false
+        default:
+            self.waitingOnPlayer = false
+            self.scene?.isUserInteractionEnabled = true
+        }
+
         
         //        let (state, winner) = self.scene!.gameBoard!.determineIfWinner()
         //        if state == .Winner{

@@ -186,9 +186,9 @@
 			isa = PBXGroup;
 			children = (
 				BACA519C228D3025009CBE7A /* GameManager.swift */,
-				F5C7381B2297D805008424B5 /* EndGameState.swift */,
-				F5C7381D2297D846008424B5 /* ActiveGameState.swift */,
 				F5C7381F2297D883008424B5 /* StartGameState.swift */,
+				F5C7381D2297D846008424B5 /* ActiveGameState.swift */,
+				F5C7381B2297D805008424B5 /* EndGameState.swift */,
 			);
 			path = GameState;
 			sourceTree = "<group>";

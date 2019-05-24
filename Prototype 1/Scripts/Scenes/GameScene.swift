@@ -58,6 +58,12 @@ class GameScene: SceneClass {
         print("hit")
     }
     
+    func currentTurnOrder() -> Int {
+        let current = gameTurn.enemyTurn.rawValue
+        
+        return current
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         

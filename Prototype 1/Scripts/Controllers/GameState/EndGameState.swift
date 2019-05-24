@@ -28,7 +28,6 @@ class EndGameState: GKState{
     }
     
     func updateGameState(){
-        let resetNode = self.scene?.childNode(withName: "Reset")
-        resetNode?.isHidden = false
+
     }
 }

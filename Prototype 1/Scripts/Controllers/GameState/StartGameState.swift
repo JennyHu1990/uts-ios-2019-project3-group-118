@@ -22,7 +22,7 @@ class StartGameState: GKState{
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        <#code#>
+        return stateClass == ActiveGameState.self
     }
     
     
