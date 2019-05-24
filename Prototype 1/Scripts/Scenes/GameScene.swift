@@ -25,7 +25,7 @@ class GameScene: SceneClass {
     
     override func didMove(to view: SKView) {
         super.gameManager = GameManager(scene: self)
-        let card1 = CardTemplate(cardType: .defense)
+        let card1 = CardTemplate(cardType: .heal)
         card1.name = "card1"
         card1.position = CGPoint(x: -320, y: -300)
         addChild(card1)

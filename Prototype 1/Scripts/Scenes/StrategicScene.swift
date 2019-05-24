@@ -12,67 +12,71 @@ import SpriteKit
 import GameplayKit
 
 class StrategicScene: SceneClass {
-    
+
     var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
-    private var lastUpdateTime : TimeInterval = 0
-    private var label : SKLabelNode?
+    var graphs = [String: GKGraph]()
+    private var lastUpdateTime: TimeInterval = 0
+    private var label: SKLabelNode?
+
     //    var gameManager: GameManager!
-    
-    
+
+
     override func sceneDidLoad() {
-        
+
         self.lastUpdateTime = 0
     }
-    
+
     override func didMove(to view: SKView) {
         // 1
         super.gameManager = GameManager(scene: self)
         physicsWorld.gravity = .zero
-        
+
         // cardDefense
-        let cardDefense1 = defense(cardType: .defense)
-        let cardDefense2 = defense(cardType: .defense)
-        let cardDefense3 = defense(cardType: .defense)
-        let cardDefense4 = defense(cardType: .defense)
-        let cardDefense5 = defense(cardType: .defense)
-        //        cardDefense1.name = "cardDefense1"
-        cardDefense1.position = CGPoint(x: -size.width/2 + 3*cardDefense1.size.width, y: size.height/2 - cardDefense1.size.height)
-        cardDefense2.position = CGPoint(x: -size.width/2 + cardDefense1.size.width, y: size.height/2 - cardDefense2.size.height)
-        cardDefense3.position = CGPoint(x: 0,  y: size.height/2 - cardDefense3.size.height)
-        cardDefense4.position = CGPoint(x: size.width/2 - cardDefense1.size.width, y: size.height/2 - cardDefense4.size.height)
-        cardDefense5.position = CGPoint(x: size.width/2 - 3*cardDefense1.size.width, y: size.height/2 - cardDefense5.size.height)
-        super.gameManager.add(cardDefense1)
-        super.gameManager.add(cardDefense2)
-        super.gameManager.add(cardDefense3)
-        super.gameManager.add(cardDefense4)
-        super.gameManager.add(cardDefense5)
-        
-        // cardAttak
-        let cardAttackkItem1 = cardAttack1()
-        //        let cardAttackkItem2 = cardAttack2()
-        //        let cardAttackkItem3 = cardAttack3()
-        //        let cardAttackkItem4 = cardAttack4()
-        //        let cardAttackkItem5 = cardAttack5()
-        cardAttackkItem1.position = CGPoint(x: -size.width/2 + 3*cardDefense1.size.width, y: size.height/2 - 2 * cardAttackkItem1.size.height)
-        //        cardAttack2.position = CGPoint(x: -size.width/2 + cardDefense1.size.width, y: size.height/2 - 2*cardAttack2.size.height)
-        //        cardAttack3.position = CGPoint(x: 0,  y: size.height/2 - 2*cardAttack3.size.height)
-        //        cardAttack4.position = CGPoint(x: size.width/2 - cardDefense1.size.width, y: size.height/2 - 2*cardAttack4.size.height)
-        //        cardAttack5.position = CGPoint(x: size.width/2 - 3*cardDefense1.size.width, y: size.height/2 - 2*cardAttack5.size.height)
-        super.gameManager.add(cardAttackkItem1)
-        
+//        let cardDefense1 = defense(cardType: .defense)
+//        let cardDefense2 = defense(cardType: .defense)
+//        let cardDefense3 = defense(cardType: .defense)
+//        let cardDefense4 = defense(cardType: .defense)
+//        let cardDefense5 = defense(cardType: .defense)
+//        //        cardDefense1.name = "cardDefense1"
+//        cardDefense1.position = CGPoint(x: -size.width/2 + 3*cardDefense1.size.width, y: size.height/2 - cardDefense1.size.height)
+//        cardDefense2.position = CGPoint(x: -size.width/2 + cardDefense1.size.width, y: size.height/2 - cardDefense2.size.height)
+//        cardDefense3.position = CGPoint(x: 0,  y: size.height/2 - cardDefense3.size.height)
+//        cardDefense4.position = CGPoint(x: size.width/2 - cardDefense1.size.width, y: size.height/2 - cardDefense4.size.height)
+//        cardDefense5.position = CGPoint(x: size.width/2 - 3*cardDefense1.size.width, y: size.height/2 - cardDefense5.size.height)
+//        super.gameManager.add(cardDefense1)
+//        super.gameManager.add(cardDefense2)
+//        super.gameManager.add(cardDefense3)
+//        super.gameManager.add(cardDefense4)
+//        super.gameManager.add(cardDefense5)
+//
+        // cardAttack
+        let cardAttackItem1 = AttackCard(name: "121", energy: 1, imageName: "CardAttackImage1", description: "22222222222222222222222222222")
+//                let cardAttackkItem2 = cardAttack1()
+//                let cardAttackkItem3 = cardAttack1()
+//                let cardAttackkItem4 = cardAttack1()
+//                let cardAttackkItem5 = cardAttack1()
+        cardAttackItem1.position = CGPoint(x: -size.width / 2 + 3 * cardAttackItem1.size.width, y: size.height / 2 - 2 * cardAttackItem1.size.height)
+//                cardAttack2.position = CGPoint(x: -size.width/2 + cardDefense1.size.width, y: size.height/2 - 2*cardAttack2.size.height)
+//                cardAttack3.position = CGPoint(x: 0,  y: size.height/2 - 2*cardAttack3.size.height)
+//                cardAttack4.position = CGPoint(x: size.width/2 - cardDefense1.size.width, y: size.height/2 - 2*cardAttack4.size.height)
+//                cardAttack5.position = CGPoint(x: size.width/2 - 3*cardDefense1.size.width, y: size.height/2 - 2*cardAttack5.size.height)
+        super.gameManager.add(cardAttackItem1)
+//        super.gameManager.add(cardAttackkItem1)
+//        super.gameManager.add(cardAttackkItem1)
+
+
         // 4
-        let card3 = CardTemplate(cardType: .buff)
-        card3.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
-        super.gameManager.add(card3)
+        let buffCard = BuffCard(name: "Buff", energy: 1, imageName: "CardAttackImage1", description: "222222222222")
+        buffCard.position = CGPoint(x: size.width / 2 - buffCard.size.width, y: 200)
+        super.gameManager.add(buffCard)
         // 5
-        let card4 = CardTemplate(cardType: .debuff)
-        card4.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
-        super.gameManager.add(card4)
+        let debuffCard = DebuffCard(name: "debuff", energy: 1, imageName: "CardAttackImage1", description: "222222222222")
+
+        debuffCard.position = CGPoint(x: size.width / 2 - buffCard.size.width, y: 200)
+        super.gameManager.add(debuffCard)
     }
-    
-    
-    
+
+
     //    override func update(_ currentTime: TimeInterval) {
     //        // Called before each frame is rendered
     //
@@ -92,9 +96,6 @@ class StrategicScene: SceneClass {
     //        self.lastUpdateTime = currentTime
     //    }
 }
-
-
-
 
 
 // Create shape node to use during mouse interaction
