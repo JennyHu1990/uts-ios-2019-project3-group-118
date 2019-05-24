@@ -121,7 +121,6 @@
 			children = (
 				BACA5199228D2A54009CBE7A /* Scenes */,
 				BACA5198228D2A48009CBE7A /* Controllers */,
-				BACA519C228D3025009CBE7A /* GameManager.swift */,
 				BA91732E2297A0B500E939B0 /* Card */,
 				2B601A4C228EE67B003B814C /* CardDeck.swift */,
 				2BAC53FD22927EA400B1A4CC /* Player.swift */,
@@ -160,6 +159,7 @@
 		BACA5198228D2A48009CBE7A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F5C7381A2297CD02008424B5 /* GameState */,
 				BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */,
 				2BE1916D228D00EA00694D2F /* GameViewController.swift */,
 			);
@@ -174,6 +174,14 @@
 				F5681899228EB61700765006 /* SceneClass.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		F5C7381A2297CD02008424B5 /* GameState */ = {
+			isa = PBXGroup;
+			children = (
+				BACA519C228D3025009CBE7A /* GameManager.swift */,
+			);
+			path = GameState;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -11,9 +11,6 @@ import GameplayKit
 
 class GameScene: SceneClass {
     
-    var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
-    
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
@@ -53,11 +50,6 @@ class GameScene: SceneClass {
         player.position = CGPoint(x: -320, y:-100)
         player.zPosition = 1
         super.gameManager.add(player)
-//        let spiderEnemy = Enemy(imageName: "FightIcon", name: "Spider", hp: 30)
-//        if let spriteComponent = spiderEnemy.component(ofType: SpriteComponent.self) {
-//            spriteComponent.node.position = CGPoint(x: spriteComponent.node.size.width/2, y: size.height/2)
-//        }
-//        super.gameManager.add(spiderEnemy)
     }
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
 
@@ -65,7 +57,23 @@ class GameScene: SceneClass {
         other.removeFromParent()
         print("hit")
     }
-
+    
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
+        
+        // Initialize _lastUpdateTime if it has not already been
+        if (self.lastUpdateTime == 0) {
+            self.lastUpdateTime = currentTime
+        }
+        
+        // Calculate time since last update
+        let dt = currentTime - self.lastUpdateTime
+        
+        // Update entities
+        
+        self.lastUpdateTime = currentTime
+    }
+    
 }
 extension GameScene: SKPhysicsContactDelegate{
     func didBegin(_ contact: SKPhysicsContact) {
@@ -92,24 +100,7 @@ extension GameScene: SKPhysicsContactDelegate{
 
 
 
-//    override func update(_ currentTime: TimeInterval) {
-//        // Called before each frame is rendered
-//
-//        // Initialize _lastUpdateTime if it has not already been
-//        if (self.lastUpdateTime == 0) {
-//            self.lastUpdateTime = currentTime
-//        }
-//
-//        // Calculate time since last update
-//        let dt = currentTime - self.lastUpdateTime
-//
-//        // Update entities
-//        for entity in self.entities {
-//            entity.update(deltaTime: dt)
-//        }
-//
-//        self.lastUpdateTime = currentTime
-//    }
+
         // Create shape node to use during mouse interaction
 //        let w = (self.size.width + self.size.height) * 0.05
 //        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
