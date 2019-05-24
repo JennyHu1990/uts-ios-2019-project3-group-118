@@ -13,8 +13,8 @@ import GameplayKit
 
 class StrategicScene: SceneClass {
     
-    var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
+    //var entities = [GKEntity]()
+//    var graphs = [String : GKGraph]()
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     //    var gameManager: GameManager!
