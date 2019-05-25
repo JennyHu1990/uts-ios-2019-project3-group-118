@@ -10,26 +10,26 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+//
 class GameManager {
-    
+
     // 1
     var entities = Set<SKSpriteNode>()
     let scene: SKScene
-    
+
     // 2
     init(scene: SKScene) {
         self.scene = scene
     }
-    
+
     // 3
     func add(_ entity: SKSpriteNode) {
         entities.insert(entity)
         scene.addChild(entity)
     }
-    
+
     // 4
     func remove(_ entity: SKSpriteNode) {
-        
         entity.removeFromParent()
         entities.remove(entity)
     }

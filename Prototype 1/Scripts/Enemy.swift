@@ -21,6 +21,7 @@ class Enemy: SKSpriteNode {
     let frontTexture :SKTexture
     let backTexture :SKTexture
     var hp: Int
+    var enemySize: CGSize
 //    init(imageName: String, name: String, hp: Int) {
 //        
 //        self.hp = hp
@@ -31,6 +32,7 @@ class Enemy: SKSpriteNode {
         self.enemy = enemyType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
         self.hp = health
+        self.enemySize = CGSize.init(width: 560.0, height: 560.0)
         switch enemyType {
         case .bossFirst:
             frontTexture = SKTexture(imageNamed: "Enemy1")
@@ -38,7 +40,13 @@ class Enemy: SKSpriteNode {
             frontTexture = SKTexture(imageNamed: "Enemy2")
         }
         
-        super.init(texture: frontTexture, color: .clear, size: frontTexture.size())
+        super.init(texture: frontTexture, color: .clear, size: enemySize)
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.enemySize)
+        self.physicsBody?.isDynamic = true
+        self.physicsBody?.categoryBitMask = Physics.enemy
+        self.physicsBody?.contactTestBitMask = Physics.card
+        self.physicsBody?.collisionBitMask = Physics.none
+
     }
     
     required init?(coder aDecoder: NSCoder) {

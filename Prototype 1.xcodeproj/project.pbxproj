@@ -16,15 +16,21 @@
 		2BE19171228D00EA00694D2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1916F228D00EA00694D2F /* Main.storyboard */; };
 		2BE19173228D00EC00694D2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19172228D00EC00694D2F /* Assets.xcassets */; };
 		2BE19176228D00EC00694D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE19174228D00EC00694D2F /* LaunchScreen.storyboard */; };
+		4425F67546E069E254E85815 /* BuffCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4425F9251B72C448F02FB320 /* BuffCard.swift */; };
+		4425FF92725E1178B0AD6649 /* DebuffCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4425F5545E4CFD74E9EBBDB9 /* DebuffCard.swift */; };
+		BA27069E22965A6E002CA766 /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA27069D22965A6E002CA766 /* Physics.swift */; };
 		BA94ACC3228E69BF0056B82B /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA94ACC2228E69BF0056B82B /* Enemy.swift */; };
 		BACA5195228D2A24009CBE7A /* StrategicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5194228D2A24009CBE7A /* StrategicScene.swift */; };
 		BACA5197228D2A36009CBE7A /* StrategicSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */; };
 		BACA519D228D3025009CBE7A /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA519C228D3025009CBE7A /* GameManager.swift */; };
 		BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACA51A0228D324B009CBE7A /* CardTemplate.swift */; };
 		F50AC45B228EBD6800CF5C43 /* AttackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50AC45A228EBD6800CF5C43 /* AttackCard.swift */; };
-		F50AC45D228EBD8E00CF5C43 /* DefendCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */; };
+		F50AC45D228EBD8E00CF5C43 /* HealCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50AC45C228EBD8E00CF5C43 /* HealCard.swift */; };
 		F50AC45F228ECA0000CF5C43 /* StrategicScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F50AC45E228ECA0000CF5C43 /* StrategicScene.sks */; };
 		F568189A228EB61700765006 /* SceneClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5681899228EB61700765006 /* SceneClass.swift */; };
+		F5C7381C2297D805008424B5 /* EndGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381B2297D805008424B5 /* EndGameState.swift */; };
+		F5C7381E2297D846008424B5 /* ActiveGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381D2297D846008424B5 /* ActiveGameState.swift */; };
+		F5C738202297D883008424B5 /* StartGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381F2297D883008424B5 /* StartGameState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,15 +45,21 @@
 		2BE19172228D00EC00694D2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BE19175228D00EC00694D2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BE19177228D00EC00694D2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4425F5545E4CFD74E9EBBDB9 /* DebuffCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuffCard.swift; sourceTree = "<group>"; };
+		4425F9251B72C448F02FB320 /* BuffCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuffCard.swift; sourceTree = "<group>"; };
+		BA27069D22965A6E002CA766 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
 		BA94ACC2228E69BF0056B82B /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		BACA5194228D2A24009CBE7A /* StrategicScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicScene.swift; sourceTree = "<group>"; };
 		BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategicSceneController.swift; sourceTree = "<group>"; };
 		BACA519C228D3025009CBE7A /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		BACA51A0228D324B009CBE7A /* CardTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTemplate.swift; sourceTree = "<group>"; };
 		F50AC45A228EBD6800CF5C43 /* AttackCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackCard.swift; sourceTree = "<group>"; };
-		F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefendCard.swift; sourceTree = "<group>"; };
+		F50AC45C228EBD8E00CF5C43 /* HealCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealCard.swift; sourceTree = "<group>"; };
 		F50AC45E228ECA0000CF5C43 /* StrategicScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StrategicScene.sks; sourceTree = "<group>"; };
 		F5681899228EB61700765006 /* SceneClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneClass.swift; sourceTree = "<group>"; };
+		F5C7381B2297D805008424B5 /* EndGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameState.swift; sourceTree = "<group>"; };
+		F5C7381D2297D846008424B5 /* ActiveGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameState.swift; sourceTree = "<group>"; };
+		F5C7381F2297D883008424B5 /* StartGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +102,18 @@
 			path = "Prototype 1";
 			sourceTree = "<group>";
 		};
+		BA91732E2297A0B500E939B0 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
+				F50AC45A228EBD6800CF5C43 /* AttackCard.swift */,
+				F50AC45C228EBD8E00CF5C43 /* HealCard.swift */,
+				4425F9251B72C448F02FB320 /* BuffCard.swift */,
+				4425F5545E4CFD74E9EBBDB9 /* DebuffCard.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		BACA518F228D28C4009CBE7A /* Template */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,13 +127,11 @@
 			children = (
 				BACA5199228D2A54009CBE7A /* Scenes */,
 				BACA5198228D2A48009CBE7A /* Controllers */,
-				BACA519C228D3025009CBE7A /* GameManager.swift */,
-				BACA51A0228D324B009CBE7A /* CardTemplate.swift */,
+				BA91732E2297A0B500E939B0 /* Card */,
 				2B601A4C228EE67B003B814C /* CardDeck.swift */,
-				F50AC45A228EBD6800CF5C43 /* AttackCard.swift */,
 				2BAC53FD22927EA400B1A4CC /* Player.swift */,
-				F50AC45C228EBD8E00CF5C43 /* DefendCard.swift */,
 				BA94ACC2228E69BF0056B82B /* Enemy.swift */,
+				BA27069D22965A6E002CA766 /* Physics.swift */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -143,6 +165,7 @@
 		BACA5198228D2A48009CBE7A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F5C7381A2297CD02008424B5 /* GameState */,
 				BACA5196228D2A36009CBE7A /* StrategicSceneController.swift */,
 				2BE1916D228D00EA00694D2F /* GameViewController.swift */,
 			);
@@ -157,6 +180,17 @@
 				F5681899228EB61700765006 /* SceneClass.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		F5C7381A2297CD02008424B5 /* GameState */ = {
+			isa = PBXGroup;
+			children = (
+				BACA519C228D3025009CBE7A /* GameManager.swift */,
+				F5C7381F2297D883008424B5 /* StartGameState.swift */,
+				F5C7381D2297D846008424B5 /* ActiveGameState.swift */,
+				F5C7381B2297D805008424B5 /* EndGameState.swift */,
+			);
+			path = GameState;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +270,11 @@
 				F50AC45B228EBD6800CF5C43 /* AttackCard.swift in Sources */,
 				BACA519D228D3025009CBE7A /* GameManager.swift in Sources */,
 				BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */,
-				F50AC45D228EBD8E00CF5C43 /* DefendCard.swift in Sources */,
+				F50AC45D228EBD8E00CF5C43 /* HealCard.swift in Sources */,
+				BA27069E22965A6E002CA766 /* Physics.swift in Sources */,
+				F5C7381C2297D805008424B5 /* EndGameState.swift in Sources */,
+				F5C738202297D883008424B5 /* StartGameState.swift in Sources */,
+				F5C7381E2297D846008424B5 /* ActiveGameState.swift in Sources */,
 				2BAC53FE22927EA400B1A4CC /* Player.swift in Sources */,
 				2BE1916C228D00EA00694D2F /* GameScene.swift in Sources */,
 				2B601A4D228EE67B003B814C /* CardDeck.swift in Sources */,
@@ -245,6 +283,8 @@
 				2BE19166228D00EA00694D2F /* AppDelegate.swift in Sources */,
 				BACA5195228D2A24009CBE7A /* StrategicScene.swift in Sources */,
 				F568189A228EB61700765006 /* SceneClass.swift in Sources */,
+				4425F67546E069E254E85815 /* BuffCard.swift in Sources */,
+				4425FF92725E1178B0AD6649 /* DebuffCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,9 +11,6 @@ import GameplayKit
 
 class GameScene: SceneClass {
     
-    var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
-    
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
@@ -25,56 +22,85 @@ class GameScene: SceneClass {
     
     override func didMove(to view: SKView) {
         super.gameManager = GameManager(scene: self)
-        let card1 = CardTemplate(cardType: .defense)
+        let card1 = CardTemplate(cardType: .heal)
         card1.name = "card1"
-        card1.position = CGPoint(x: -size.width/2 + 2*card1.size.width, y: 200)
-        super.gameManager.add(card1)
-        
+        card1.position = CGPoint(x: -320, y: -300)
+        addChild(card1)
+        physicsWorld.gravity = .zero
+        physicsWorld.contactDelegate = self
         // 3
         let card2 = CardTemplate(cardType: .attack)
-        card2.position = CGPoint(x: size.width/2 - card2.size.width, y:200)
-        super.gameManager.add(card2)
+        card2.position = CGPoint(x: -160, y:-300)
+        addChild(card2)
         // 4
         let card3 = CardTemplate(cardType: .buff)
-        card3.position = CGPoint(x: size.width/2 - card3.size.width, y:200)
+        card3.position = CGPoint(x: 0, y:-200)
         super.gameManager.add(card3)
         // 3
         let card4 = CardTemplate(cardType: .debuff)
-        card4.position = CGPoint(x: size.width/2 - card4.size.width, y:200)
+        card4.position = CGPoint(x: 160, y:-300)
         super.gameManager.add(card4)
         
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)
-        super.gameManager.add(enemy)
+        enemy.zPosition = 10
+        addChild(enemy)
+        
         let player = Player(health: 50, playerType: .player1)
-        player.position = CGPoint(x: 0, y:0)
+        player.position = CGPoint(x: -320, y:-100)
+        player.zPosition = 1
         super.gameManager.add(player)
-//        let spiderEnemy = Enemy(imageName: "FightIcon", name: "Spider", hp: 30)
-//        if let spriteComponent = spiderEnemy.component(ofType: SpriteComponent.self) {
-//            spriteComponent.node.position = CGPoint(x: spriteComponent.node.size.width/2, y: size.height/2)
-//        }
-//        super.gameManager.add(spiderEnemy)
     }
+    func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
 
+        card.removeFromParent()
+        other.removeFromParent()
+        print("hit")
+    }
     
-//    override func update(_ currentTime: TimeInterval) {
-//        // Called before each frame is rendered
-//        
-//        // Initialize _lastUpdateTime if it has not already been
-//        if (self.lastUpdateTime == 0) {
-//            self.lastUpdateTime = currentTime
-//        }
-//        
-//        // Calculate time since last update
-//        let dt = currentTime - self.lastUpdateTime
-//        
-//        // Update entities
-//        for entity in self.entities {
-//            entity.update(deltaTime: dt)
-//        }
-//        
-//        self.lastUpdateTime = currentTime
-//    }
+    func currentTurnOrder() -> Int {
+        let current = gameTurn.enemyTurn.rawValue
+        
+        return current
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
+        
+        // Initialize _lastUpdateTime if it has not already been
+        if (self.lastUpdateTime == 0) {
+            self.lastUpdateTime = currentTime
+        }
+        
+        // Calculate time since last update
+        let dt = currentTime - self.lastUpdateTime
+        
+        // Update entities
+        
+        self.lastUpdateTime = currentTime
+    }
+    
+}
+extension GameScene: SKPhysicsContactDelegate{
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if ((firstBody.categoryBitMask & Physics.card != 0) &&
+            (secondBody.categoryBitMask & Physics.enemy != 0)) {
+            if let card = firstBody.node as? SKSpriteNode,
+                let enemy = secondBody.node as? SKSpriteNode {
+                cardHitOther(card: card, other: enemy)
+            }
+        }
+    }
 }
 
 
