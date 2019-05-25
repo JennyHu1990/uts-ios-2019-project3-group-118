@@ -14,6 +14,7 @@ class GameScene: SceneClass {
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    var healthBar: SKSpriteNode!
     
     override func sceneDidLoad() {
         self.backgroundColor = .red
@@ -50,6 +51,17 @@ class GameScene: SceneClass {
         player.position = CGPoint(x: -320, y:-100)
         player.zPosition = 1
         super.gameManager.add(player)
+        
+        ///Health Bar
+        healthBar = childNode(withName: "healthBar") as? SKSpriteNode
+        
+        var health: CGFloat = 1.0 {
+            didSet {
+                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+                healthBar.xScale = health
+            }
+        }
+        
     }
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
 
