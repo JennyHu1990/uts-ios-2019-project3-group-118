@@ -28,7 +28,7 @@ class StrategicScene: SceneClass {
 
     override func didMove(to view: SKView) {
         // 1
-        super.gameManager = GameManager(scene: self)
+        super.nodeManager = NodeManager(scene: self)
         physicsWorld.gravity = .zero
 
         // cardDefense
@@ -60,7 +60,7 @@ class StrategicScene: SceneClass {
 //                cardAttack3.position = CGPoint(x: 0,  y: size.height/2 - 2*cardAttack3.size.height)
 //                cardAttack4.position = CGPoint(x: size.width/2 - cardDefense1.size.width, y: size.height/2 - 2*cardAttack4.size.height)
 //                cardAttack5.position = CGPoint(x: size.width/2 - 3*cardDefense1.size.width, y: size.height/2 - 2*cardAttack5.size.height)
-        super.gameManager.add(cardAttackItem1)
+        super.nodeManager.add(cardAttackItem1)
 //        super.gameManager.add(cardAttackkItem1)
 //        super.gameManager.add(cardAttackkItem1)
 
@@ -68,12 +68,12 @@ class StrategicScene: SceneClass {
         // 4
         let buffCard = BuffCard(name: "Buff", energy: 1, imageName: "CardAttackImage1", description: "222222222222")
         buffCard.position = CGPoint(x: size.width / 2 - buffCard.size.width, y: 200)
-        super.gameManager.add(buffCard)
+        super.nodeManager.add(buffCard)
         // 5
         let debuffCard = DebuffCard(name: "debuff", energy: 1, imageName: "CardAttackImage1", description: "222222222222")
 
         debuffCard.position = CGPoint(x: size.width / 2 - buffCard.size.width, y: 200)
-        super.gameManager.add(debuffCard)
+        super.nodeManager.add(debuffCard)
     }
 
 

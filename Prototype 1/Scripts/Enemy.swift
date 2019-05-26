@@ -52,4 +52,17 @@ class Enemy: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func getDamage(with value: Int) {
+        if value > 0 {
+            hp = hp - value
+        }
+        if hp <= 0 {
+            die()
+        }
+    }
+    
+    func die() {
+        print("\(self.name) is died")
+    }
 }
