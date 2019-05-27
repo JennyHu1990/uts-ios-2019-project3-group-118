@@ -23,37 +23,40 @@ class GameScene: SceneClass {
     
     // set up initial view
     override func didMove(to view: SKView) {
+        // call node manager to keep track of nodes
         super.nodeManager = NodeManager(scene: self)
-        let card1 = CardTemplate(cardType: .heal)
-        card1.name = "card1"
-        card1.position = CGPoint(x: -320, y: -300)
-        addChild(card1)
+        // set physic world
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
-        // 3
+        // initiallize some basic cards
+        let card1 = CardTemplate(cardType: .heal)
+        // card position
+        card1.position = CGPoint(x: -320, y: -300)
+        // add card to scene
+        addChild(card1)
+        // 2
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: -160, y:-300)
         addChild(card2)
-        // 4
+        // 3
         let card3 = CardTemplate(cardType: .buff)
         card3.position = CGPoint(x: 0, y:-200)
         super.nodeManager.add(card3)
-        // 3
+        // 4
         let card4 = CardTemplate(cardType: .debuff)
         card4.position = CGPoint(x: 160, y:-300)
         super.nodeManager.add(card4)
-        
+        // initiallize enemy
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)
         enemy.zPosition = 10
         addChild(enemy)
-        
+        // initiallize player
         let player = Player(playerType: .player1)
         player.position = CGPoint(x: -320, y:-100)
         player.zPosition = 1
         super.nodeManager.add(player)
-        
-        ///Health Bar
+        ///Initiallize health bar
         healthBar = childNode(withName: "healthBar") as? SKSpriteNode
         
         var health: CGFloat = 1.0 {
@@ -66,7 +69,7 @@ class GameScene: SceneClass {
     }
     // function to interact with cards
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
-
+        
 //        card.removeFromParent()
 //        other.removeFromParent()
 //        print("hit")
