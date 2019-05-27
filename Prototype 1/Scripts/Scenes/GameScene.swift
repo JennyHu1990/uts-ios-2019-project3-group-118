@@ -10,17 +10,18 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SceneClass {
-    
+    // set some variables
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     var healthBar: SKSpriteNode!
     
+    // sceneDidLoad override
     override func sceneDidLoad() {
-        self.backgroundColor = .red
         self.lastUpdateTime = 0
     }
     
+    // set up initial view
     override func didMove(to view: SKView) {
         super.nodeManager = NodeManager(scene: self)
         let card1 = CardTemplate(cardType: .heal)
@@ -63,19 +64,22 @@ class GameScene: SceneClass {
         }
         
     }
+    // function to interact with cards
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
 
-        card.removeFromParent()
-        other.removeFromParent()
-        print("hit")
+//        card.removeFromParent()
+//        other.removeFromParent()
+//        print("hit")
     }
     
+    // function to return current turn order
     func currentTurnOrder() -> Int {
         let current = gameTurn.enemyTurn.rawValue
         
         return current
     }
     
+    // update per frame function
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
@@ -93,10 +97,13 @@ class GameScene: SceneClass {
     }
     
 }
+
+// physic contact delegate
 extension GameScene: SKPhysicsContactDelegate{
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody
         var secondBody: SKPhysicsBody
+        // reorganise the two physic bodies so that the bitmask is in order
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             firstBody = contact.bodyA
             secondBody = contact.bodyB
@@ -105,6 +112,7 @@ extension GameScene: SKPhysicsContactDelegate{
             secondBody = contact.bodyA
         }
         
+        // run function if card interact with other
         if ((firstBody.categoryBitMask & Physics.card != 0) &&
             (secondBody.categoryBitMask & Physics.enemy != 0)) {
             if let card = firstBody.node as? SKSpriteNode,
@@ -115,7 +123,7 @@ extension GameScene: SKPhysicsContactDelegate{
     }
 }
 
-
+// default function below
 
 
 
