@@ -108,6 +108,7 @@ class GameScene: SceneClass {
         healthBarEnemy.xScale = 0.0
         other.removeFromParent()
         print("hit")
+        gameState.enter(EndGameState.self)
     }
     
     // function to return current turn order

@@ -92,7 +92,7 @@ class SceneClass: SKScene {
             // do similar things as above, but for child node
             if let button = atPoint(location) as? SKSpriteNode {
                 if button.name == "Start" {
-                    let revealGameScene = SKTransition.fade(withDuration: 0.5)
+                    let revealGameScene = SKTransition.fade(withDuration: 1.5)
                     let goToGameScene = GameScene(fileNamed: "GameScene")
                     goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
                     self.view?.presentScene(goToGameScene!, transition: revealGameScene)
