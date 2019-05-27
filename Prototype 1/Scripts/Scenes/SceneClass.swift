@@ -15,7 +15,7 @@ import GameplayKit
 class SceneClass: SKScene {
 
     var currentCard: CardTemplate?
-    var gameManager: GameManager!
+    var nodeManager: NodeManager!
     var deck: CardDeck?
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

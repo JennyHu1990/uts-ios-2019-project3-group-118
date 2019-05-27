@@ -28,7 +28,7 @@ class GameScene: SceneClass {
     }
     
     override func didMove(to view: SKView) {
-        super.gameManager = GameManager(scene: self)
+        super.nodeManager = NodeManager(scene: self)
         let card1 = CardTemplate(cardType: .heal)
         card1.name = "card1"
         card1.position = CGPoint(x: -320, y: -300)
@@ -42,21 +42,21 @@ class GameScene: SceneClass {
         // 4
         let card3 = CardTemplate(cardType: .buff)
         card3.position = CGPoint(x: 0, y:-200)
-        super.gameManager.add(card3)
+        super.nodeManager.add(card3)
         // 3
         let card4 = CardTemplate(cardType: .debuff)
         card4.position = CGPoint(x: 160, y:-300)
-        super.gameManager.add(card4)
+        super.nodeManager.add(card4)
         
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)
         enemy.zPosition = 10
         addChild(enemy)
         
-        let player = Player(health: 50, playerType: .player1)
+        let player = Player(playerType: .player1)
         player.position = CGPoint(x: -320, y:-100)
         player.zPosition = 1
-        super.gameManager.add(player)
+        super.nodeManager.add(player)
         
         ///Health Bar
         healthBar = childNode(withName: "healthBar") as? SKSpriteNode
