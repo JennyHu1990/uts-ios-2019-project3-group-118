@@ -51,16 +51,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5w-Va-9Wm">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="Y1q-Bt-5LT">
+                                <rect key="frame" x="0.0" y="0.0" width="2280" height="1440"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5w-Va-9Wm">
+                                <rect key="frame" x="255" y="161" width="157" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" title="Play Game">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="wW0-CI-MqK" kind="show" id="icF-sC-0a7"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="y5w-Va-9Wm" firstAttribute="centerY" secondItem="wUd-gs-NPV" secondAttribute="centerY" id="9rC-0M-qm6"/>
+                            <constraint firstItem="y5w-Va-9Wm" firstAttribute="centerX" secondItem="wUd-gs-NPV" secondAttribute="centerX" id="duG-Ev-gd3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dnV-Uu-OBf"/>
                     </view>
                 </viewController>
@@ -127,4 +138,7 @@
             <point key="canvasLocation" x="805" y="-273"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Background" width="2280" height="1440"/>
+    </resources>
 </document>
