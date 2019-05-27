@@ -39,13 +39,13 @@ class GameScene: SceneClass {
         card2.position = CGPoint(x: -160, y:-300)
         addChild(card2)
         // 3
-        let card3 = CardTemplate(cardType: .buff)
-        card3.position = CGPoint(x: 0, y:-200)
-        super.nodeManager.add(card3)
+//        let card3 = CardTemplate(cardType: .buff)
+//        card3.position = CGPoint(x: 0, y:-200)
+//        super.nodeManager.add(card3)
         // 4
-        let card4 = CardTemplate(cardType: .debuff)
-        card4.position = CGPoint(x: 160, y:-300)
-        super.nodeManager.add(card4)
+//        let card4 = CardTemplate(cardType: .debuff)
+//        card4.position = CGPoint(x: 160, y:-300)
+//        super.nodeManager.add(card4)
         // initiallize enemy
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)
@@ -70,15 +70,14 @@ class GameScene: SceneClass {
     // function to interact with cards
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
         
-//        card.removeFromParent()
-//        other.removeFromParent()
-//        print("hit")
+        card.removeFromParent()
+        other.removeFromParent()
+        print("hit")
     }
     
     // function to return current turn order
     func currentTurnOrder() -> Int {
         let current = gameTurn.enemyTurn.rawValue
-        
         return current
     }
     
