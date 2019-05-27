@@ -54,7 +54,7 @@ class ActiveGameState: GKState{
             self.waitingOnPlayer = true
             self.scene?.isUserInteractionEnabled = false
             self.scene?.healthBarPlayer.xScale = 0.1
-            self.scene?.currentTurnOrder() = playerTurn
+            
         default:
             self.waitingOnPlayer = false
             self.scene?.isUserInteractionEnabled = true

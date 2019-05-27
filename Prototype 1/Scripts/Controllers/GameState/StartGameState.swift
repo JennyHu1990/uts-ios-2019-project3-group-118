@@ -22,7 +22,7 @@ class StartGameState: GKState{
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == ActiveGameState.self
+        return stateClass == EndGameState.self
     }
     
     override func update(deltaTime: TimeInterval) {
