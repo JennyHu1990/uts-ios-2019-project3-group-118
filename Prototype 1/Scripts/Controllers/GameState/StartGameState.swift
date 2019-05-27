@@ -25,7 +25,6 @@ class StartGameState: GKState{
         return stateClass == ActiveGameState.self
     }
     
-    
     override func update(deltaTime: TimeInterval) {
         resetGame()
         self.stateMachine?.enter(ActiveGameState.self)

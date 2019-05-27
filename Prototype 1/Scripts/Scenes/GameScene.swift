@@ -15,6 +15,13 @@ class GameScene: SceneClass {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     var healthBar: SKSpriteNode!
+    var activeCard: SKSpriteNode?
+    var activeOther: SKSpriteNode?
+    // set gamesgate
+    lazy var gameState: GKStateMachine = GKStateMachine(states: [
+        StartGameState(scene: self),
+        ActiveGameState(scene: self),
+        EndGameState(scene: self)])
     
     // sceneDidLoad override
     override func sceneDidLoad() {
@@ -23,17 +30,21 @@ class GameScene: SceneClass {
     
     // set up initial view
     override func didMove(to view: SKView) {
+        
         // call node manager to keep track of nodes
         super.nodeManager = NodeManager(scene: self)
+        
         // set physic world
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
+        
         // initiallize some basic cards
         let card1 = CardTemplate(cardType: .heal)
         // card position
         card1.position = CGPoint(x: -320, y: -300)
         // add card to scene
         addChild(card1)
+        
         // 2
         let card2 = CardTemplate(cardType: .attack)
         card2.position = CGPoint(x: -160, y:-300)
@@ -42,20 +53,24 @@ class GameScene: SceneClass {
 //        let card3 = CardTemplate(cardType: .buff)
 //        card3.position = CGPoint(x: 0, y:-200)
 //        super.nodeManager.add(card3)
+        
         // 4
 //        let card4 = CardTemplate(cardType: .debuff)
 //        card4.position = CGPoint(x: 160, y:-300)
 //        super.nodeManager.add(card4)
+        
         // initiallize enemy
         let enemy = Enemy(health: 100, enemyType: .bossFirst)
         enemy.position = CGPoint(x: 320, y:0)
         enemy.zPosition = 10
         addChild(enemy)
+        
         // initiallize player
         let player = Player(playerType: .player1)
         player.position = CGPoint(x: -320, y:-100)
         player.zPosition = 1
         super.nodeManager.add(player)
+        
         ///Initiallize health bar
         healthBar = childNode(withName: "healthBar") as? SKSpriteNode
         
@@ -66,13 +81,15 @@ class GameScene: SceneClass {
             }
         }
         
+        // enter start game
+        gameState.enter(StartGameState.self)
     }
+    
     // function to interact with cards
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
-        
-        card.removeFromParent()
-        other.removeFromParent()
-        print("hit")
+            card.removeFromParent()
+            other.removeFromParent()
+            print("hit")
     }
     
     // function to return current turn order
@@ -119,7 +136,7 @@ extension GameScene: SKPhysicsContactDelegate{
             (secondBody.categoryBitMask & Physics.enemy != 0)) {
             if let card = firstBody.node as? SKSpriteNode,
                 let enemy = secondBody.node as? SKSpriteNode {
-                cardHitOther(card: card, other: enemy)
+                    cardHitOther(card: card, other: enemy)
             }
         }
     }

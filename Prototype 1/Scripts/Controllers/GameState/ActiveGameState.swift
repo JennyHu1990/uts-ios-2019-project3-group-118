@@ -59,6 +59,7 @@ class ActiveGameState: GKState{
         }
 
         
+        
         //        let (state, winner) = self.scene!.gameBoard!.determineIfWinner()
         //        if state == .Winner{
         //            let winningLabel = self.scene?.childNodeWithName("winningLabel")
