@@ -9,6 +9,11 @@
 import SpriteKit
 import GameplayKit
 
+/* Tracking enum for game state */
+enum GameState {
+    case title, ready, playing, gameOver
+}
+
 class GameScene: SceneClass {
     // set some variables
     private var lastUpdateTime : TimeInterval = 0
@@ -22,6 +27,7 @@ class GameScene: SceneClass {
         StartGameState(scene: self),
         ActiveGameState(scene: self),
         EndGameState(scene: self)])
+    var state: GameState = .title
     
     // sceneDidLoad override
     override func sceneDidLoad() {
@@ -39,14 +45,14 @@ class GameScene: SceneClass {
         physicsWorld.contactDelegate = self
         
         // initiallize some basic cards
-        let card1 = CardTemplate(cardType: .heal)
+        let card1 = cardAttack1()
         // card position
         card1.position = CGPoint(x: -320, y: -300)
         // add card to scene
         addChild(card1)
         
         // 2
-        let card2 = CardTemplate(cardType: .attack)
+        let card2 = cardAttack3()
         card2.position = CGPoint(x: -160, y:-300)
         addChild(card2)
         // 3
@@ -74,12 +80,7 @@ class GameScene: SceneClass {
         ///Initiallize health bar
         healthBar = childNode(withName: "healthBar") as? SKSpriteNode
         
-        var health: CGFloat = 1.0 {
-            didSet {
-                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-                healthBar.xScale = health
-            }
-        }
+        
         
         // enter start game
         gameState.enter(StartGameState.self)
@@ -100,7 +101,20 @@ class GameScene: SceneClass {
     
     // update per frame function
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        
+        var health: CGFloat = 1.0 {
+            didSet {
+                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+                healthBar.xScale = health
+            }
+        }
+        // Called before each frame is rendered/* Called before each frame is rendered */
+        if state != .playing {
+            return
+        }
+        /* Decrease Health */
+        health -= 0.01
+
         
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
