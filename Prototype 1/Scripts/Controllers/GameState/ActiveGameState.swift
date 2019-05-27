@@ -53,11 +53,14 @@ class ActiveGameState: GKState{
         case gameTurn.enemyTurn.rawValue:
             self.waitingOnPlayer = true
             self.scene?.isUserInteractionEnabled = false
+            self.scene?.healthBarPlayer.xScale = 0.1
+            self.scene?.currentTurnOrder() = playerTurn
         default:
             self.waitingOnPlayer = false
             self.scene?.isUserInteractionEnabled = true
         }
 
+        
         
         //        let (state, winner) = self.scene!.gameBoard!.determineIfWinner()
         //        if state == .Winner{

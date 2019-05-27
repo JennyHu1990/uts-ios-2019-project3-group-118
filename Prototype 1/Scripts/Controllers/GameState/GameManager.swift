@@ -10,8 +10,10 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+//
+
 // class to store infos
-class GameManager {    //
+class GameManager {    
     
     // Player
     static var maxHp: Int = 50
@@ -21,7 +23,6 @@ class GameManager {    //
     static var remainCards : [CardTemplate] = []
     static var holdCards: [CardTemplate] = []
     static var usedCards : [CardTemplate] = []
-    
     
     // player buff
     // TODO may set to false if end the turn

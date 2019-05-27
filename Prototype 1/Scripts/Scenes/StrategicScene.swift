@@ -17,9 +17,7 @@ class StrategicScene: SceneClass {
     var graphs = [String: GKGraph]()
     private var lastUpdateTime: TimeInterval = 0
     private var label: SKLabelNode?
-
     //    var gameManager: GameManager!
-
 
     override func sceneDidLoad() {
 
