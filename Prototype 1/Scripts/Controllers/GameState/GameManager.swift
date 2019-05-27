@@ -10,6 +10,8 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+//
+
 // class to store infos
 class GameManager {    
     

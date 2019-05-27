@@ -14,14 +14,17 @@ enum GameState {
     case title, ready, playing, gameOver
 }
 
+
 class GameScene: SceneClass {
     // set some variables
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
-    var healthBar: SKSpriteNode!
+    var healthBarPlayer: SKSpriteNode!
+    var healthBarEnemy: SKSpriteNode!
     var activeCard: SKSpriteNode?
     var activeOther: SKSpriteNode?
+    var turnOrder: gameTurn = gameTurn.playerTurn
     // set gamesgate
     lazy var gameState: GKStateMachine = GKStateMachine(states: [
         StartGameState(scene: self),
@@ -49,7 +52,7 @@ class GameScene: SceneClass {
         // card position
         card1.position = CGPoint(x: -320, y: -300)
         // add card to scene
-        addChild(card1)
+        //addChild(card1)
         
         // 2
         let card2 = cardAttack3()
@@ -78,9 +81,21 @@ class GameScene: SceneClass {
         super.nodeManager.add(player)
         
         ///Initiallize health bar
-        healthBar = childNode(withName: "healthBar") as? SKSpriteNode
+        healthBarPlayer = childNode(withName: "healthBarPlayer") as? SKSpriteNode
+        var health: CGFloat = 1.0 {
+            didSet {
+                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+                healthBarPlayer.xScale = health
+            }
+        }
         
-        
+        healthBarEnemy = childNode(withName: "healthBarEnemy") as? SKSpriteNode
+        var healthE: CGFloat = 1.0 {
+            didSet {
+                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+                healthBarEnemy.xScale = healthE
+            }
+        }
         
         // enter start game
         gameState.enter(StartGameState.self)
@@ -88,14 +103,16 @@ class GameScene: SceneClass {
     
     // function to interact with cards
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
-            card.removeFromParent()
-            other.removeFromParent()
-            print("hit")
+        card.removeFromParent()
+        healthBarPlayer.xScale = 0.5
+        healthBarEnemy.xScale = 0.0
+        other.removeFromParent()
+        print("hit")
     }
     
     // function to return current turn order
     func currentTurnOrder() -> Int {
-        let current = gameTurn.enemyTurn.rawValue
+        let current = turnOrder.rawValue
         return current
     }
     
@@ -105,7 +122,13 @@ class GameScene: SceneClass {
         var health: CGFloat = 1.0 {
             didSet {
                 /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-                healthBar.xScale = health
+                healthBarPlayer.xScale = health
+            }
+        }
+        var healthE: CGFloat = 1.0 {
+            didSet {
+                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+                healthBarEnemy.xScale = healthE
             }
         }
         // Called before each frame is rendered/* Called before each frame is rendered */
