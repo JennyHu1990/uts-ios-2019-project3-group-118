@@ -111,7 +111,7 @@ class CardTemplate: SKSpriteNode {
         descNode.verticalAlignmentMode = .top
         super.addChild(descNode)
 
-        imageNode = SKSpriteNode(imageNamed: "CardAttackImage1")
+        imageNode = SKSpriteNode(imageNamed: "CardAttackImage2")
         imageNode.position = CGPoint(x: 0, y: 35)
         imageNode.zPosition = -1
 //        imageNode.zPosition = -1
@@ -152,6 +152,7 @@ class CardTemplate: SKSpriteNode {
         imageNode = SKSpriteNode(imageNamed: fileName)
         imageNode.position = CGPoint(x: 0, y: 35)
         imageNode.zPosition = -1
+        super.addChild(imageNode)
 //        imageNode.isUserInteractionEnabled = false
     }
 

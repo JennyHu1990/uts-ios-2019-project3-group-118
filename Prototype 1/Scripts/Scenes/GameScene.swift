@@ -35,13 +35,13 @@ class GameScene: SceneClass {
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
         // initiallize some basic cards
-        let card1 = CardTemplate(cardType: .heal)
+        let card1 = cardAttack1()
         // card position
         card1.position = CGPoint(x: -320, y: -300)
         // add card to scene
         addChild(card1)
         // 2
-        let card2 = CardTemplate(cardType: .attack)
+        let card2 = cardAttack3()
         card2.position = CGPoint(x: -160, y:-300)
         addChild(card2)
         // 3
