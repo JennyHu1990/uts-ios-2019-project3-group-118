@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-//
+// class to store infos
 class GameManager {    //
     
     // Player
@@ -88,8 +88,9 @@ class GameManager {    //
         }
     }
     
+    // ded boi
     static func playerDied() {
-        print("player is died")
+        print("player is ded")
     }
     
 }
