@@ -9,12 +9,18 @@
 import SpriteKit
 import GameplayKit
 
+/* Tracking enum for game state */
+enum GameState {
+    case title, ready, playing, gameOver
+}
+
 class GameScene: SceneClass {
     
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     var healthBar: SKSpriteNode!
+    var state: GameState = .title
     
     override func sceneDidLoad() {
         self.backgroundColor = .red
@@ -55,12 +61,7 @@ class GameScene: SceneClass {
         ///Health Bar
         healthBar = childNode(withName: "healthBar") as? SKSpriteNode
         
-        var health: CGFloat = 1.0 {
-            didSet {
-                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-                healthBar.xScale = health
-            }
-        }
+        
         
     }
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
@@ -77,7 +78,20 @@ class GameScene: SceneClass {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        
+        var health: CGFloat = 1.0 {
+            didSet {
+                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+                healthBar.xScale = health
+            }
+        }
+        // Called before each frame is rendered/* Called before each frame is rendered */
+        if state != .playing {
+            return
+        }
+        /* Decrease Health */
+        health -= 0.01
+
         
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
