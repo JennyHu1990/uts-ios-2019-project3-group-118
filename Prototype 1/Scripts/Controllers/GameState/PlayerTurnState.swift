@@ -10,7 +10,7 @@ import Foundation
 import GameplayKit
 import SpriteKit
 
-class EnemyTurnState: GKState{
+class PlayerTurnState: GKState{
     var scene: GameScene?
     var winningLabel: SKNode!
     var resetNode: SKNode!
