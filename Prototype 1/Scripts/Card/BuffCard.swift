@@ -56,7 +56,7 @@ class cardBuff1: BuffCard {
 //Increase next round damage +1
 class cardBuff2: BuffCard {
     init() {
-        super.init(name: "Buff2", energy: 1, imageName: "CardBuffImage2", description: "Increase next round damage +1")
+        super.init(name: "Buff2", energy: 1, imageName: "CardBuffImage2", description: "Increase 1 Damage next round")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -89,7 +89,7 @@ class cardBuff3: BuffCard {
 //Gain 3 cards
 class cardBuff4: BuffCard {
     init() {
-        super.init(name: "Buff4", energy: 2, imageName: "CardBuffImage4", description: "Damage player 3 hp and Gain 3 cards")
+        super.init(name: "Buff4", energy: 2, imageName: "CardBuffImage4", description: "3 Damage - player \nGain 3 cards")
     }
     
     required init?(coder aDecoder: NSCoder) {

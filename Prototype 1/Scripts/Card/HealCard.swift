@@ -60,7 +60,7 @@ class cardHeal1: HealCard {
 //Random 1-4 heal of player
 class cardHeal2: HealCard {
     init() {
-        super.init(name: "Heal2", energy: 2, imageName: "CardHealImage2", description: "Random 1-4 heal of player")
+        super.init(name: "Heal2", energy: 2, imageName: "CardHealImage2", description: "1-4 Random Heal")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -78,7 +78,7 @@ class cardHeal2: HealCard {
 //Damage all the enemy 2 hp
 class cardHeal3: HealCard {
     init() {
-        super.init(name: "Heal3", energy: 3, imageName: "CardHealImage3", description: "Heal player hp 3 and Damage all the enemy 1hp")
+        super.init(name: "Heal3", energy: 3, imageName: "CardHealImage3", description: "3 Heal \n1 Damage all the enemies")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -97,7 +97,7 @@ class cardHeal3: HealCard {
 //Heal player 1
 class cardHeal4: HealCard {
     init() {
-        super.init(name: "Heal4", energy: 1, imageName: "CardHealImage4", description: "Heal player hp 3 and Damage all the enemy 1hp", heal: 1)
+        super.init(name: "Heal4", energy: 1, imageName: "CardHealImage4", description: "1 Heal", heal: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {

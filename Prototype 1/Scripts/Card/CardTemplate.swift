@@ -90,24 +90,24 @@ class CardTemplate: SKSpriteNode {
     func initialUINode() {
         print("show")
 //        energyNode.text = "1"
-        energyNode.fontSize = 15
+        energyNode.fontSize = 16
         energyNode.fontColor = SKColor.white
-        energyNode.position = CGPoint(x: -50, y: 70)
+        energyNode.position = CGPoint(x: -50, y: 73)
         energyNode.preferredMaxLayoutWidth = 110
         super.addChild(energyNode)
 
-        nameNode.fontSize = 13
+        nameNode.fontSize = 12
         nameNode.fontColor = SKColor.black
         nameNode.position = CGPoint(x: 0, y: -20)
         nameNode.preferredMaxLayoutWidth = 90
         super.addChild(nameNode)
 
-        descNode.fontSize = 13
+        descNode.fontSize = 10
         descNode.fontColor = SKColor.black
         descNode.preferredMaxLayoutWidth = 100
         descNode.numberOfLines = 2
         descNode.horizontalAlignmentMode = .center
-        descNode.position = CGPoint(x: 0, y: -(190 / 4 ))
+        descNode.position = CGPoint(x: 0, y: -(190 / 5))
         descNode.verticalAlignmentMode = .top
         super.addChild(descNode)
 

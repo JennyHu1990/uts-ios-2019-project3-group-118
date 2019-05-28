@@ -42,7 +42,7 @@ class DebuffCard: CardTemplate {
 //Enemy sclient 2 rounds
 class cardDebuff1: DebuffCard {
     init() {
-        super.init(name: "Debuff1", energy: 2, imageName: "CardDebuffImage1", description: "Enemy sclient 2 rounds")
+        super.init(name: "Debuff1", energy: 2, imageName: "CardDebuffImage1", description: "Sclience all Enemies 2 turns")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,7 +59,7 @@ class cardDebuff1: DebuffCard {
 //Slient player 1 round
 class cardDebuff2: DebuffCard {
     init() {
-        super.init(name: "Debuff2", energy: 2, imageName: "CardDebuffImage2", description: "Enemy lost 2 hp for 2 round and Slient player 1 round")
+        super.init(name: "Debuff2", energy: 2, imageName: "CardDebuffImage2", description: "2 damage 2 turns \nSlience player 1 turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -75,7 +75,7 @@ class cardDebuff2: DebuffCard {
 //All enemy Sclient 1 round
 class cardDebuff3: DebuffCard {
     init() {
-        super.init(name: "Debuff3", energy: 3, imageName: "CardDebuffImage3", description: "All enemy Sclient 1 round")
+        super.init(name: "Debuff3", energy: 3, imageName: "CardDebuffImage3", description: "Sclience All enemies 1 turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,7 +91,7 @@ class cardDebuff3: DebuffCard {
 //Reduce the 2hp damage of enemy in next turn
 class cardDebuff4: DebuffCard {
     init() {
-        super.init(name: "Debuff4", energy: 2, imageName: "CardDebuffImage4", description: "Reduce the 2hp damage of enemy in next turn")
+        super.init(name: "Debuff4", energy: 2, imageName: "CardDebuffImage4", description: "Reduce 2 damage in next turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
