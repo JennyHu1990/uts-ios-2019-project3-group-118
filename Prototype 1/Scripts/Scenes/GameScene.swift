@@ -21,6 +21,7 @@ class GameScene: SceneClass {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     var healthBarPlayer: SKSpriteNode!
+    var enemy = Enemy(health: 100, enemyType: .bossFirst)
     var health: CGFloat = 0.0 {
         didSet {
             /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
@@ -39,8 +40,8 @@ class GameScene: SceneClass {
     var turnOrder: gameTurn = gameTurn.playerTurn
     // set gamesgate
     lazy var gameState: GKStateMachine = GKStateMachine(states: [
-        StartGameState(scene: self),
-        ActiveGameState(scene: self),
+        PlayerTurnState(scene: self),
+        EnemyTurnState(scene: self),
         EndGameState(scene: self)])
     var state: GameState = .title
     
@@ -77,6 +78,7 @@ class GameScene: SceneClass {
         let card2 = cardAttack3()
         card2.position = CGPoint(x: -160, y:-300)
         addChild(card2)
+        
         // 3
 //        let card3 = CardTemplate(cardType: .buff)
 //        card3.position = CGPoint(x: 0, y:-200)
@@ -88,7 +90,7 @@ class GameScene: SceneClass {
 //        super.nodeManager.add(card4)
         
         // initiallize enemy
-        let enemy = Enemy(health: 100, enemyType: .bossFirst)
+        
         enemy.position = CGPoint(x: 320, y:0)
         enemy.zPosition = 10
         addChild(enemy)
@@ -106,16 +108,39 @@ class GameScene: SceneClass {
         healthE = (CGFloat)(enemy.hp / enemy.maxHp)
         
         // enter start game
-        gameState.enter(StartGameState.self)
+        gameState.enter(PlayerTurnState.self)
+    }
+    
+    func shakeSprite(target:SKSpriteNode, duration:Float) {
+        
+        let position = target.position
+        
+        let amplitudeX:Float = 10
+        let amplitudeY:Float = 6
+        let numberOfShakes = duration / 0.04
+        var actionsArray:[SKAction] = []
+        for _ in 1...Int(numberOfShakes) {
+            let moveX = Float(arc4random_uniform(UInt32(amplitudeX))) - amplitudeX / 2
+            let moveY = Float(arc4random_uniform(UInt32(amplitudeY))) - amplitudeY / 2
+            let shakeAction = SKAction.moveBy(x: CGFloat(moveX), y: CGFloat(moveY), duration: 0.02)
+            shakeAction.timingMode = SKActionTimingMode.easeOut
+            actionsArray.append(shakeAction)
+            actionsArray.append(shakeAction.reversed())
+        }
+        
+        actionsArray.append(SKAction.move(to: position, duration: 0.0))
+        
+        let actionSeq = SKAction.sequence(actionsArray)
+        target.run(actionSeq)
     }
     
     // function to interact with cards
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
         card.removeFromParent()
-        GameManager.hp = GameManager.maxHp / 2
-        other.removeFromParent()
+        shakeSprite(target: other, duration: 1.0)
+        //other.removeFromParent()
         print("hit")
-        gameState.enter(EndGameState.self)
+        gameState.enter(EnemyTurnState.self)
     }
     
     // function to return current turn order
@@ -127,12 +152,14 @@ class GameScene: SceneClass {
     // update per frame function
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered/* Called before each frame is rendered */
-        if state != .playing {
-            return
-        }
+//        if state != .playing {
+//            return
+//        }
         /* Decrease Health */
-        health -= 0.01
-        
+        let currentHp = (Double)(GameManager.hp)
+        let currentMax = (Double)(GameManager.maxHp)
+        self.health = (CGFloat)(currentHp / currentMax)
+        //print(health)
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
             self.lastUpdateTime = currentTime
@@ -140,7 +167,7 @@ class GameScene: SceneClass {
         
         // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
-        
+        self.gameState.update(deltaTime: dt)
         // Update entities
         
         self.lastUpdateTime = currentTime

@@ -20,7 +20,7 @@ class EndGameState: GKState{
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == StartGameState.self
+        return stateClass == PlayerTurnState.self
     }
     
     override func didEnter(from previousState: GKState?) {

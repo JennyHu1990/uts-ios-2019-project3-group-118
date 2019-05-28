@@ -34,8 +34,8 @@
 		F50ED97F229BAD3F0001711C /* EndScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F50ED97E229BAD3F0001711C /* EndScene.sks */; };
 		F568189A228EB61700765006 /* SceneClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5681899228EB61700765006 /* SceneClass.swift */; };
 		F5C7381C2297D805008424B5 /* EndGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381B2297D805008424B5 /* EndGameState.swift */; };
-		F5C7381E2297D846008424B5 /* ActiveGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381D2297D846008424B5 /* ActiveGameState.swift */; };
-		F5C738202297D883008424B5 /* StartGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381F2297D883008424B5 /* StartGameState.swift */; };
+		F5C7381E2297D846008424B5 /* EnemyTurnState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381D2297D846008424B5 /* EnemyTurnState.swift */; };
+		F5C738202297D883008424B5 /* PlayerTurnState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C7381F2297D883008424B5 /* PlayerTurnState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +68,8 @@
 		F50ED97E229BAD3F0001711C /* EndScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndScene.sks; sourceTree = "<group>"; };
 		F5681899228EB61700765006 /* SceneClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneClass.swift; sourceTree = "<group>"; };
 		F5C7381B2297D805008424B5 /* EndGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameState.swift; sourceTree = "<group>"; };
-		F5C7381D2297D846008424B5 /* ActiveGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameState.swift; sourceTree = "<group>"; };
-		F5C7381F2297D883008424B5 /* StartGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameState.swift; sourceTree = "<group>"; };
+		F5C7381D2297D846008424B5 /* EnemyTurnState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyTurnState.swift; sourceTree = "<group>"; };
+		F5C7381F2297D883008424B5 /* PlayerTurnState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTurnState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				BACA519C228D3025009CBE7A /* GameManager.swift */,
-				F5C7381F2297D883008424B5 /* StartGameState.swift */,
-				F5C7381D2297D846008424B5 /* ActiveGameState.swift */,
+				F5C7381F2297D883008424B5 /* PlayerTurnState.swift */,
+				F5C7381D2297D846008424B5 /* EnemyTurnState.swift */,
 				F5C7381B2297D805008424B5 /* EndGameState.swift */,
 				BAE0818A229A4DD9009E237E /* NodeManager.swift */,
 			);
@@ -291,9 +291,9 @@
 				F50AC45D228EBD8E00CF5C43 /* HealCard.swift in Sources */,
 				BA27069E22965A6E002CA766 /* Physics.swift in Sources */,
 				F5C7381C2297D805008424B5 /* EndGameState.swift in Sources */,
-				F5C738202297D883008424B5 /* StartGameState.swift in Sources */,
+				F5C738202297D883008424B5 /* PlayerTurnState.swift in Sources */,
 				2B19F94D229A4A7000A88E5A /* MenuSceneViewController.swift in Sources */,
-				F5C7381E2297D846008424B5 /* ActiveGameState.swift in Sources */,
+				F5C7381E2297D846008424B5 /* EnemyTurnState.swift in Sources */,
 				BAE0818B229A4DD9009E237E /* NodeManager.swift in Sources */,
 				2BAC53FE22927EA400B1A4CC /* Player.swift in Sources */,
 				2BE1916C228D00EA00694D2F /* GameScene.swift in Sources */,

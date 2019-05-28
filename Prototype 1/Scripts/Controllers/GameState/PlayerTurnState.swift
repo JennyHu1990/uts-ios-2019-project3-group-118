@@ -10,7 +10,7 @@ import Foundation
 import GameplayKit
 import SpriteKit
 
-class StartGameState: GKState{
+class EnemyTurnState: GKState{
     var scene: GameScene?
     var winningLabel: SKNode!
     var resetNode: SKNode!
@@ -22,7 +22,7 @@ class StartGameState: GKState{
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == EndGameState.self
+        return stateClass == EnemyTurnState.self || stateClass == EndGameState.self
     }
     
     override func didEnter(from previousState: GKState?) {
@@ -30,14 +30,18 @@ class StartGameState: GKState{
     }
     
     override func update(deltaTime: TimeInterval) {
-        resetGame()
-        self.stateMachine?.enter(ActiveGameState.self)
+        //resetGame()
+        //print("still player turn")
+        //self.stateMachine?.enter(ActiveGameState.self)
     }
     
-
+    override func willExit(to nextState: GKState) {
+        
+    }
     
     func updateGameState(){
         assert(scene != nil, "Scene must not be nil")
+        print("player turn")
     }
     
     func resetGame(){

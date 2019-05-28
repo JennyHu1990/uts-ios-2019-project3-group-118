@@ -16,7 +16,7 @@ enum gameTurn: Int {
 }
 
 
-class ActiveGameState: GKState{
+class EnemyTurnState: GKState{
     var scene: GameScene?
     var waitingOnPlayer: Bool
     
@@ -27,12 +27,16 @@ class ActiveGameState: GKState{
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == EndGameState.self
+        if stateClass == EndGameState.self || stateClass == PlayerTurnState.self{
+            return true
+        }
+        
+        return false
     }
     
     override func didEnter(from previousState: GKState?) {
-        waitingOnPlayer = false
         updateGameState()
+        self.stateMachine?.enter(PlayerTurnState.self)
     }
     
     override func update(deltaTime: TimeInterval) {
@@ -47,21 +51,27 @@ class ActiveGameState: GKState{
     func updateGameState(){
         assert(scene != nil, "Scene must not be nil")
         
-        switch self.scene?.currentTurnOrder() {
-        case gameTurn.playerTurn.rawValue:
-            self.waitingOnPlayer = false
-            self.scene?.isUserInteractionEnabled = true
-        case gameTurn.enemyTurn.rawValue:
-            self.waitingOnPlayer = true
-            self.scene?.isUserInteractionEnabled = false
-            self.scene?.healthBarPlayer.xScale = 0.1
-            
-        default:
-            self.waitingOnPlayer = false
-            self.scene?.isUserInteractionEnabled = true
+//        switch self.scene?.currentTurnOrder() {
+//        case gameTurn.playerTurn.rawValue:
+//            self.waitingOnPlayer = false
+//            self.scene?.isUserInteractionEnabled = true
+//        case gameTurn.enemyTurn.rawValue:
+//            self.waitingOnPlayer = true
+//            self.scene?.isUserInteractionEnabled = false
+//        default:
+//            self.waitingOnPlayer = false
+//            self.scene?.isUserInteractionEnabled = true
+//        }
+        assert(scene?.enemy.hp != nil, "enemy hp must not be nil")
+        if(GameManager.hp > 0 || (scene?.enemy.hp)! > 0){
+            GameManager.hp -= 5
+            print("enemy turn")
         }
-
+        else {
+            self.stateMachine?.enter(EndGameState.self)
+        }
         
+
         
         //        let (state, winner) = self.scene!.gameBoard!.determineIfWinner()
         //        if state == .Winner{
@@ -132,7 +142,6 @@ class ActiveGameState: GKState{
         //            }
         //        }
         //        else{
-        
         
     }
 }
