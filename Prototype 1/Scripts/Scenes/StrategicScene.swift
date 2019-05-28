@@ -33,7 +33,7 @@ class StrategicScene: SceneClass {
         // cardAttack
         let cardAttackItem1 = cardAttack1()
 
-        cardAttackItem1.position = CGPoint(x: -size.width / 2 + 1 * cardAttackItem1.size.width, y: size.height / 2 - 1 * cardAttackItem1.size.height)
+        cardAttackItem1.position = CGPoint(x: -size.width / 2 + 5 * cardAttackItem1.size.width, y: size.height / 2 - 2 * cardAttackItem1.size.height)
         super.nodeManager.add(cardAttackItem1)
         
         // cardAttack
@@ -45,19 +45,19 @@ class StrategicScene: SceneClass {
         // cardAttack
         let cardAttackItem3 = cardAttack3()
 
-        cardAttackItem3.position = CGPoint(x: -size.width / 2 + 3 * cardAttackItem3.size.width, y: size.height / 2 - 1 * cardAttackItem3.size.height)
+        cardAttackItem3.position = CGPoint(x: -size.width / 2 + 9 * cardAttackItem3.size.width, y: size.height / 2 - 2 * cardAttackItem3.size.height)
         super.nodeManager.add(cardAttackItem3)
 
         // cardAttack
         let cardAttackItem4 = cardAttack4()
 
-        cardAttackItem4.position = CGPoint(x: -size.width / 2 + 4 * cardAttackItem4.size.width, y: size.height / 2 - 1 * cardAttackItem4.size.height)
+        cardAttackItem4.position = CGPoint(x: -size.width / 2 + 6 * cardAttackItem4.size.width, y: size.height / 2 - 2 * cardAttackItem4.size.height)
         super.nodeManager.add(cardAttackItem4)
 
         // cardAttack
         let cardAttackItem5 = cardAttack5()
 
-        cardAttackItem5.position = CGPoint(x: -size.width / 2 + 5 * cardAttackItem5.size.width, y: size.height / 2 - 1 * cardAttackItem5.size.height)
+        cardAttackItem5.position = CGPoint(x: -size.width / 2 + 3 * cardAttackItem5.size.width, y: size.height / 2 - 2 * cardAttackItem5.size.height)
         super.nodeManager.add(cardAttackItem5)
 
         // cardAttack
@@ -69,13 +69,13 @@ class StrategicScene: SceneClass {
         // cardAttack
         let cardAttackItem7 = cardAttack7()
 
-        cardAttackItem7.position = CGPoint(x: -size.width / 2 + 7 * cardAttackItem7.size.width, y: size.height / 2 - 1 * cardAttackItem7.size.height)
+        cardAttackItem7.position = CGPoint(x: -size.width / 2 + 8 * cardAttackItem7.size.width, y: size.height / 2 - 2 * cardAttackItem7.size.height)
         super.nodeManager.add(cardAttackItem7)
 
         // cardAttack
         let cardHealItem1 = cardHeal1()
 
-        cardHealItem1.position = CGPoint(x: -size.width / 2 + 1 * cardHealItem1.size.width, y: size.height / 2 - 2 * cardHealItem1.size.height)
+        cardHealItem1.position = CGPoint(x: -size.width / 2 + 9 * cardHealItem1.size.width, y: size.height / 2 - 3 * cardHealItem1.size.height)
         super.nodeManager.add(cardHealItem1)
 
         let cardHealItem2 = cardHeal2()
@@ -85,33 +85,33 @@ class StrategicScene: SceneClass {
 
         let cardHealItem3 = cardHeal3()
 
-        cardHealItem3.position = CGPoint(x: -size.width / 2 + 3 * cardHealItem3.size.width, y: size.height / 2 - 2 * cardHealItem3.size.height)
+        cardHealItem3.position = CGPoint(x: -size.width / 2 + 5 * cardHealItem3.size.width, y: size.height / 2 - 1 * cardHealItem3.size.height)
         super.nodeManager.add(cardHealItem3)
 
         let cardHealItem4 = cardHeal4()
 
-        cardHealItem4.position = CGPoint(x: -size.width / 2 + 4 * cardHealItem4.size.width, y: size.height / 2 - 2 * cardHealItem4.size.height)
+        cardHealItem4.position = CGPoint(x: -size.width / 2 + 7 * cardHealItem4.size.width, y: size.height / 2 - 1 * cardHealItem4.size.height)
         super.nodeManager.add(cardHealItem4)
 
 
         let cardBuffItem1 = cardBuff1()
 
-        cardBuffItem1.position = CGPoint(x: -size.width / 2 + 5 * cardBuffItem1.size.width, y: size.height / 2 - 2 * cardBuffItem1.size.height)
+        cardBuffItem1.position = CGPoint(x: -size.width / 2 + 1 * cardBuffItem1.size.width, y: size.height / 2 - 2 * cardBuffItem1.size.height)
         super.nodeManager.add(cardBuffItem1)
 
         let cardBuffItem2 = cardBuff2()
 
-        cardBuffItem2.position = CGPoint(x: -size.width / 2 + 6 * cardBuffItem2.size.width, y: size.height / 2 - 2 * cardBuffItem2.size.height)
+        cardBuffItem2.position = CGPoint(x: -size.width / 2 + 4 * cardBuffItem2.size.width, y: size.height / 2 - 2 * cardBuffItem2.size.height)
         super.nodeManager.add(cardBuffItem2)
 
         let cardBuffItem3 = cardBuff3()
 
-        cardBuffItem3.position = CGPoint(x: -size.width / 2 + 7 * cardBuffItem3.size.width, y: size.height / 2 - 2 * cardBuffItem3.size.height)
+        cardBuffItem3.position = CGPoint(x: -size.width / 2 + 4 * cardBuffItem3.size.width, y: size.height / 2 - 1 * cardBuffItem3.size.height)
         super.nodeManager.add(cardBuffItem3)
 
         let cardBuffItem4 = cardBuff4()
 
-        cardBuffItem4.position = CGPoint(x: -size.width / 2 + 8 * cardBuffItem4.size.width, y: size.height / 2 - 2 * cardBuffItem4.size.height)
+        cardBuffItem4.position = CGPoint(x: -size.width / 2 + 9 * cardBuffItem4.size.width, y: size.height / 2 - 1 * cardBuffItem4.size.height)
         super.nodeManager.add(cardBuffItem4)
 
 
@@ -125,19 +125,22 @@ class StrategicScene: SceneClass {
 
         let debuffItem2 = cardDebuff2()
 
-        debuffItem2.position = CGPoint(x: -size.width / 2 + 9 * debuffItem2.size.width, y: size.height / 2 - 1 * debuffItem2.size.height)
+        debuffItem2.position = CGPoint(x: -size.width / 2 + 7 * debuffItem2.size.width, y: size.height / 2 - 2 * debuffItem2.size.height)
         super.nodeManager.add(debuffItem2)
+ 
 
         let debuffItem3 = cardDebuff3()
 
-        debuffItem3.position =  CGPoint(x: -size.width / 2 + 9 * debuffItem3.size.width, y: size.height / 2 - 2 * debuffItem3.size.height)
+        debuffItem3.position =  CGPoint(x: -size.width / 2 + 3 * debuffItem3.size.width, y: size.height / 2 - 1 * debuffItem3.size.height)
        
         super.nodeManager.add(debuffItem3)
 
         let debuffItem4 = cardDebuff4()
 
-        debuffItem4.position = CGPoint(x: -size.width / 2 + 9 * debuffItem4.size.width, y: size.height / 2 - 3 * debuffItem4.size.height)
+        debuffItem4.position = CGPoint(x: -size.width / 2 + 1 * debuffItem4.size.width, y: size.height / 2 - 1 * debuffItem4.size.height)
         super.nodeManager.add(debuffItem4)
+        
+
         
     }
 
