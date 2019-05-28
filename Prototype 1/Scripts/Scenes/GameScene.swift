@@ -172,7 +172,33 @@ class GameScene: SceneClass {
         
         self.lastUpdateTime = currentTime
     }
-    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            //use the first touch
+            let location = touch.location(in: self)
+            // select the card
+            if currentCard != nil {
+                // change the card floating height
+                currentCard?.zPosition = CardLevel.board.rawValue
+                // remove the pickup action
+                currentCard?.removeAction(forKey: "pickup")
+                // run the card drop animation
+                currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
+                currentCard = nil
+                //                card.removeFromParent()
+                //                addChild(card)
+            }
+            //do similar things as above, but for start button
+                        if let button = atPoint(location) as? SKSpriteNode {
+                            if button.name == "EndTurnButton" {
+                                let revealGameScene = SKTransition.fade(withDuration: 1.5)
+                                let goToGameScene = GameScene(fileNamed: "GameScene")
+                                goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
+                                self.view?.presentScene(goToGameScene!, transition: revealGameScene)
+                            }
+                        }
+        }
+    }
 }
 
 // physic contact delegate

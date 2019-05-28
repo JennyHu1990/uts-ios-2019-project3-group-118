@@ -66,7 +66,7 @@ class EnemyTurnState: GKState{
         //        }
         assert(scene?.enemy.hp != nil, "enemy hp must not be nil")
         if(GameManager.hp > 0 || (scene?.enemy.hp)! > 0){
-            GameManager.hp -= 5
+            GameManager.damagePlayer(with: 5)
             print("enemy turn")
         }
         else {
