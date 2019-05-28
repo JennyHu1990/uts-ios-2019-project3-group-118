@@ -44,6 +44,10 @@ class GameManager {
         }
     }
     
+    static func addCard(card: CardTemplate){
+        GameManager.remainCards.append(card)
+    }
+    
     static func healPlayer(with value: Int) {
         if value > 0 {
             GameManager.hp = GameManager.hp + value
@@ -52,7 +56,8 @@ class GameManager {
     }
     
     // add card to player's own cards
-    static func drawRandomCards(count : Int = 1) {
+    // 
+    static func drawRandomCards(count : Int = 1) -> CardTemplate? {
         for _ in 0 ..< count {
             if remainCards.count>0 {
                 let randomCard = remainCards.randomElement()!
@@ -60,15 +65,23 @@ class GameManager {
                 if let index = remainCards.index(of: randomCard){
                     remainCards.remove(at: index)
                 }
+                return randomCard
             } else {
                 if usedCards.count > 0 {
                     remainCards.append(contentsOf: usedCards)
                     usedCards = []
+                    let randomCard = remainCards.randomElement()!
+                    holdCards.append(randomCard)
+                    if let index = remainCards.index(of: randomCard){
+                        remainCards.remove(at: index)
+                    }
+                    return randomCard
                 } else {
                     print("No card left in remainCards")
                 }
             }
         }
+        return nil
     }
     
     // throw one random card

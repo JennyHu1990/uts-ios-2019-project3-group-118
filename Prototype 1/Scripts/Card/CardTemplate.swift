@@ -160,8 +160,9 @@ class CardTemplate: SKSpriteNode {
         return self.cardImage
     }
 
-    func activateCard() {
-
+    func activateCardEnemy(enemy: Enemy) {
+    }
+    func activateCardPlayer(){        
     }
 
     func enlarge() {

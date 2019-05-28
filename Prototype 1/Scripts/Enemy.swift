@@ -10,14 +10,14 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-enum EnemyType: Int {
+enum EnemyType {
     case bossFirst,
     bossSecond
 }
 
 class Enemy: SKSpriteNode {
     
-    let enemy :EnemyType
+    let enemyType : EnemyType
     let frontTexture :SKTexture
     let backTexture :SKTexture
     var hp: Int
@@ -30,7 +30,7 @@ class Enemy: SKSpriteNode {
 //    }
     
     init(health: Int, enemyType: EnemyType) {
-        self.enemy = enemyType
+        self.enemyType = enemyType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
         self.hp = health
         self.maxHp = health

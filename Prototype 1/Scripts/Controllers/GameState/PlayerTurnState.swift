@@ -27,6 +27,7 @@ class PlayerTurnState: GKState{
     
     override func didEnter(from previousState: GKState?) {
         updateGameState()
+        
     }
     
     override func update(deltaTime: TimeInterval) {
@@ -42,6 +43,11 @@ class PlayerTurnState: GKState{
     func updateGameState(){
         assert(scene != nil, "Scene must not be nil")
         print("player turn")
+        if GameManager.drawRandomCards() != nil {
+            let card1 = GameManager.drawRandomCards()!
+            card1.position = (scene?.cardPosition)!
+            scene?.addChild(card1)
+        }
     }
     
     func resetGame(){

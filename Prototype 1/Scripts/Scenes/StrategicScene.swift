@@ -201,6 +201,7 @@ class StrategicScene: SceneClass {
             // select the card
             if currentCard != nil {
                 // change the card floating height
+                GameManager.addCard(card: currentCard!)
                 currentCard?.zPosition = CardLevel.board.rawValue
                 // remove the pickup action
                 currentCard?.removeAction(forKey: "pickup")

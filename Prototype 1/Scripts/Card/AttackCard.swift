@@ -32,7 +32,8 @@ class AttackCard: CardTemplate {
         self.damage = damage
     }
 
-    func use(for enemy: Enemy) {
+    /*try extension*/
+    override func activateCardEnemy(enemy: Enemy) {
         enemy.getDamage(with: damage)
     }
 }
@@ -78,7 +79,7 @@ class cardAttack3: AttackCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use(for enemy: Enemy) {
+    override func activateCardEnemy(enemy: Enemy) {
         enemy.getDamage(with: GameManager.hp)
     }
 }
@@ -96,7 +97,7 @@ class cardAttack4: AttackCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use(for enemy: Enemy) {
+    override func activateCardEnemy(enemy: Enemy) {
         enemy.getDamage(with: 3)
         GameManager.healPlayer(with: 2)
     }
@@ -115,7 +116,7 @@ class cardAttack5: AttackCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use(for enemy: Enemy) {
+    override func activateCardEnemy(enemy: Enemy) {
         enemy.getDamage(with: 8)
         GameManager.damagePlayer(with: 4)
     }
@@ -133,7 +134,7 @@ class cardAttack6: AttackCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use(for enemy: Enemy) {
+    override func activateCardEnemy(enemy: Enemy) {
         enemy.getDamage(with: 4)
         GameManager.throwRandomCard()
     }
@@ -150,7 +151,7 @@ class cardAttack7: AttackCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use(for enemy: Enemy) {
+    override func activateCardEnemy(enemy: Enemy) {
         let randomDamage = Int.random(in: 0 ..< 4)
         enemy.getDamage(with: randomDamage)
     }

@@ -10,10 +10,6 @@ import SpriteKit
 import GameplayKit
 
 /* Tracking enum for game state */
-enum GameState {
-    case title, ready, playing, gameOver
-}
-
 
 class GameScene: SceneClass {
     // set some variables
@@ -21,6 +17,12 @@ class GameScene: SceneClass {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     var healthBarPlayer: SKSpriteNode!
+    var deckCountL = SKLabelNode(text: "Cards left")
+    var deckCount:String = "0" {
+        didSet{
+            deckCountL = SKLabelNode(text: "Cards left" + deckCount)
+        }
+    }
     var enemy = Enemy(health: 100, enemyType: .bossFirst)
     var health: CGFloat = 0.0 {
         didSet {
@@ -37,13 +39,14 @@ class GameScene: SceneClass {
     }
     var activeCard: SKSpriteNode?
     var activeOther: SKSpriteNode?
+    let cardPosition = CGPoint(x: -320, y: -300)
     var turnOrder: gameTurn = gameTurn.playerTurn
     // set gamesgate
     lazy var gameState: GKStateMachine = GKStateMachine(states: [
         PlayerTurnState(scene: self),
         EnemyTurnState(scene: self),
         EndGameState(scene: self)])
-    var state: GameState = .title
+    
     
     // sceneDidLoad override
     override func sceneDidLoad() {
@@ -67,17 +70,23 @@ class GameScene: SceneClass {
         endButton.position = CGPoint(x: 0, y: 200)
         addChild(endButton)
         
+        deckCount = (String)(GameManager.remainCards.count)
+        deckCountL.position = CGPoint(x: -500, y: -250)
+        addChild(deckCountL)
         // initiallize some basic cards
-        let card1 = cardAttack1()
+//        if let card1 = GameManager.drawRandomCards(count: 1){
+//            card1.position = cardPosition
+//        } else{
+//        print("no cards")
+//        }
         // card position
-        card1.position = CGPoint(x: -320, y: -300)
         // add card to scene
         //addChild(card1)
         
         // 2
         let card2 = cardAttack3()
         card2.position = CGPoint(x: -160, y:-300)
-        addChild(card2)
+        //addChild(card2)
         
         // 3
 //        let card3 = CardTemplate(cardType: .buff)
@@ -135,12 +144,15 @@ class GameScene: SceneClass {
     }
     
     // function to interact with cards
-    func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
+    func cardHitOther(card: CardTemplate, other: SKSpriteNode) {
+        if other == enemy {
+            card.activateCardEnemy(enemy: enemy)
+        }
         card.removeFromParent()
         shakeSprite(target: other, duration: 1.0)
         //other.removeFromParent()
         print("hit")
-        gameState.enter(EnemyTurnState.self)
+//        gameState.enter(EnemyTurnState.self)
     }
     
     // function to return current turn order
@@ -191,10 +203,7 @@ class GameScene: SceneClass {
             //do similar things as above, but for start button
                         if let button = atPoint(location) as? SKSpriteNode {
                             if button.name == "EndTurnButton" {
-                                let revealGameScene = SKTransition.fade(withDuration: 1.5)
-                                let goToGameScene = GameScene(fileNamed: "GameScene")
-                                goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
-                                self.view?.presentScene(goToGameScene!, transition: revealGameScene)
+                                gameState.enter(EnemyTurnState.self)
                             }
                         }
         }
@@ -218,7 +227,7 @@ extension GameScene: SKPhysicsContactDelegate{
         // run function if card interact with other
         if ((firstBody.categoryBitMask & Physics.card != 0) &&
             (secondBody.categoryBitMask & Physics.enemy != 0)) {
-            if let card = firstBody.node as? SKSpriteNode,
+            if let card = firstBody.node as? CardTemplate,
                 let enemy = secondBody.node as? SKSpriteNode {
                     cardHitOther(card: card, other: enemy)
             }
