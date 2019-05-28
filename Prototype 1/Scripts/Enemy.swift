@@ -21,6 +21,7 @@ class Enemy: SKSpriteNode {
     let frontTexture :SKTexture
     let backTexture :SKTexture
     var hp: Int
+    var maxHp: Int
     var enemySize: CGSize
 //    init(imageName: String, name: String, hp: Int) {
 //        
@@ -32,6 +33,7 @@ class Enemy: SKSpriteNode {
         self.enemy = enemyType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
         self.hp = health
+        self.maxHp = health
         self.enemySize = CGSize.init(width: 560.0, height: 560.0)
         switch enemyType {
         case .bossFirst:
@@ -63,6 +65,6 @@ class Enemy: SKSpriteNode {
     }
     
     func die() {
-        print("\(self.name) is died")
+        print("\(self.name) is ded")
     }
 }

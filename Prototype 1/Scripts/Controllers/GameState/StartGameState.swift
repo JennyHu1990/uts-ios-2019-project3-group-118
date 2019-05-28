@@ -25,9 +25,19 @@ class StartGameState: GKState{
         return stateClass == EndGameState.self
     }
     
+    override func didEnter(from previousState: GKState?) {
+        updateGameState()
+    }
+    
     override func update(deltaTime: TimeInterval) {
         resetGame()
         self.stateMachine?.enter(ActiveGameState.self)
+    }
+    
+
+    
+    func updateGameState(){
+        assert(scene != nil, "Scene must not be nil")
     }
     
     func resetGame(){

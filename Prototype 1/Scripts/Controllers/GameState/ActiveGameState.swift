@@ -32,15 +32,16 @@ class ActiveGameState: GKState{
     
     override func didEnter(from previousState: GKState?) {
         waitingOnPlayer = false
+        updateGameState()
     }
     
     override func update(deltaTime: TimeInterval) {
         assert(scene != nil, "Scene must not be nil")
         
-        if !waitingOnPlayer{
-            waitingOnPlayer = true
-            updateGameState()
-        }
+//        if !waitingOnPlayer{
+//            waitingOnPlayer = true
+//            updateGameState()
+//        }
     }
     
     func updateGameState(){

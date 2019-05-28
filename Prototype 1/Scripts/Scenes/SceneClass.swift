@@ -53,7 +53,6 @@ class SceneClass: SKScene {
 //                }
             }
         }
-
     }
     // move the card when the touch position change
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -74,9 +73,9 @@ class SceneClass: SKScene {
 
     // "drop" the card when the touch end
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
+        if touches.first != nil {
             // use the first touch
-            let location = touch.location(in: self)
+            //let location = touch.location(in: self)
             // select the card
             if currentCard != nil {
                 // change the card floating height
@@ -89,15 +88,15 @@ class SceneClass: SKScene {
                 //                card.removeFromParent()
                 //                addChild(card)
             }
-            // do similar things as above, but for child node
-            if let button = atPoint(location) as? SKSpriteNode {
-                if button.name == "Start" {
-                    let revealGameScene = SKTransition.fade(withDuration: 1.5)
-                    let goToGameScene = GameScene(fileNamed: "GameScene")
-                    goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
-                    self.view?.presentScene(goToGameScene!, transition: revealGameScene)
-                }
-            }
+            // do similar things as above, but for start button
+//            if let button = atPoint(location) as? SKSpriteNode {
+//                if button.name == "Start" {
+//                    let revealGameScene = SKTransition.fade(withDuration: 1.5)
+//                    let goToGameScene = GameScene(fileNamed: "GameScene")
+//                    goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
+//                    self.view?.presentScene(goToGameScene!, transition: revealGameScene)
+//                }
+//            }
         }
     }
 

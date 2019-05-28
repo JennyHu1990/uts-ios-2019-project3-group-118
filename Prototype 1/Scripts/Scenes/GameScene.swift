@@ -21,7 +21,19 @@ class GameScene: SceneClass {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     var healthBarPlayer: SKSpriteNode!
+    var health: CGFloat = 0.0 {
+        didSet {
+            /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+            healthBarPlayer.xScale = health
+        }
+    }
     var healthBarEnemy: SKSpriteNode!
+    var healthE: CGFloat = 0.0 {
+        didSet {
+            /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+            healthBarEnemy.xScale = healthE
+        }
+    }
     var activeCard: SKSpriteNode?
     var activeOther: SKSpriteNode?
     var turnOrder: gameTurn = gameTurn.playerTurn
@@ -46,6 +58,13 @@ class GameScene: SceneClass {
         // set physic world
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
+        
+        // initiallize end turn button
+        let endButton = SKSpriteNode(imageNamed: "EndTurnButton")
+        endButton.name = "EndTurnButton"
+        endButton.size = CGSize(width: 160, height: 60)
+        endButton.position = CGPoint(x: 0, y: 200)
+        addChild(endButton)
         
         // initiallize some basic cards
         let card1 = cardAttack1()
@@ -81,21 +100,10 @@ class GameScene: SceneClass {
         super.nodeManager.add(player)
         
         ///Initiallize health bar
-        healthBarPlayer = childNode(withName: "healthBarPlayer") as? SKSpriteNode
-        var health: CGFloat = 1.0 {
-            didSet {
-                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-                healthBarPlayer.xScale = health
-            }
-        }
-        
-        healthBarEnemy = childNode(withName: "healthBarEnemy") as? SKSpriteNode
-        var healthE: CGFloat = 1.0 {
-            didSet {
-                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-                healthBarEnemy.xScale = healthE
-            }
-        }
+        healthBarPlayer = childNode(withName: "BarPlayer")?.childNode(withName: "healthBarPlayer") as? SKSpriteNode
+        healthBarEnemy = childNode(withName: "BarEnemy")?.childNode(withName: "healthBarEnemy") as? SKSpriteNode
+        health = (CGFloat)(GameManager.hp / GameManager.maxHp)
+        healthE = (CGFloat)(enemy.hp / enemy.maxHp)
         
         // enter start game
         gameState.enter(StartGameState.self)
@@ -104,8 +112,7 @@ class GameScene: SceneClass {
     // function to interact with cards
     func cardHitOther(card: SKSpriteNode, other: SKSpriteNode) {
         card.removeFromParent()
-        healthBarPlayer.xScale = 0.5
-        healthBarEnemy.xScale = 0.0
+        GameManager.hp = GameManager.maxHp / 2
         other.removeFromParent()
         print("hit")
         gameState.enter(EndGameState.self)
@@ -119,26 +126,12 @@ class GameScene: SceneClass {
     
     // update per frame function
     override func update(_ currentTime: TimeInterval) {
-        
-        var health: CGFloat = 1.0 {
-            didSet {
-                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-                healthBarPlayer.xScale = health
-            }
-        }
-        var healthE: CGFloat = 1.0 {
-            didSet {
-                /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-                healthBarEnemy.xScale = healthE
-            }
-        }
         // Called before each frame is rendered/* Called before each frame is rendered */
         if state != .playing {
             return
         }
         /* Decrease Health */
         health -= 0.01
-
         
         // Initialize _lastUpdateTime if it has not already been
         if (self.lastUpdateTime == 0) {
