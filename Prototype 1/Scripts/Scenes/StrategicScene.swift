@@ -213,11 +213,20 @@ class StrategicScene: SceneClass {
             }
             // do similar things as above, but for start button
             if let button = atPoint(location) as? SKSpriteNode {
-                if button.name == "Start" {
+                if button.name == "Start" && GameManager.remainCards.count != 0{
                     let revealGameScene = SKTransition.fade(withDuration: 1.5)
                     let goToGameScene = GameScene(fileNamed: "GameScene")
                     goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
                     self.view?.presentScene(goToGameScene!, transition: revealGameScene)
+                }
+                else {
+                    let errorLabel = SKLabelNode(text: "Cannot Start Game")
+                    errorLabel.position = CGPoint(x: 0, y:0)
+                    errorLabel.fontSize = 80
+                    addChild(errorLabel)
+                    errorLabel.run(SKAction.sequence([
+                        SKAction.fadeOut(withDuration: 3), 
+                        SKAction.removeFromParent()]))
                 }
             }
         }
