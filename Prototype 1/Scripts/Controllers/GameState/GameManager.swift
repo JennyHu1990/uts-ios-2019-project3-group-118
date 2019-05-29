@@ -45,7 +45,8 @@ class GameManager {
     }
     
     static func addCard(card: CardTemplate){
-        GameManager.remainCards.append(card)
+        let newCard = card
+        GameManager.remainCards.append(newCard)
     }
     
     static func healPlayer(with value: Int) {
