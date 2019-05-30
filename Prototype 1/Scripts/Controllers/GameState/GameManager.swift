@@ -46,6 +46,7 @@ class GameManager {
     
     static func addCard(card: CardTemplate){
         let newCard = card
+        print(newCard)
         GameManager.remainCards.append(newCard)
     }
     
