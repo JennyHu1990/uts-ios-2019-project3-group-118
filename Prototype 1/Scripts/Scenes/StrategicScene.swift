@@ -224,7 +224,7 @@ class StrategicScene: SceneClass {
                         let errorLabel = SKLabelNode(text: "Cannot Start Game")
                         errorLabel.position = CGPoint(x: 0, y:0)
                         errorLabel.fontSize = 80
-                        errorLabel.zposition = 100
+                        errorLabel.zPosition = 100
                         addChild(errorLabel)
                         errorLabel.run(SKAction.sequence([
                             SKAction.fadeOut(withDuration: 3), 
