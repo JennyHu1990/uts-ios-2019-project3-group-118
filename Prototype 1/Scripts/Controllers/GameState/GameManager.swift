@@ -60,8 +60,8 @@ class GameManager {
     // add card to player's own cards
     // 
     static func drawRandomCards(count : Int = 1) -> CardTemplate? {
-        for _ in 0 ..< count +1  {
-            if remainCards.count>0 {
+        for _ in 0 ..< count + 1  {
+            if remainCards.count > 0 {
                 let randomCard = remainCards.randomElement()!
                 holdCards.append(randomCard)
                 if let index = remainCards.index(of: randomCard){
@@ -69,7 +69,7 @@ class GameManager {
                 }
                 return randomCard
             } else {
-                if usedCards.count > 0 {
+                if usedCards.count > 0 +1 {
                     remainCards.append(contentsOf: usedCards)
                     usedCards = []
                     let randomCard = remainCards.randomElement()!
