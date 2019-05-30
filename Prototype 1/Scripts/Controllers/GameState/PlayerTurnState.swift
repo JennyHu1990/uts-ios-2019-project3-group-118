@@ -43,8 +43,8 @@ class PlayerTurnState: GKState{
     func updateGameState(){
         assert(scene != nil, "Scene must not be nil")
         print("player turn")
-        if GameManager.drawRandomCards() != nil {
-            let card1 = GameManager.drawRandomCards()!
+        if let card1 = GameManager.drawRandomCards()! {
+            //let card1 = GameManager.drawRandomCards()!
             card1.position = (scene?.cardPosition)!
             scene?.addChild(card1)
         }
