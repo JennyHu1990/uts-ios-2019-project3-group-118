@@ -24,10 +24,10 @@ class GameScene: SceneClass {
         }
     }
     var enemy = Enemy(health: 100, enemyType: .bossFirst)
-    var health: CGFloat = 0.0 {
+    var healthBarValue: CGFloat = 0.0 {
         didSet {
             /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
-            healthBarPlayer.xScale = health
+            healthBarPlayer.xScale = healthBarValue
         }
     }
     var healthBarEnemy: SKSpriteNode!
@@ -41,11 +41,7 @@ class GameScene: SceneClass {
     var activeOther: SKSpriteNode?
     let cardPosition = CGPoint(x: -320, y: -300)
     var turnOrder: gameTurn = gameTurn.playerTurn
-    // set gamesgate
-    lazy var gameState: GKStateMachine = GKStateMachine(states: [
-        PlayerTurnState(scene: self),
-        EnemyTurnState(scene: self),
-        EndGameState(scene: self)])
+    
     
     
     // sceneDidLoad override
@@ -73,33 +69,14 @@ class GameScene: SceneClass {
         deckCount = (String)(GameManager.remainCards.count)
         deckCountL.position = CGPoint(x: -500, y: -250)
         addChild(deckCountL)
-        // initiallize some basic cards
-//        if let card1 = GameManager.drawRandomCards(count: 1){
-//            card1.position = cardPosition
-//        } else{
-//        print("no cards")
-//        }
-        // card position
-        // add card to scene
-        //addChild(card1)
         
-        // 2
-        let card2 = cardAttack3()
-        card2.position = CGPoint(x: -160, y:-300)
-        //addChild(card2)
-        
-        // 3
-//        let card3 = CardTemplate(cardType: .buff)
-//        card3.position = CGPoint(x: 0, y:-200)
-//        super.nodeManager.add(card3)
-        
-        // 4
-//        let card4 = CardTemplate(cardType: .debuff)
-//        card4.position = CGPoint(x: 160, y:-300)
-//        super.nodeManager.add(card4)
+        // add card which selected from strategicScene
+        for card in GameManager.holdCards {
+            card.position = cardPosition
+            scene?.addChild(card)
+        }
         
         // initiallize enemy
-        
         enemy.position = CGPoint(x: 320, y:0)
         enemy.zPosition = 10
         addChild(enemy)
@@ -113,11 +90,11 @@ class GameScene: SceneClass {
         ///Initiallize health bar
         healthBarPlayer = childNode(withName: "BarPlayer")?.childNode(withName: "healthBarPlayer") as? SKSpriteNode
         healthBarEnemy = childNode(withName: "BarEnemy")?.childNode(withName: "healthBarEnemy") as? SKSpriteNode
-        health = (CGFloat)(GameManager.hp / GameManager.maxHp)
+        healthBarValue = (CGFloat)(GameManager.hp / GameManager.maxHp)
         healthE = (CGFloat)(enemy.hp / enemy.maxHp)
         
-        // enter start game
-        gameState.enter(PlayerTurnState.self)
+        // start state machine
+        GameManager.initialGameStateAndStart(scene: self)
     }
     
     func shakeSprite(target:SKSpriteNode, duration:Float) {
@@ -152,7 +129,6 @@ class GameScene: SceneClass {
         shakeSprite(target: other, duration: 1.0)
         //other.removeFromParent()
         print("hit")
-//        gameState.enter(EnemyTurnState.self)
     }
     
     // function to return current turn order
@@ -163,27 +139,36 @@ class GameScene: SceneClass {
     
     // update per frame function
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered/* Called before each frame is rendered */
-//        if state != .playing {
-//            return
-//        }
         /* Decrease Health */
-        let currentHp = (Double)(GameManager.hp)
-        let currentMax = (Double)(GameManager.maxHp)
-        self.health = (CGFloat)(currentHp / currentMax)
-        //print(health)
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
+        if  GameManager.gameIsRunning {
+            updateHealthBarValue()
+            
+            // Initialize _lastUpdateTime if it has not already been
+            if (self.lastUpdateTime == 0) {
+                self.lastUpdateTime = currentTime
+            }
+            
+            // Calculate time since last update
+            let dt = currentTime - self.lastUpdateTime
+            
+            // Update entities
+            GameManager.updateGame(deltaTime: dt)
+            
             self.lastUpdateTime = currentTime
         }
-        
-        // Calculate time since last update
-        let dt = currentTime - self.lastUpdateTime
-        self.gameState.update(deltaTime: dt)
-        // Update entities
-        
-        self.lastUpdateTime = currentTime
     }
+    
+    func updateHealthBarValue() {
+        var currentHp:CGFloat = CGFloat(GameManager.hp)
+        let currentMax:CGFloat = CGFloat(GameManager.maxHp)
+        
+        if currentHp < 0 {
+            currentHp = 0
+        }
+        
+        self.healthBarValue = currentHp / currentMax
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             //use the first touch
@@ -201,11 +186,11 @@ class GameScene: SceneClass {
                 //                addChild(card)
             }
             //do similar things as above, but for start button
-                        if let button = atPoint(location) as? SKSpriteNode {
-                            if button.name == "EndTurnButton" {
-                                gameState.enter(EnemyTurnState.self)
-                            }
-                        }
+            if let button = atPoint(location) as? SKSpriteNode {
+                if button.name == "EndTurnButton" {
+                    GameManager.enterEnemyState()
+                }
+            }
         }
     }
 }

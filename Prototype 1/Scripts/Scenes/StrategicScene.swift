@@ -17,6 +17,8 @@ class StrategicScene: SceneClass {
     var graphs = [String: GKGraph]()
     private var lastUpdateTime: TimeInterval = 0
     private var label: SKLabelNode?
+    var cardsLeft = [CardTemplate]()
+    var playerSelectedCards = [CardTemplate]()
     //    var gameManager: GameManager!
 
     override func sceneDidLoad() {
@@ -29,116 +31,24 @@ class StrategicScene: SceneClass {
         super.nodeManager = NodeManager(scene: self)
         physicsWorld.gravity = .zero
 
-
-        // cardAttack
-        let cardAttackItem1 = cardAttack1()
-
-        cardAttackItem1.position = CGPoint(x: -size.width / 2 + 5 * cardAttackItem1.size.width, y: size.height / 2 - 2 * cardAttackItem1.size.height)
-        super.nodeManager.add(cardAttackItem1)
+        cardsLeft.append(contentsOf: [cardAttack1(),cardAttack2(),cardAttack3(),cardAttack4(),cardAttack5(),cardAttack6(),cardAttack7(),cardHeal1(),cardHeal2(),cardHeal3(),cardHeal4(),cardBuff1(),cardBuff2(),cardBuff3(),cardBuff4(),cardDebuff1(),cardDebuff2(),cardDebuff3(),cardDebuff4()])
         
-        // cardAttack
-        let cardAttackItem2 = cardAttack2()
-
-        cardAttackItem2.position = CGPoint(x: -size.width / 2 + 2 * cardAttackItem2.size.width, y: size.height / 2 - 1 * cardAttackItem1.size.height)
-        super.nodeManager.add(cardAttackItem2)
-
-        // cardAttack
-        let cardAttackItem3 = cardAttack3()
-
-        cardAttackItem3.position = CGPoint(x: -size.width / 2 + 9 * cardAttackItem3.size.width, y: size.height / 2 - 2 * cardAttackItem3.size.height)
-        super.nodeManager.add(cardAttackItem3)
-
-        // cardAttack
-        let cardAttackItem4 = cardAttack4()
-
-        cardAttackItem4.position = CGPoint(x: -size.width / 2 + 6 * cardAttackItem4.size.width, y: size.height / 2 - 2 * cardAttackItem4.size.height)
-        super.nodeManager.add(cardAttackItem4)
-
-        // cardAttack
-        let cardAttackItem5 = cardAttack5()
-
-        cardAttackItem5.position = CGPoint(x: -size.width / 2 + 3 * cardAttackItem5.size.width, y: size.height / 2 - 2 * cardAttackItem5.size.height)
-        super.nodeManager.add(cardAttackItem5)
-
-        // cardAttack
-        let cardAttackItem6 = cardAttack6()
-
-        cardAttackItem6.position = CGPoint(x: -size.width / 2 + 6 * cardAttackItem6.size.width, y: size.height / 2 - 1 * cardAttackItem6.size.height)
-        super.nodeManager.add(cardAttackItem6)
-
-        // cardAttack
-        let cardAttackItem7 = cardAttack7()
-
-        cardAttackItem7.position = CGPoint(x: -size.width / 2 + 8 * cardAttackItem7.size.width, y: size.height / 2 - 2 * cardAttackItem7.size.height)
-        super.nodeManager.add(cardAttackItem7)
-
-        // cardAttack
-        let cardHealItem1 = cardHeal1()
-
-        cardHealItem1.position = CGPoint(x: -size.width / 2 + 9 * cardHealItem1.size.width, y: size.height / 2 - 3 * cardHealItem1.size.height)
-        super.nodeManager.add(cardHealItem1)
-
-        let cardHealItem2 = cardHeal2()
-
-        cardHealItem2.position = CGPoint(x: -size.width / 2 + 2 * cardHealItem2.size.width, y: size.height / 2 - 2 * cardHealItem2.size.height)
-        super.nodeManager.add(cardHealItem2)
-
-        let cardHealItem3 = cardHeal3()
-
-        cardHealItem3.position = CGPoint(x: -size.width / 2 + 5 * cardHealItem3.size.width, y: size.height / 2 - 1 * cardHealItem3.size.height)
-        super.nodeManager.add(cardHealItem3)
-
-        let cardHealItem4 = cardHeal4()
-
-        cardHealItem4.position = CGPoint(x: -size.width / 2 + 7 * cardHealItem4.size.width, y: size.height / 2 - 1 * cardHealItem4.size.height)
-        super.nodeManager.add(cardHealItem4)
-
-
-        let cardBuffItem1 = cardBuff1()
-
-        cardBuffItem1.position = CGPoint(x: -size.width / 2 + 1 * cardBuffItem1.size.width, y: size.height / 2 - 2 * cardBuffItem1.size.height)
-        super.nodeManager.add(cardBuffItem1)
-
-        let cardBuffItem2 = cardBuff2()
-
-        cardBuffItem2.position = CGPoint(x: -size.width / 2 + 4 * cardBuffItem2.size.width, y: size.height / 2 - 2 * cardBuffItem2.size.height)
-        super.nodeManager.add(cardBuffItem2)
-
-        let cardBuffItem3 = cardBuff3()
-
-        cardBuffItem3.position = CGPoint(x: -size.width / 2 + 4 * cardBuffItem3.size.width, y: size.height / 2 - 1 * cardBuffItem3.size.height)
-        super.nodeManager.add(cardBuffItem3)
-
-        let cardBuffItem4 = cardBuff4()
-
-        cardBuffItem4.position = CGPoint(x: -size.width / 2 + 9 * cardBuffItem4.size.width, y: size.height / 2 - 1 * cardBuffItem4.size.height)
-        super.nodeManager.add(cardBuffItem4)
-
-
-        // 5
-        let debuffItem1 = cardDebuff1()
-
-        debuffItem1.position =  CGPoint(x: -size.width / 2 + 8 * debuffItem1.size.width, y: size.height / 2 - 1 * debuffItem1.size.height)
+        cardsLeft.shuffle()
         
-       
-        super.nodeManager.add(debuffItem1)
-
-        let debuffItem2 = cardDebuff2()
-
-        debuffItem2.position = CGPoint(x: -size.width / 2 + 7 * debuffItem2.size.width, y: size.height / 2 - 2 * debuffItem2.size.height)
-        super.nodeManager.add(debuffItem2)
- 
-
-        let debuffItem3 = cardDebuff3()
-
-        debuffItem3.position =  CGPoint(x: -size.width / 2 + 3 * debuffItem3.size.width, y: size.height / 2 - 1 * debuffItem3.size.height)
-       
-        super.nodeManager.add(debuffItem3)
-
-        let debuffItem4 = cardDebuff4()
-
-        debuffItem4.position = CGPoint(x: -size.width / 2 + 1 * debuffItem4.size.width, y: size.height / 2 - 1 * debuffItem4.size.height)
-        super.nodeManager.add(debuffItem4)
+        for (index, card) in cardsLeft.enumerated() {
+            var gap : CGFloat
+            if index < 9 {
+                gap = CGFloat(index + 1)
+                card.position = CGPoint(x: -size.width / 2 + gap * card.size.width, y: size.height / 2 - 1 * card.size.height)
+            } else if index < 18 {
+                gap = CGFloat(index - 9 + 1)
+                card.position = CGPoint(x: -size.width / 2 + gap * card.size.width, y: size.height / 2 - 2 * card.size.height)
+            } else {
+                gap = CGFloat(index - 18 + 1)
+                card.position = CGPoint(x: -size.width / 2 + gap * card.size.width, y: size.height / 2 - 3 * card.size.height)
+            }
+            super.nodeManager.add(card)
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -161,6 +71,10 @@ class StrategicScene: SceneClass {
                 // debug
                 //print("Selected this card")
                 //}
+                if let index = cardsLeft.index(of: currentCard!){
+                    cardsLeft.remove(at: index)
+                    playerSelectedCards.append(currentCard!)
+                }
             }
                 // check for card child i.e the card image, and do silimar thing as above
             else if let card = atPoint(location).parent as? CardTemplate {
@@ -172,6 +86,10 @@ class StrategicScene: SceneClass {
                 //                    deck?.addCard(card: currentCard!)
                 //                    print("Selected this card")
                 //                }
+                if let index = cardsLeft.index(of: currentCard!){
+                    cardsLeft.remove(at: index)
+                    playerSelectedCards.append(currentCard!)
+                }
             }
         }
     }
@@ -193,6 +111,16 @@ class StrategicScene: SceneClass {
         //            let location = touch.location(in: self)
     }
     
+    func addCardBeforeStartGame() {
+        for cardSelected in playerSelectedCards {
+            GameManager.addCardToPlayerHand(card: cardSelected)
+        }
+        
+        for cardLeft in cardsLeft {
+            GameManager.addCardToRemainCards(card: cardLeft)
+        }
+    }
+    
     // "drop" the card when the touch end
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -201,7 +129,6 @@ class StrategicScene: SceneClass {
             // select the card
             if currentCard != nil {
                 // change the card floating height
-                GameManager.addCard(card: currentCard!)
                 currentCard?.zPosition = CardLevel.board.rawValue
                 // remove the pickup action
                 currentCard?.removeAction(forKey: "pickup")
@@ -214,8 +141,12 @@ class StrategicScene: SceneClass {
             // do similar things as above, but for start button
             if let button = atPoint(location) as? SKSpriteNode {
                 if button.name == "Start"{
-                    if GameManager.remainCards.count != 0 {
+                    if playerSelectedCards.count > 0 {
                         let revealGameScene = SKTransition.fade(withDuration: 1.5)
+                        
+                        // add cards to game manager
+                        addCardBeforeStartGame()
+                        
                         let goToGameScene = GameScene(fileNamed: "GameScene")
                         goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
                         self.view?.presentScene(goToGameScene!, transition: revealGameScene)

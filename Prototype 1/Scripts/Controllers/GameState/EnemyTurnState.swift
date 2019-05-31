@@ -29,11 +29,7 @@ class EnemyTurnState: GKState{
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        if stateClass == EndGameState.self || stateClass == PlayerTurnState.self{
-            return true
-        }
-        
-        return false
+        return stateClass == EndGameState.self || stateClass == PlayerTurnState.self || stateClass == LoseGameState.self
     }
     
     override func didEnter(from previousState: GKState?) {

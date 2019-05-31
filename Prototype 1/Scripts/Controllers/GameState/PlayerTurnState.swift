@@ -22,11 +22,24 @@ class PlayerTurnState: GKState{
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == EnemyTurnState.self || stateClass == EndGameState.self
+        return stateClass == EnemyTurnState.self || stateClass == EndGameState.self || stateClass == LoseGameState.self
     }
     
     override func didEnter(from previousState: GKState?) {
+//        let currentHp = (Double)(GameManager.hp)
+//        let currentMax = (Double)(GameManager.maxHp)
+//        
+//        // Player die
+//        if currentHp <= 0 {
+//            self.health = 0
+//            print("lose game")
+//            gameState.enter(LoseGameState.self)
+//            return
+//        }
+//        
+//        self.health = (CGFloat)(currentHp / currentMax)
         updateGameState()
+        GameManager.removeCardsOnHandAndDrawNew()
         
     }
     
@@ -49,6 +62,8 @@ class PlayerTurnState: GKState{
            // scene?.addChild(card1)
         //}
     }
+    
+    
     
     func resetGame(){
         
