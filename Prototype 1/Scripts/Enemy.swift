@@ -56,5 +56,6 @@ class Enemy: SKSpriteNode {
 
     func die() {
         print("\(String(describing: self.name)) is dead")
+        self.removeFromParent()
     }
 }

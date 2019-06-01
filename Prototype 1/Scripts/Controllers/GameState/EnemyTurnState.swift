@@ -64,21 +64,14 @@ class EnemyTurnState: GKState {
             GameManager.skipAllEnemy.toggle()
             return
         }
-        if (GameManager.hp > 0 || (scene?.enemy.hp)! > 0) {
-            switch ((scene?.enemy.enemyType)!) {
-            case .bossFirst:
-                GameManager.damagePlayer(with: 5)
-                print("enemy 1 turn")
-            case .bossSecond:
-                GameManager.damagePlayer(with: 20)
-                print("enemy 2 turn")
-            }
-        } else if scene?.enemy.enemyType != EnemyType.bossSecond {
-            scene?.enemy.removeFromParent()
-            scene?.enemy = Enemy(health: 50, enemyType: .bossSecond)
-            scene?.addChild((scene?.enemy)!)
-        } else {
-            self.stateMachine?.enter(EndGameState.self)
+        
+        switch GameManager.enemyList[0].enemyType {
+        case .bossFirst:
+            GameManager.damagePlayer(with: 5)
+            print("enemy 1 turn")
+        case .bossSecond:
+            GameManager.damagePlayer(with: 20)
+            print("enemy 2 turn")
         }
 
 

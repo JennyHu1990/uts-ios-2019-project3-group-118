@@ -46,6 +46,9 @@ class GameManager {
     // TODO if need to add more enemy in one scene, the code in enemy state should be modified
     static var skipAllEnemy = false
     static var reduceEnemyTwoDamage = false
+    
+    // Second Enemy
+    static var secondEnemyComeUp = false
 
 
     // set gamesgate
@@ -82,20 +85,45 @@ class GameManager {
         if doubleDamageOfNextCard {
             damageValue = damageValue * 2
         }
-        if value > 0 {
-            enemy.hp = enemy.hp - damageValue
+
+        // for testing
+//        if enemy.enemyType == .bossFirst{
+//            damageValue = 100
+//        }
+        
+        if damageValue > 0 {
+            if damageValue > enemy.hp {
+                enemy.hp = 0
+            } else {
+                enemy.hp = enemy.hp - damageValue
+            }
         }
         scene?.showDamageOrHealLabel(value: -damageValue, node: enemy)
         scene?.enemyHealthBarValue = CGFloat(enemy.hp) / CGFloat(enemy.maxHp)
         if enemy.hp <= 0 {
             enemy.die()
+            if !secondEnemyComeUp {
+                print("second Enemy Come Up")
+                showSecondEnemy()
+            }
             if let index = enemyList.index(of: enemy) {
                 enemyList.remove(at: index)
-                if enemyList.isEmpty {
+                if enemyList.isEmpty && secondEnemyComeUp {
                     playerWin()
                 }
             }
         }
+    }
+    
+    private static func showSecondEnemy() {
+        let secondEnemy = Enemy(health: 50, enemyType: .bossSecond)
+        secondEnemy.position = CGPoint(x: 320, y: 30)
+        secondEnemy.zPosition = 10
+        secondEnemy.size = CGSize(width: 280.0, height: 280.0)
+        scene?.addChild(secondEnemy)
+        enemyList.append(secondEnemy)
+        scene?.enemyHealthBarValue = CGFloat(secondEnemy.hp) / CGFloat(secondEnemy.maxHp)
+        secondEnemyComeUp = true
     }
 
     static func addCardToRemainCards(card: CardTemplate) {
@@ -203,7 +231,7 @@ class GameManager {
                     card.activateCardEnemy(enemy: enemy)
                     throwCards(with: [card])
                     remainEnergy -= card.getEnergy()
-                    print("Use card\(card.getName()) remain: \(remainEnergy)")
+                    print("Use card\(card.getName()) remain: \(remainEnergy) energy")
                 }
             } else {
                 print("enemy is nil")
