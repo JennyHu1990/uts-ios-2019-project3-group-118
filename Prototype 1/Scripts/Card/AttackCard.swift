@@ -127,7 +127,7 @@ class cardAttack5: AttackCard {
 //Lose 1 card
 class cardAttack6: AttackCard {
     init() {
-        super.init(name: "Item6", energy: 1, imageName: "CardAttackImage6", description: "4 Damage \n1 Card Lose")
+        super.init(name: "Attack", energy: 1, imageName: "CardAttackImage6", description: "4 Damage \n1 Card Lose")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -144,7 +144,7 @@ class cardAttack6: AttackCard {
 //Random 1-4 damage of the enemy
 class cardAttack7: AttackCard {
     init() {
-        super.init(name: "Item7", energy: 1, imageName: "CardAttackImage7", description: "1-4 Random Damage  ")
+        super.init(name: "Attack", energy: 1, imageName: "CardAttackImage7", description: "1-4 Random Damage  ")
     }
     
     required init?(coder aDecoder: NSCoder) {

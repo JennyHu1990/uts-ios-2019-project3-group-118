@@ -28,7 +28,7 @@ class Player: SKSpriteNode {
         self.player = playerType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
 //        self.hp = health
-        self.playerSize = CGSize.init(width: 200.0, height: 200.0)
+        self.playerSize = CGSize.init(width: 170.0, height: 170.0)
         switch playerType {
         case .player1:
             frontTexture = SKTexture(imageNamed: "Player1")

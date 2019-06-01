@@ -118,7 +118,7 @@ class CardTemplate: SKSpriteNode {
         super.addChild(descNode)
 
 //        imageNode = SKSpriteNode(imageNamed: "CardAttackImage2")
-        imageNode.position = CGPoint(x: 0, y: 35)
+        imageNode.position = CGPoint(x: 0, y: 0)
         imageNode.zPosition = -1
 //        imageNode.zPosition = -1
         super.addChild(imageNode)
@@ -161,7 +161,7 @@ class CardTemplate: SKSpriteNode {
     func setImage(with fileName: String) {
         self.cardImage = fileName
         imageNode = SKSpriteNode(imageNamed: fileName)
-        imageNode.position = CGPoint(x: 0, y: 35)
+        imageNode.position = CGPoint(x: 0, y: 30)
         imageNode.zPosition = -1
         super.addChild(imageNode)
 //        imageNode.isUserInteractionEnabled = false
