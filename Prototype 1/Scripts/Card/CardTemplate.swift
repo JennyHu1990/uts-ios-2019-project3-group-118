@@ -118,10 +118,10 @@ class CardTemplate: SKSpriteNode {
         super.addChild(descNode)
 
 //        imageNode = SKSpriteNode(imageNamed: "CardAttackImage2")
-        imageNode.position = CGPoint(x: 0, y: 0)
-        imageNode.zPosition = -1
+//        imageNode.position = CGPoint(x: 0, y: 0)
 //        imageNode.zPosition = -1
-        super.addChild(imageNode)
+////        imageNode.zPosition = -1
+//        super.addChild(imageNode)
 
         highLightNode.zPosition = -1.5
         highLightNode.position = CGPoint(x: highLightNode.position.x + 2, y: highLightNode.position.y - 7)

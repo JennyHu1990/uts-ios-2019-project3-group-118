@@ -119,7 +119,7 @@ class GameManager {
         let secondEnemy = Enemy(health: 50, enemyType: .bossSecond)
         secondEnemy.position = CGPoint(x: 320, y: 30)
         secondEnemy.zPosition = 10
-        secondEnemy.size = CGSize(width: 280.0, height: 280.0)
+        secondEnemy.size = CGSize(width: 240.0, height: 280.0)
         scene?.addChild(secondEnemy)
         enemyList.append(secondEnemy)
         scene?.enemyHealthBarValue = CGFloat(secondEnemy.hp) / CGFloat(secondEnemy.maxHp)
