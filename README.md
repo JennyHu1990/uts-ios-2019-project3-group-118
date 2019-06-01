@@ -20,9 +20,9 @@ Kill time and enjoy fun
 ## Game Scene
 
 ### Select Card
-
+![image](https://github.com/uts-ios-dev/uts-ios-2019-project3-group-118/blob/master/Screen%20Shot%202019-06-02%20at%2012.05.03%20am.png)
 ### Play Game
-![image](https://github.com/uts-ios-dev/uts-ios-2019-project3-group-118/blob/master/Screen%20Shot%202019-05-27%20at%203.55.41%20pm.png)
+![image](https://github.com/uts-ios-dev/uts-ios-2019-project3-group-118/blob/master/Screen%20Shot%202019-06-02%20at%2012.05.24%20am.png)
 
 
 
