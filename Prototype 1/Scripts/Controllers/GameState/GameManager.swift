@@ -281,14 +281,24 @@ class GameManager {
     // ded boi
     static func playerDied() {
         print("player is dead")
+        removeAllCardsParent()
         gameState?.enter(LoseGameState.self)
         return
     }
 
     static func playerWin() {
         print("player win")
+        removeAllCardsParent()
         gameState?.enter(EndGameState.self)
     }
 
-
+    static func removeAllCardsParent() {
+        let allCards: [CardTemplate] = remainCards + usedCards + holdCards
+        for card in allCards {
+            card.removeFromParent()
+        }
+        remainCards = []
+        usedCards = []
+        holdCards = []
+    }
 }
