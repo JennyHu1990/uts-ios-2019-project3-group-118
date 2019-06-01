@@ -173,8 +173,10 @@ class CardTemplate: SKSpriteNode {
     }
 
     func activateCardEnemy(enemy: Enemy) {
+        print("Need to be implement")
     }
-    func activateCardPlayer(){        
+    func activateCardPlayer(){
+        print("Need to be implement")
     }
 
     func enlarge() {

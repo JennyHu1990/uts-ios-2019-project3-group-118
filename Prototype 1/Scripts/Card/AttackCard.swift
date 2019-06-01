@@ -34,7 +34,7 @@ class AttackCard: CardTemplate {
 
     /*try extension*/
     override func activateCardEnemy(enemy: Enemy) {
-        enemy.getDamage(with: damage)
+        GameManager.damageEnemy(with: damage, enemy: enemy)
     }
 }
 
@@ -80,7 +80,7 @@ class cardAttack3: AttackCard {
     }
     
     override func activateCardEnemy(enemy: Enemy) {
-        enemy.getDamage(with: GameManager.hp)
+        GameManager.damageEnemy(with: GameManager.hp, enemy: enemy)
     }
 }
 
@@ -98,7 +98,7 @@ class cardAttack4: AttackCard {
     }
     
     override func activateCardEnemy(enemy: Enemy) {
-        enemy.getDamage(with: 3)
+        GameManager.damageEnemy(with: 3, enemy: enemy)
         GameManager.healPlayer(with: 2)
     }
 }
@@ -117,7 +117,7 @@ class cardAttack5: AttackCard {
     }
     
     override func activateCardEnemy(enemy: Enemy) {
-        enemy.getDamage(with: 8)
+        GameManager.damageEnemy(with: 8, enemy: enemy)
         GameManager.damagePlayer(with: 4)
     }
 }
@@ -135,7 +135,7 @@ class cardAttack6: AttackCard {
     }
     
     override func activateCardEnemy(enemy: Enemy) {
-        enemy.getDamage(with: 4)
+        GameManager.damageEnemy(with: 4, enemy: enemy)
         GameManager.throwRandomCard()
     }
 }
@@ -153,6 +153,6 @@ class cardAttack7: AttackCard {
     
     override func activateCardEnemy(enemy: Enemy) {
         let randomDamage = Int.random(in: 0 ..< 4)
-        enemy.getDamage(with: randomDamage)
+        GameManager.damageEnemy(with: randomDamage, enemy: enemy)
     }
 }

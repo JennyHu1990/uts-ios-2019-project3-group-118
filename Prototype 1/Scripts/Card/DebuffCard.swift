@@ -32,10 +32,6 @@ class DebuffCard: CardTemplate {
         self.setEnergy(with: energy)
         self.setDescription(with: description)
     }
-    
-    func use(){
-        
-    }
 }
 
 //Energy 2
@@ -49,7 +45,7 @@ class cardDebuff1: DebuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardEnemy(enemy: Enemy) {
         // TODO
     }
 }
@@ -66,7 +62,7 @@ class cardDebuff2: DebuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardEnemy(enemy: Enemy) {
         // TODO
     }
 }
@@ -82,7 +78,7 @@ class cardDebuff3: DebuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardEnemy(enemy: Enemy) {
         // TODO
     }
 }
@@ -98,7 +94,7 @@ class cardDebuff4: DebuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardEnemy(enemy: Enemy) {
         // TODO
     }
 }

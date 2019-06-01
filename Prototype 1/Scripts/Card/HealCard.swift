@@ -34,8 +34,8 @@ class HealCard: CardTemplate {
         self.setDescription(with: description)
         self.heal = heal
     }
-    
-    func use() {
+
+    override func activateCardPlayer() {
         GameManager.healPlayer(with: heal)
     }
 }
@@ -51,7 +51,7 @@ class cardHeal1: HealCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardPlayer() {
         GameManager.healPlayer(with: GameManager.hp)
     }
 }
@@ -67,7 +67,7 @@ class cardHeal2: HealCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardPlayer() {
         let randomHeal = Int.random(in: 1 ..< 4)
         GameManager.healPlayer(with: randomHeal)
     }
@@ -85,11 +85,12 @@ class cardHeal3: HealCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardPlayer() {
         GameManager.healPlayer(with: 3)
         for e in GameManager.enemy {
-            e.getDamage(with: 2)
+            GameManager.damageEnemy(with: 2, enemy: e)
         }
+//        GameManager.targetEnemy?.getDamage(with: 2)
     }
 }
 

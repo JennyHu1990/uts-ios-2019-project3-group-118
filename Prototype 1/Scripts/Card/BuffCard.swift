@@ -31,9 +31,6 @@ class BuffCard: CardTemplate {
         self.setEnergy(with: energy)
         self.setDescription(with: description)
     }
-    
-    func use() {
-    }
 }
 
 //Energy 1
@@ -47,7 +44,7 @@ class cardBuff1: BuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardPlayer() {
         GameManager.drawRandomCards(count: 2)
     }
 }
@@ -63,7 +60,7 @@ class cardBuff2: BuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardPlayer() {
         // TODO
     }
 }
@@ -79,7 +76,7 @@ class cardBuff3: BuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardPlayer() {
         GameManager.doubleDamageOfNextCard = true
     }
 }
@@ -96,7 +93,7 @@ class cardBuff4: BuffCard {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func use() {
+    override func activateCardPlayer() {
         GameManager.damagePlayer(with: 3)
         GameManager.drawRandomCards(count: 3)
     }

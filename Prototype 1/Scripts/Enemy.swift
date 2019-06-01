@@ -11,15 +11,14 @@ import SpriteKit
 import GameplayKit
 
 enum EnemyType {
-    case bossFirst,
-    bossSecond
+    case bossFirst, bossSecond
 }
 
 class Enemy: SKSpriteNode {
-    
-    let enemyType : EnemyType
-    let frontTexture :SKTexture
-    let backTexture :SKTexture
+
+    let enemyType: EnemyType
+    let frontTexture: SKTexture
+    let backTexture: SKTexture
     var hp: Int
     var maxHp: Int
     var enemySize: CGSize
@@ -28,7 +27,7 @@ class Enemy: SKSpriteNode {
 //        self.hp = hp
 //        self.name = name
 //    }
-    
+
     init(health: Int, enemyType: EnemyType) {
         self.enemyType = enemyType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
@@ -41,7 +40,7 @@ class Enemy: SKSpriteNode {
         case .bossSecond:
             frontTexture = SKTexture(imageNamed: "Enemy2")
         }
-        
+
         super.init(texture: frontTexture, color: .clear, size: enemySize)
         self.physicsBody = SKPhysicsBody(rectangleOf: self.enemySize)
         self.physicsBody?.isDynamic = true
@@ -50,21 +49,12 @@ class Enemy: SKSpriteNode {
         self.physicsBody?.collisionBitMask = Physics.none
 
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func getDamage(with value: Int) {
-        if value > 0 {
-            hp = hp - value
-        }
-        if hp <= 0 {
-            die()
-        }
-    }
-    
+
     func die() {
-        print("\(self.name) is ded")
+        print("\(String(describing: self.name)) is dead")
     }
 }

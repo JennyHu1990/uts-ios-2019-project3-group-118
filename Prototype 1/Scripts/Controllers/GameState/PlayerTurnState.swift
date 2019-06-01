@@ -39,8 +39,12 @@ class PlayerTurnState: GKState{
 //        
 //        self.health = (CGFloat)(currentHp / currentMax)
         updateGameState()
-        GameManager.removeCardsOnHandAndDrawNew()
-        
+        if GameManager.firstRound {
+            GameManager.firstRound = !GameManager.firstRound
+        } else {
+            GameManager.removeCardsOnHandAndDrawNew()
+            scene?.showPlayerHoldCards()
+        }
     }
     
     override func update(deltaTime: TimeInterval) {
@@ -50,12 +54,12 @@ class PlayerTurnState: GKState{
     }
     
     override func willExit(to nextState: GKState) {
-        
+
     }
     
     func updateGameState(){
         assert(scene != nil, "Scene must not be nil")
-        print(GameManager.remainCards.count)
+//        print(GameManager.remainCards.count)
         //if let card1 = GameManager.drawRandomCards()! {
             //let card1 = GameManager.drawRandomCards()!
            // card1.position = (scene?.cardPosition)!
