@@ -15,7 +15,7 @@ class LoseScene: SceneClass {
 
     override func didMove(to view: SKView) {
         restartButton.name = "RestartGameButton"
-        restartButton.size = CGSize(width: 160, height: 60)
+        restartButton.size = CGSize(width: 210, height: 60)
         restartButton.position = CGPoint(x: 0, y: -150)
         addChild(restartButton)
     }

@@ -28,9 +28,9 @@ class EndGameState: GKState{
     }
     
     func updateGameState(){
-        let revealGameScene = SKTransition.fade(withDuration: 1.5)
-        let goToGameScene = SKScene(fileNamed: "EndScene")
-        goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
-        scene?.view?.presentScene(goToGameScene!, transition: revealGameScene)
+        let revealScene = SKTransition.fade(withDuration: 1.5)
+        let goToEndScene = SKScene(fileNamed: "EndScene")
+        goToEndScene!.scaleMode = SKSceneScaleMode.aspectFill
+        scene?.view?.presentScene(goToEndScene!, transition: revealScene)
     }
 }

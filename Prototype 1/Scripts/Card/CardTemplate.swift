@@ -95,7 +95,6 @@ class CardTemplate: SKSpriteNode {
     }
 
     func initialUINode() {
-        print("show")
 //        energyNode.text = "1"
         energyNode.fontSize = 16
         energyNode.fontColor = SKColor.white
