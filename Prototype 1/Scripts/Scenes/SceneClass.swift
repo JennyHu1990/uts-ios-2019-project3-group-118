@@ -26,14 +26,7 @@ class SceneClass: SKScene {
             // set current touch
             let location = touch.location(in: self)
             if let card = atPoint(location) as? CardTemplate {
-                // select current card
                 currentCard = card
-                // change the card floating height
-                currentCard?.zPosition = CardLevel.moving.rawValue
-                // remove the drop action
-                currentCard?.removeAction(forKey: "drop")
-                // run the card enlargement animation
-                currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
                 // add card to deck
                 //if touch.tapCount > 1 {
                     //deck?.addCard(card: currentCard!)
@@ -44,14 +37,17 @@ class SceneClass: SKScene {
             // check for card child i.e the card image, and do silimar thing as above
             else if let card = atPoint(location).parent as? CardTemplate {
                 currentCard = card
-                currentCard?.zPosition = CardLevel.moving.rawValue
-                currentCard?.removeAction(forKey: "drop")
-                currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
 //                if touch.tapCount > 1 {
 //                    deck?.addCard(card: currentCard!)
 //                    print("Selected this card")
 //                }
             }
+            // change the card floating height
+            currentCard?.zPosition = CardLevel.moving.rawValue
+            // remove the drop action
+            currentCard?.removeAction(forKey: "drop")
+            // run the card enlargement animation
+            currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
         }
     }
     // move the card when the touch position change

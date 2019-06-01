@@ -68,11 +68,11 @@ class cardAttack2: AttackCard {
 
 
 //Sword angry
-//Energy 2,
+//Energy 3,
 //Damage enemy hp equals to the player’s hp
 class cardAttack3: AttackCard {
     init() {
-        super.init(name: "Sword angry", energy: 2, imageName: "CardAttackImage3", description: "Damage = Player’s hp")
+        super.init(name: "Sword angry", energy: 3, imageName: "CardAttackImage3", description: "Damage = Player’s hp")
     }
     
     required init?(coder aDecoder: NSCoder) {

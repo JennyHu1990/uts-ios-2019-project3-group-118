@@ -13,42 +13,41 @@ import GameplayKit
 import SpriteKit
 
 enum gameTurn: Int {
-    case playerTurn,
-    enemyTurn
+    case playerTurn, enemyTurn
 }
 
 
-class EnemyTurnState: GKState{
+class EnemyTurnState: GKState {
     var scene: GameScene?
     var waitingOnPlayer: Bool
-    
-    init(scene: GameScene){
+
+    init(scene: GameScene) {
         self.scene = scene
         waitingOnPlayer = false
         super.init()
     }
-    
+
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass == EndGameState.self || stateClass == PlayerTurnState.self || stateClass == LoseGameState.self
     }
-    
+
     override func didEnter(from previousState: GKState?) {
         updateGameState()
         self.stateMachine?.enter(PlayerTurnState.self)
     }
-    
+
     override func update(deltaTime: TimeInterval) {
         assert(scene != nil, "Scene must not be nil")
-        
+
         //        if !waitingOnPlayer{
         //            waitingOnPlayer = true
         //            updateGameState()
         //        }
     }
-    
-    func updateGameState(){
+
+    func updateGameState() {
         assert(scene != nil, "Scene must not be nil")
-        
+
         //        switch self.scene?.currentTurnOrder() {
         //        case gameTurn.playerTurn.rawValue:
         //            self.waitingOnPlayer = false
@@ -61,8 +60,12 @@ class EnemyTurnState: GKState{
         //            self.scene?.isUserInteractionEnabled = true
         //        }
         assert(scene?.enemy.hp != nil, "enemy hp must not be nil")
-        if(GameManager.hp > 0 || (scene?.enemy.hp)! > 0){
-            switch ((scene?.enemy.enemyType)!){
+        if GameManager.skipAllEnemy {
+            GameManager.skipAllEnemy.toggle()
+            return
+        }
+        if (GameManager.hp > 0 || (scene?.enemy.hp)! > 0) {
+            switch ((scene?.enemy.enemyType)!) {
             case .bossFirst:
                 GameManager.damagePlayer(with: 5)
                 print("enemy 1 turn")
@@ -70,17 +73,15 @@ class EnemyTurnState: GKState{
                 GameManager.damagePlayer(with: 20)
                 print("enemy 2 turn")
             }
-        }
-        else if scene?.enemy.enemyType != EnemyType.bossSecond {
+        } else if scene?.enemy.enemyType != EnemyType.bossSecond {
             scene?.enemy.removeFromParent()
             scene?.enemy = Enemy(health: 50, enemyType: .bossSecond)
             scene?.addChild((scene?.enemy)!)
-        }
-        else {
+        } else {
             self.stateMachine?.enter(EndGameState.self)
         }
-        
-        
+
+
         //        let (state, winner) = self.scene!.gameBoard!.determineIfWinner()
         //        if state == .Winner{
         //            let winningLabel = self.scene?.childNodeWithName("winningLabel")
@@ -150,6 +151,6 @@ class EnemyTurnState: GKState{
         //            }
         //        }
         //        else{
-        
+
     }
 }

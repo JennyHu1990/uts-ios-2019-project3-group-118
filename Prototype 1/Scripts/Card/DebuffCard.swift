@@ -36,26 +36,26 @@ class DebuffCard: CardTemplate {
 
 //Energy 2
 //Enemy sclient 2 rounds
-class cardDebuff1: DebuffCard {
-    init() {
-        super.init(name: "Debuff1", energy: 2, imageName: "CardDebuffImage1", description: "Sclience all Enemies 2 turns")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func activateCardEnemy(enemy: Enemy) {
-        // TODO
-    }
-}
+//class cardDebuff1: DebuffCard {
+//    init() {
+//        super.init(name: "Debuff1", energy: 2, imageName: "CardDebuffImage1", description: "Skip all Enemies 2 turns")
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//    override func activateCardEnemy(enemy: Enemy) {
+//        // TODO
+//    }
+//}
 
 //Energy 2
 //Enemy lost 2 hp for 2 round
 //Slient player 1 round
 class cardDebuff2: DebuffCard {
     init() {
-        super.init(name: "Debuff2", energy: 2, imageName: "CardDebuffImage2", description: "2 damage 2 turns \nSlience player 1 turn")
+        super.init(name: "Debuff2", energy: 2, imageName: "CardDebuffImage2", description: "10 damage 2 times \nSkip player 1 turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,7 +63,11 @@ class cardDebuff2: DebuffCard {
     }
     
     override func activateCardEnemy(enemy: Enemy) {
-        // TODO
+        GameManager.damageEnemy(with: 10, enemy: enemy)
+        self.run(SKAction.sequence([
+            SKAction.wait(forDuration: 0.7),
+            SKAction.run { GameManager.damageEnemy(with: 10, enemy: enemy) }]))
+        GameManager.skipPlayer = true
     }
 }
 
@@ -71,7 +75,7 @@ class cardDebuff2: DebuffCard {
 //All enemy Sclient 1 round
 class cardDebuff3: DebuffCard {
     init() {
-        super.init(name: "Debuff3", energy: 3, imageName: "CardDebuffImage3", description: "Sclience All enemies 1 turn")
+        super.init(name: "Debuff3", energy: 2, imageName: "CardDebuffImage3", description: "Skip all enemy 1 turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,7 +83,7 @@ class cardDebuff3: DebuffCard {
     }
     
     override func activateCardEnemy(enemy: Enemy) {
-        // TODO
+        GameManager.skipAllEnemy = true
     }
 }
 
@@ -95,6 +99,6 @@ class cardDebuff4: DebuffCard {
     }
     
     override func activateCardEnemy(enemy: Enemy) {
-        // TODO
+        GameManager.reduceEnemyTwoDamage = true
     }
 }

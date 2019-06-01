@@ -33,7 +33,7 @@ class Enemy: SKSpriteNode {
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
         self.hp = health
         self.maxHp = health
-        self.enemySize = CGSize.init(width: 280.0, height: 280.0)
+        self.enemySize = CGSize(width: 280.0, height: 180.0)
         switch enemyType {
         case .bossFirst:
             frontTexture = SKTexture(imageNamed: "Enemy1")

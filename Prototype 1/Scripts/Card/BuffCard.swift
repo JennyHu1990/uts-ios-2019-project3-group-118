@@ -49,11 +49,11 @@ class cardBuff1: BuffCard {
     }
 }
 
-//Energy 1
+//Energy 2
 //Increase next round damage +1
 class cardBuff2: BuffCard {
     init() {
-        super.init(name: "Buff2", energy: 1, imageName: "CardBuffImage2", description: "Increase 1 Damage next round")
+        super.init(name: "Buff2", energy: 1, imageName: "CardBuffImage2", description: "Increase 1 Damage this round")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,15 +61,15 @@ class cardBuff2: BuffCard {
     }
     
     override func activateCardPlayer() {
-        // TODO
+        GameManager.thisRoundDamagePlusOne = true
     }
 }
 
-//Energy 3
+//Energy 2
 //Double the damage of next card
 class cardBuff3: BuffCard {
     init() {
-        super.init(name: "Buff3", energy: 1, imageName: "CardBuffImage3", description: "Gain 2 cards")
+        super.init(name: "Buff3", energy: 2, imageName: "CardBuffImage3", description: "Double damage of next card")
     }
     
     required init?(coder aDecoder: NSCoder) {

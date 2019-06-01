@@ -14,6 +14,9 @@ import GameplayKit
 
 // class to store infos
 class GameManager {
+    // TODO
+//    Use card1 : -2
+//    heal card place in the center of scene should place it in original place
 
     static var scene: GameScene?
     static var firstRound = false
@@ -22,10 +25,11 @@ class GameManager {
     static var maxHp: Int = 50
     static var hp: Int = 50
 
-    static var enemy: [Enemy] = []
+    static var enemyList: [Enemy] = []
     // Draw 5 new cards each player turn
     static var drawEachTurn = 5
-    static var EnergyEachTurn = 4
+    static var energyEachTurn = 4
+    private (set) static var remainEnergy = energyEachTurn
 
     // may have 2 or more enemy in the future
 //    static var targetEnemy : Enemy?
@@ -36,10 +40,13 @@ class GameManager {
     private (set) static var usedCards: [CardTemplate] = []
 
     // player buff
-    // TODO may set to false if end the turn
-    static var nextRoundDamagePlusOne = false
-    // TODO not implemented
+    static var thisRoundDamagePlusOne = false
     static var doubleDamageOfNextCard = false
+    static var skipPlayer = false
+    // TODO if need to add more enemy in one scene, the code in enemy state should be modified
+    static var skipAllEnemy = false
+    static var reduceEnemyTwoDamage = false
+
 
     // set gamesgate
     static var gameState: GKStateMachine?
@@ -65,21 +72,35 @@ class GameManager {
     }
 
     static func damageEnemy(with value: Int, enemy: Enemy) {
+        var damageValue = value
+        if thisRoundDamagePlusOne {
+            damageValue = damageValue + 1
+        }
+        if reduceEnemyTwoDamage {
+            damageValue = damageValue - 2
+        }
+        if doubleDamageOfNextCard {
+            damageValue = damageValue * 2
+        }
         if value > 0 {
-            enemy.hp = enemy.hp - value
+            enemy.hp = enemy.hp - damageValue
         }
-        scene?.showDamageOrHealLabel(value: -value, node: enemy)
-        scene?.enemyHealthBarValue = CGFloat(enemy.hp)/CGFloat(enemy.maxHp)
-        if hp <= 0 {
+        scene?.showDamageOrHealLabel(value: -damageValue, node: enemy)
+        scene?.enemyHealthBarValue = CGFloat(enemy.hp) / CGFloat(enemy.maxHp)
+        if enemy.hp <= 0 {
             enemy.die()
+            if let index = enemyList.index(of: enemy) {
+                enemyList.remove(at: index)
+                if enemyList.isEmpty {
+                    playerWin()
+                }
+            }
         }
-
     }
 
     static func addCardToRemainCards(card: CardTemplate) {
         if card.parent != nil {
-            card.removeFromParent()
-            card.isHidden = true
+            throwCardInASecretPlace(card: card)
         }
         remainCards.append(card)
     }
@@ -87,16 +108,22 @@ class GameManager {
     static func addCardToPlayerHand(card: CardTemplate) {
         if card.parent != nil {
             card.removeFromParent()
-            card.isHidden = true
         }
         card.isSelected = false
         holdCards.append(card)
     }
 
     // Slay the spire style
-    static func removeCardsOnHandAndDrawNew() {
-        usedCards.append(contentsOf: holdCards)
+    static func drawCardsOnNewTurn() {
         drawRandomCards(count: drawEachTurn)
+    }
+
+    static func removeCardsOnHand() {
+        for card in holdCards {
+            throwCardInASecretPlace(card: card)
+        }
+        usedCards.append(contentsOf: holdCards)
+        holdCards = []
     }
 
     static func healPlayer(with value: Int) {
@@ -110,26 +137,30 @@ class GameManager {
     // add card to player's own cards
     // 
     static func drawRandomCards(count: Int = 1) {
+        print("Draw random cards")
         for _ in 0..<count {
             if remainCards.count > 0 {
-                let randomCard = remainCards.randomElement()!
-                holdCards.append(randomCard)
-                if let index = remainCards.index(of: randomCard) {
-                    remainCards.remove(at: index)
-                }
+                addRandomCardFromRemainCardsToHoldCards()
             } else {
                 if usedCards.count > 0 {
+                    print("remain card count = 0")
                     remainCards.append(contentsOf: usedCards)
                     usedCards = []
-                    let randomCard = remainCards.randomElement()!
-                    holdCards.append(randomCard)
-                    if let index = remainCards.index(of: randomCard) {
-                        remainCards.remove(at: index)
-                    }
+                    addRandomCardFromRemainCardsToHoldCards()
                 } else {
-                    print("No card left in remainCards")
+                    print("No card left in remainCards and usedCards")
                 }
             }
+        }
+        scene?.showPlayerHoldCards()
+    }
+
+    private static func addRandomCardFromRemainCardsToHoldCards() {
+        print("addRandomCardFromRemainCardsToHoldCards")
+        let randomCard = remainCards.randomElement()!
+        holdCards.append(randomCard)
+        if let index = remainCards.index(of: randomCard) {
+            remainCards.remove(at: index)
         }
     }
 
@@ -146,9 +177,18 @@ class GameManager {
         usedCards.append(contentsOf: cards)
         for card in cards {
             if let index = holdCards.index(of: card) {
+                throwCardInASecretPlace(card: card)
                 holdCards.remove(at: index)
             }
         }
+        scene?.showPlayerHoldCards()
+    }
+
+    // remove card from scene in order to prevent physical issue
+    private static func throwCardInASecretPlace(card: CardTemplate) {
+        card.isHidden = true
+        card.removeFromParent()
+        card.position = CGPoint(x: 0, y: -500)
     }
 
     static func useCard(card: CardTemplate, enemy: Enemy? = nil, completion: (() -> Void)? = nil) {
@@ -159,20 +199,19 @@ class GameManager {
 //            }
 //            card.activateCardEnemy(enemy: targetEnemy!)
             if let enemy = enemy {
-                card.activateCardEnemy(enemy: enemy)
-                throwCards(with: [card])
-                card.removeFromParent()
-                card.isHidden = true
-                scene?.deckCount = remainCards.count
+                if isAvailableToUseCard(card: card) {
+                    card.activateCardEnemy(enemy: enemy)
+                    throwCards(with: [card])
+                    remainEnergy -= card.getEnergy()
+                    print("Use card\(card.getName()) remain: \(remainEnergy)")
+                }
             } else {
                 print("enemy is nil")
             }
         } else if card is HealCard || card is BuffCard {
             card.activateCardPlayer()
             throwCards(with: [card])
-            card.removeFromParent()
-            card.isHidden = true
-            scene?.deckCount = remainCards.count
+            remainEnergy -= card.getEnergy()
         }
 
         if let callback = completion {
@@ -180,7 +219,24 @@ class GameManager {
         }
     }
 
-    static func shakeSprite(target: SKSpriteNode, duration: Float) {
+    static func isAvailableToUseCard(card: CardTemplate) -> Bool {
+        return card.getEnergy() <= remainEnergy
+    }
+
+    static func isAvailableToUseAnyCardInThisTurn() -> Bool {
+        for card in holdCards {
+            if remainEnergy >= card.getEnergy() {
+                return true
+            }
+        }
+        return false
+    }
+
+    static func fillEnergy() {
+        remainEnergy = energyEachTurn
+    }
+
+    static func shakeSprite(target: SKNode, duration: Float) {
 
         let position = target.position
 
@@ -203,11 +259,13 @@ class GameManager {
         target.run(actionSeq)
     }
 
-    static func initialGameStateAndStart(scene: GameScene, player: Player) {
+    static func initialGameStateAndStart(scene: GameScene, player: Player, enemy: [Enemy]) {
         gameState = GKStateMachine(states: [PlayerTurnState(scene: scene), EnemyTurnState(scene: scene), EndGameState(scene: scene), LoseGameState(scene: scene)])
         self.player = player
+        self.enemyList = enemy
         self.scene = scene
         self.firstRound = true
+        remainEnergy = energyEachTurn
         gameState?.enter(PlayerTurnState.self)
         hp = maxHp
     }
@@ -222,9 +280,14 @@ class GameManager {
 
     // ded boi
     static func playerDied() {
-        print("player is ded")
+        print("player is dead")
         gameState?.enter(LoseGameState.self)
         return
+    }
+
+    static func playerWin() {
+        print("player win")
+        gameState?.enter(EndGameState.self)
     }
 
 

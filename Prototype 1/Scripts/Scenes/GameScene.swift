@@ -16,30 +16,40 @@ class GameScene: SceneClass {
     private var lastUpdateTime: TimeInterval = 0
     private var label: SKLabelNode?
     private var spinnyNode: SKShapeNode?
+    private var endButton: SKSpriteNode = SKSpriteNode(imageNamed: "EndTurnButton")
     var healthBarPlayer: SKSpriteNode!
-    var deckCountL = SKLabelNode(text: "Cards left")
-    var deckCount: Int = 0 {
+    var energyLabelNode = SKLabelNode(text: "Energy:")
+    var energyCount: Int = 0 {
         didSet {
-            deckCountL.text = "Cards left \(deckCount)"
+            if energyCount < 0 {
+                energyCount = 0
+            }
+            energyLabelNode.text = "Energy: \(energyCount)/\(GameManager.energyEachTurn)"
         }
     }
     var enemy = Enemy(health: 100, enemyType: .bossFirst)
     var playerHealthBarValue: CGFloat = 0.0 {
         didSet {
             /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
+            if playerHealthBarValue < 0 {
+                playerHealthBarValue = 0
+            }
             healthBarPlayer.xScale = playerHealthBarValue
         }
     }
     var healthBarEnemy: SKSpriteNode!
     var enemyHealthBarValue: CGFloat = 0.0 {
         didSet {
+            if enemyHealthBarValue < 0 {
+                enemyHealthBarValue = 0
+            }
             /* Scale health bar between 0.0 -> 1.0 e.g 0 -> 100% */
             healthBarEnemy.xScale = enemyHealthBarValue
         }
     }
     var activeCard: SKSpriteNode?
     var activeOther: SKSpriteNode?
-    let cardPosition = CGPoint(x: -320, y: -300)
+    let cardPosition = CGPoint(x: -320, y: -220)
     var turnOrder: gameTurn = gameTurn.playerTurn
 
 
@@ -59,15 +69,13 @@ class GameScene: SceneClass {
         physicsWorld.contactDelegate = self
 
         // initiallize end turn button
-        let endButton = SKSpriteNode(imageNamed: "EndTurnButton")
         endButton.name = "EndTurnButton"
         endButton.size = CGSize(width: 160, height: 60)
         endButton.position = CGPoint(x: 0, y: 200)
         addChild(endButton)
 
-        deckCount = GameManager.remainCards.count
-        deckCountL.position = CGPoint(x: -500, y: -250)
-        addChild(deckCountL)
+        energyLabelNode.position = CGPoint(x: -500, y: -250)
+        addChild(energyLabelNode)
 
         // add card which selected from strategicScene
         for card in GameManager.holdCards {
@@ -76,14 +84,15 @@ class GameScene: SceneClass {
         }
 
         // initiallize enemy
-        enemy.position = CGPoint(x: 320, y: 0)
+        var enemyList = [Enemy]()
+        enemy.position = CGPoint(x: 320, y: 30)
         enemy.zPosition = 10
         addChild(enemy)
-        GameManager.enemy.append(enemy)
+        enemyList.append(enemy)
 
         // initiallize player
         let player = Player(playerType: .player1)
-        player.position = CGPoint(x: -320, y: -100)
+        player.position = CGPoint(x: -320, y: 0)
         player.zPosition = 1
         super.nodeManager.add(player)
 
@@ -98,7 +107,7 @@ class GameScene: SceneClass {
         enemyHealthBarValue = (CGFloat)(enemy.hp / enemy.maxHp)
 
         // start state machine
-        GameManager.initialGameStateAndStart(scene: self, player: player)
+        GameManager.initialGameStateAndStart(scene: self, player: player, enemy: enemyList)
         showPlayerHoldCards()
     }
 
@@ -110,6 +119,7 @@ class GameScene: SceneClass {
 
     // update per frame function
     override func update(_ currentTime: TimeInterval) {
+        energyCount = GameManager.remainEnergy
         /* Decrease Health */
         if GameManager.gameIsRunning {
             updateHealthBarValue()
@@ -141,18 +151,18 @@ class GameScene: SceneClass {
     }
 
     func showDamageOrHealLabel(value: Int, node: SKSpriteNode) {
-        let labelNode = SKLabelNode()
+        let labelNode = SKLabelNode(fontNamed: "AvenirNext-Bold")
         if value >= 0 {
             labelNode.text = "+ \(value)"
-            labelNode.color = UIColor.green
+            labelNode.fontColor = UIColor.green
         } else {
-            labelNode.text = "- \(value)"
-            labelNode.color = UIColor.yellow
+            labelNode.text = "- \(-value)"
+            labelNode.fontColor = UIColor.yellow
         }
 
         labelNode.fontSize = 30
-        labelNode.zPosition = 1
-        labelNode.position = node.position
+        labelNode.zPosition = 100
+        labelNode.position = CGPoint(x: node.position.x, y: node.position.y + 50)
 
         self.addChild(labelNode)
         let groupAction = SKAction.group([SKAction.fadeOut(withDuration: 2), SKAction.move(by: CGVector(dx: 0, dy: 50), duration: 1.5)])
@@ -162,9 +172,49 @@ class GameScene: SceneClass {
     }
 
     func showPlayerHoldCards() {
-        for card in GameManager.holdCards {
-            card.position = cardPosition
+        print("show player hold cards \(GameManager.holdCards.count)")
+        for (index, card) in GameManager.holdCards.enumerated() {
+            card.position = CGPoint(x: cardPosition.x + CGFloat(index) * card.cardSize.width + 20, y: cardPosition.y)
             card.isHidden = false
+            if card.parent != nil {
+                card.removeFromParent()
+            }
+            self.addChild(card)
+        }
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // select card on first touch
+        if let touch = touches.first {
+            // set current touch
+            let location = touch.location(in: self)
+            if let card = atPoint(location) as? CardTemplate {
+                currentCard = card
+            }
+            // check for card child i.e the card image, and do silimar thing as above
+            else if let card = atPoint(location).parent as? CardTemplate {
+                currentCard = card
+            }
+
+            guard let currentCard = currentCard else {
+                return
+            }
+
+            if (GameManager.isAvailableToUseCard(card: currentCard)) {
+                // change the card floating height
+                currentCard.zPosition = CardLevel.moving.rawValue
+                // remove the drop action
+                currentCard.removeAction(forKey: "drop")
+                // run the card enlargement animation
+                currentCard.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
+            } else {
+                self.currentCard = nil
+                // shining the remain energy label or sth in order to remind player
+                GameManager.shakeSprite(target: energyLabelNode, duration: 1.5)
+                if GameManager.isAvailableToUseAnyCardInThisTurn() {
+                    GameManager.shakeSprite(target: endButton, duration: 2.5)
+                }
+            }
         }
     }
 
@@ -215,8 +265,8 @@ extension GameScene: SKPhysicsContactDelegate {
                     GameManager.shakeSprite(target: enemy, duration: 1.0)
                     GameManager.useCard(card: card, enemy: enemy as? Enemy)
                 } else {
-                    print("wrong interaction with \(String(describing: card.name)) desc: \(card.getDescription())")
-                    card.position = cardPosition
+                    print("wrong interaction with \(String(describing: card.getName())) desc: \(card.getDescription())")
+                    showPlayerHoldCards()
                 }
             }
         } else if ((firstBody.categoryBitMask & Physics.card != 0) && (secondBody.categoryBitMask & Physics.player != 0)) {
@@ -224,8 +274,8 @@ extension GameScene: SKPhysicsContactDelegate {
                 if card is HealCard || card is BuffCard {
                     GameManager.useCard(card: card)
                 } else {
-                    print("wrong interaction with \(String(describing: card.name)) desc: \(card.getDescription())")
-                    card.position = cardPosition
+                    print("wrong interaction with \(String(describing: card.getName())) desc: \(card.getDescription())")
+                    showPlayerHoldCards()
                 }
             }
         }

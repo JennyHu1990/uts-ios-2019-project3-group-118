@@ -58,7 +58,7 @@ class CardTemplate: SKSpriteNode {
     init(cardType: CardType) {
         self.cardType = cardType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
-        self.cardSize = CGSize.init(width: 130, height: 190)
+        self.cardSize = CGSize(width: 130, height: 190)
 
         switch cardType {
         case .attack:
@@ -125,8 +125,8 @@ class CardTemplate: SKSpriteNode {
         super.addChild(imageNode)
 
         highLightNode.zPosition = -1.5
-        highLightNode.position = CGPoint(x: highLightNode.position.x + 2, y: highLightNode.position.y - 2)
-        highLightNode.size = CGSize(width: 160, height: 230)
+        highLightNode.position = CGPoint(x: highLightNode.position.x + 2, y: highLightNode.position.y - 7)
+        highLightNode.size = CGSize(width: 130, height: 190)
         highLightNode.isHidden = true
         super.addChild(highLightNode)
 

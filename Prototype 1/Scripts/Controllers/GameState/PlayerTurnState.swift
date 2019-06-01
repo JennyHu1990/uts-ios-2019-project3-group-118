@@ -10,21 +10,21 @@ import Foundation
 import GameplayKit
 import SpriteKit
 
-class PlayerTurnState: GKState{
+class PlayerTurnState: GKState {
     var scene: GameScene?
     var winningLabel: SKNode!
     var resetNode: SKNode!
     var boardNode: SKNode!
-    
-    init(scene: GameScene){
+
+    init(scene: GameScene) {
         self.scene = scene
         super.init()
     }
-    
+
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass == EnemyTurnState.self || stateClass == EndGameState.self || stateClass == LoseGameState.self
     }
-    
+
     override func didEnter(from previousState: GKState?) {
 //        let currentHp = (Double)(GameManager.hp)
 //        let currentMax = (Double)(GameManager.maxHp)
@@ -39,38 +39,55 @@ class PlayerTurnState: GKState{
 //        
 //        self.health = (CGFloat)(currentHp / currentMax)
         updateGameState()
+        if GameManager.skipPlayer {
+            GameManager.skipPlayer.toggle()
+            return
+        }
+        if GameManager.reduceEnemyTwoDamage {
+            GameManager.reduceEnemyTwoDamage.toggle()
+            return
+        }
+
         if GameManager.firstRound {
-            GameManager.firstRound = !GameManager.firstRound
+            GameManager.firstRound.toggle()
         } else {
-            GameManager.removeCardsOnHandAndDrawNew()
+            print("remove card and redraw")
+            GameManager.drawCardsOnNewTurn()
             scene?.showPlayerHoldCards()
         }
     }
-    
+
     override func update(deltaTime: TimeInterval) {
         //resetGame()
         //print("still player turn")
         //self.stateMachine?.enter(ActiveGameState.self)
     }
-    
-    override func willExit(to nextState: GKState) {
 
+    override func willExit(to nextState: GKState) {
+        if GameManager.thisRoundDamagePlusOne {
+            GameManager.thisRoundDamagePlusOne.toggle()
+        }
+        if GameManager.doubleDamageOfNextCard {
+            GameManager.doubleDamageOfNextCard.toggle()
+        }
+        GameManager.removeCardsOnHand()
     }
-    
-    func updateGameState(){
+
+    func updateGameState() {
         assert(scene != nil, "Scene must not be nil")
-//        print(GameManager.remainCards.count)
+        print("player turn")
+
+        GameManager.fillEnergy()
         //if let card1 = GameManager.drawRandomCards()! {
-            //let card1 = GameManager.drawRandomCards()!
-           // card1.position = (scene?.cardPosition)!
-           // scene?.addChild(card1)
+        //let card1 = GameManager.drawRandomCards()!
+        // card1.position = (scene?.cardPosition)!
+        // scene?.addChild(card1)
         //}
     }
-    
-    
-    
-    func resetGame(){
-        
+
+
+    func resetGame() {
+
     }
 }
 
