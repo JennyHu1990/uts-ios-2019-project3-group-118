@@ -19,6 +19,14 @@ class StrategicScene: SceneClass {
     private var label: SKLabelNode?
     var cardsLeft = [CardTemplate]()
     var playerSelectedCards = [CardTemplate]()
+    let maxSelectCount = 5
+    var selectCountNode = SKLabelNode(text: "Select:")
+    var selectCount: Int {
+        get {
+            return playerSelectedCards.count
+        }
+    }
+
     //    var gameManager: GameManager!
 
     override func sceneDidLoad() {
@@ -31,12 +39,12 @@ class StrategicScene: SceneClass {
         super.nodeManager = NodeManager(scene: self)
         physicsWorld.gravity = .zero
 
-        cardsLeft.append(contentsOf: [cardAttack1(),cardAttack2(),cardAttack3(),cardAttack4(),cardAttack5(),cardAttack6(),cardAttack7(),cardHeal1(),cardHeal2(),cardHeal3(),cardHeal4(),cardBuff1(),cardBuff2(),cardBuff3(),cardBuff4(),cardDebuff1(),cardDebuff2(),cardDebuff3(),cardDebuff4()])
-        
+        cardsLeft.append(contentsOf: [cardAttack1(), cardAttack2(), cardAttack3(), cardAttack4(), cardAttack5(), cardAttack6(), cardAttack7(), cardHeal1(), cardHeal2(), cardHeal3(), cardHeal4(), cardBuff1(), cardBuff2(), cardBuff3(), cardBuff4(), cardDebuff1(), cardDebuff2(), cardDebuff3(), cardDebuff4()])
+
         cardsLeft.shuffle()
-        
+
         for (index, card) in cardsLeft.enumerated() {
-            var gap : CGFloat
+            var gap: CGFloat
             if index < 9 {
                 gap = CGFloat(index + 1)
                 card.position = CGPoint(x: -size.width / 2 + gap * card.size.width, y: size.height / 2 - 1 * card.size.height)
@@ -49,6 +57,27 @@ class StrategicScene: SceneClass {
             }
             super.nodeManager.add(card)
         }
+
+        selectCountNode.position = CGPoint(x: 450, y: -250)
+        selectCountNode.text = "Select: 0/\(maxSelectCount)"
+        addChild(selectCountNode)
+    }
+
+    func selectCard(card: CardTemplate?) {
+        if let index = cardsLeft.index(of: card!) {
+            if (selectCount < maxSelectCount) {
+                cardsLeft.remove(at: index)
+                playerSelectedCards.append(card!)
+                selectCountNode.text = "Select: \(selectCount)/\(maxSelectCount)"
+                card?.selectCard()
+            }
+        } else if let index = playerSelectedCards.index(of: card!) {
+            playerSelectedCards.remove(at: index)
+            cardsLeft.append(card!)
+            selectCountNode.text = "Select: \(selectCount)/\(maxSelectCount)"
+            card?.selectCard()
+        }
+
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -65,18 +94,9 @@ class StrategicScene: SceneClass {
                 currentCard?.removeAction(forKey: "drop")
                 // run the card enlargement animation
                 currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
-                // add card to deck
-                //if touch.tapCount > 1 {
-                //deck?.addCard(card: currentCard!)
-                // debug
-                //print("Selected this card")
-                //}
-                if let index = cardsLeft.index(of: currentCard!){
-                    cardsLeft.remove(at: index)
-                    playerSelectedCards.append(currentCard!)
-                }
+                selectCard(card: currentCard)
             }
-                // check for card child i.e the card image, and do silimar thing as above
+            // check for card child i.e the card image, and do silimar thing as above
             else if let card = atPoint(location).parent as? CardTemplate {
                 currentCard = card
                 currentCard?.zPosition = CardLevel.moving.rawValue
@@ -86,14 +106,11 @@ class StrategicScene: SceneClass {
                 //                    deck?.addCard(card: currentCard!)
                 //                    print("Selected this card")
                 //                }
-                if let index = cardsLeft.index(of: currentCard!){
-                    cardsLeft.remove(at: index)
-                    playerSelectedCards.append(currentCard!)
-                }
+                selectCard(card: currentCard)
             }
         }
     }
-    
+
     // move the card when the touch position change
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        let touchedPoint = touches.first!
@@ -110,17 +127,17 @@ class StrategicScene: SceneClass {
         //        for touch in touches{
         //            let location = touch.location(in: self)
     }
-    
+
     func addCardBeforeStartGame() {
         for cardSelected in playerSelectedCards {
             GameManager.addCardToPlayerHand(card: cardSelected)
         }
-        
+
         for cardLeft in cardsLeft {
             GameManager.addCardToRemainCards(card: cardLeft)
         }
     }
-    
+
     // "drop" the card when the touch end
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -140,33 +157,30 @@ class StrategicScene: SceneClass {
             }
             // do similar things as above, but for start button
             if let button = atPoint(location) as? SKSpriteNode {
-                if button.name == "Start"{
-                    if playerSelectedCards.count > 0 {
+                if button.name == "Start" {
+                    if playerSelectedCards.count == maxSelectCount {
                         let revealGameScene = SKTransition.fade(withDuration: 1.5)
-                        
+
                         // add cards to game manager
                         addCardBeforeStartGame()
-                        
+
                         let goToGameScene = GameScene(fileNamed: "GameScene")
                         goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
                         self.view?.presentScene(goToGameScene!, transition: revealGameScene)
-                    }
-                    else {
-                        let errorLabel = SKLabelNode(text: "Cannot Start Game")
-                        errorLabel.position = CGPoint(x: 0, y:0)
+                    } else {
+                        let errorLabel = SKLabelNode(text: "Please select \(maxSelectCount) cards")
+                        errorLabel.position = CGPoint(x: 0, y: -180)
                         errorLabel.fontSize = 80
                         errorLabel.zPosition = 100
                         addChild(errorLabel)
-                        errorLabel.run(SKAction.sequence([
-                            SKAction.fadeOut(withDuration: 3), 
-                            SKAction.removeFromParent()]))
+                        errorLabel.run(SKAction.sequence([SKAction.fadeOut(withDuration: 3), SKAction.removeFromParent()]))
                     }
                 }
             }
         }
     }
-    
-    
+
+
     //    override func update(_ currentTime: TimeInterval) {
     //        // Called before each frame is rendered
     //

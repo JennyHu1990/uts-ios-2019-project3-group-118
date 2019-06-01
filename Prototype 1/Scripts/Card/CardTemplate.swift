@@ -36,11 +36,17 @@ class CardTemplate: SKSpriteNode {
     var enlarged = false
     var savedPosition = CGPoint.zero
     var chosenCard = [Int]()
+    var isSelected = false {
+        didSet {
+            highLightNode.isHidden = !isSelected
+        }
+    }
 
     // node
     var energyNode = SKLabelNode(fontNamed: "Chalkduster")
     var nameNode = SKLabelNode(fontNamed: "Chalkduster")
     var imageNode = SKSpriteNode(imageNamed: "CardAttackImage1")
+    var highLightNode = SKSpriteNode(imageNamed: "CardShine")
     var descNode = SKLabelNode(fontNamed: "Chalkduster")
 
     // card attribute
@@ -53,6 +59,7 @@ class CardTemplate: SKSpriteNode {
         self.cardType = cardType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
         self.cardSize = CGSize.init(width: 130, height: 190)
+
         switch cardType {
         case .attack:
             frontTexture = SKTexture(imageNamed: "CardAttack")
@@ -111,12 +118,17 @@ class CardTemplate: SKSpriteNode {
         descNode.verticalAlignmentMode = .top
         super.addChild(descNode)
 
-        imageNode = SKSpriteNode(imageNamed: "CardAttackImage2")
+//        imageNode = SKSpriteNode(imageNamed: "CardAttackImage2")
         imageNode.position = CGPoint(x: 0, y: 35)
         imageNode.zPosition = -1
 //        imageNode.zPosition = -1
         super.addChild(imageNode)
 
+        highLightNode.zPosition = -1.5
+        highLightNode.position = CGPoint(x: highLightNode.position.x + 2, y: highLightNode.position.y - 2)
+        highLightNode.size = CGSize(width: 160, height: 230)
+        highLightNode.isHidden = true
+        super.addChild(highLightNode)
 
     }
 
@@ -192,6 +204,7 @@ class CardTemplate: SKSpriteNode {
 
     func selectCard() {
         print("Selected")
+        isSelected = !isSelected
     }
 }
 

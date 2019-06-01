@@ -20,7 +20,7 @@ class GameScene: SceneClass {
     var deckCountL = SKLabelNode(text: "Cards left")
     var deckCount:String = "0" {
         didSet{
-            deckCountL = SKLabelNode(text: "Cards left" + deckCount)
+            deckCountL = SKLabelNode(text: "Cards left " + deckCount)
         }
     }
     var enemy = Enemy(health: 100, enemyType: .bossFirst)
