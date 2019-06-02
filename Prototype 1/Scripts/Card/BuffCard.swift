@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-
+//Sub class of Card Template
 class BuffCard: CardTemplate {
 //    var backImage = SKTexture.self
     var used = false
@@ -33,11 +33,10 @@ class BuffCard: CardTemplate {
     }
 }
 
-//Energy 1
-//Gain 2 cards
+//Buff Card 1
 class cardBuff1: BuffCard {
     init() {
-        super.init(name: "Buff1", energy: 1, imageName: "CardBuffImage1", description: "Gain 2 cards")
+        super.init(name: "Buff 1", energy: 1, imageName: "CardBuffImage1", description: "Gain 2 cards")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,11 +48,10 @@ class cardBuff1: BuffCard {
     }
 }
 
-//Energy 2
-//Increase next round damage +1
+//Buff Card 2
 class cardBuff2: BuffCard {
     init() {
-        super.init(name: "Buff2", energy: 1, imageName: "CardBuffImage2", description: "Increase 1 Damage this round")
+        super.init(name: "Buff 2", energy: 1, imageName: "CardBuffImage2", description: "Increase 1 Damage this round")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,11 +63,10 @@ class cardBuff2: BuffCard {
     }
 }
 
-//Energy 2
-//Double the damage of next card
+//Buff Card 3
 class cardBuff3: BuffCard {
     init() {
-        super.init(name: "Buff3", energy: 2, imageName: "CardBuffImage3", description: "Double damage of next card")
+        super.init(name: "Buff 3", energy: 2, imageName: "CardBuffImage3", description: "Double damage of next card")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,12 +78,10 @@ class cardBuff3: BuffCard {
     }
 }
 
-//Energy 2
-//Damage player 3 hp
-//Gain 3 cards
+//Buff Card 4
 class cardBuff4: BuffCard {
     init() {
-        super.init(name: "Buff4", energy: 2, imageName: "CardBuffImage4", description: "3 Damage - player \nGain 3 cards")
+        super.init(name: "Buff 4", energy: 2, imageName: "CardBuffImage4", description: "3 Damage - player \nGain 3 cards")
     }
     
     required init?(coder aDecoder: NSCoder) {
