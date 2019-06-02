@@ -19,6 +19,8 @@ class GameScene: SceneClass {
     private var endButton: SKSpriteNode = SKSpriteNode(imageNamed: "EndTurnButton")
     var healthBarPlayer: SKSpriteNode!
     var energyLabelNode = SKLabelNode(text: "Energy:")
+    
+    //count energy when play the game
     var energyCount: Int = 0 {
         didSet {
             if energyCount < 0 {
@@ -27,6 +29,8 @@ class GameScene: SceneClass {
             energyLabelNode.text = "Energy: \(energyCount)/\(GameManager.energyEachTurn)"
         }
     }
+    
+    //hp for enemy and player
     var enemy = Enemy(health: 100, enemyType: .bossFirst)
     var playerHealthBarValue: CGFloat = 0.0 {
         didSet {
@@ -139,6 +143,7 @@ class GameScene: SceneClass {
         }
     }
 
+    //update the hp
     func updateHealthBarValue() {
         var currentHp: CGFloat = CGFloat(GameManager.hp)
         let currentMax: CGFloat = CGFloat(GameManager.maxHp)
@@ -149,7 +154,8 @@ class GameScene: SceneClass {
 
         self.playerHealthBarValue = currentHp / currentMax
     }
-
+    
+    //show the damage or heal
     func showDamageOrHealLabel(value: Int, node: SKSpriteNode) {
         let labelNode = SKLabelNode(fontNamed: "AvenirNext-Bold")
         if value >= 0 {
@@ -171,6 +177,8 @@ class GameScene: SceneClass {
         }
     }
 
+    
+    //show the card that player hold each turn
     func showPlayerHoldCards() {
         print("show player hold cards \(GameManager.holdCards.count)")
         for (index, card) in GameManager.holdCards.enumerated() {
@@ -183,6 +191,7 @@ class GameScene: SceneClass {
         }
     }
 
+    // funciont for interact the card
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // select card on first touch
         if let touch = touches.first {
