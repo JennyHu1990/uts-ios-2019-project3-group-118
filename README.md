@@ -1,4 +1,4 @@
-# Faelurian
+# Faeluria
 For the iOS assignment3
 
 The group get inspriation from the game "Slay the Spire"
@@ -32,7 +32,7 @@ When first enemy is defeated, the second enemy would show up.
 
 
 ### Select Card
-![image](https://github.com/uts-ios-dev/uts-ios-2019-project3-group-118/blob/master/Screen%20Shot%202019-06-02%20at%2012.05.03%20am.png)
+![image](https://github.com/uts-ios-dev/uts-ios-2019-project3-group-118/blob/master/SelectCard.png)
 
 When the user press the card, it will be selected and showed in white shiny background.
 
@@ -40,7 +40,7 @@ Player select 5 cards to start game.
 
 
 ### Play Game
-![image](https://github.com/uts-ios-dev/uts-ios-2019-project3-group-118/blob/master/Screen%20Shot%202019-06-02%20at%2012.05.24%20am.png)
+![image](https://github.com/uts-ios-dev/uts-ios-2019-project3-group-118/blob/master/PlayGame.png)
 
 Each turn, the player has 4 energy.
 
