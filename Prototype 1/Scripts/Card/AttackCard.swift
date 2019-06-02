@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+//The sub class of the cardTemplate
 class AttackCard: CardTemplate {
 //    var backImage = SKTexture.self
     var used = false
@@ -38,9 +39,7 @@ class AttackCard: CardTemplate {
     }
 }
 
-// Dragon attack
-// Energy 1;
-// Damage enemy hp 3
+// Attack Card 1 : Dragon Attack
 class cardAttack1: AttackCard {
     
     init() {
@@ -52,13 +51,11 @@ class cardAttack1: AttackCard {
     }
 }
 
-// Item2:  Snake fire
-// Energy 2;
-// damage enemy hp 6
+// Attack Card 2 : Snake Fire
 class cardAttack2: AttackCard {
     
     init() {
-        super.init(name: "Snake fire", energy: 2, imageName: "CardAttackImage2", description: "6 Damage", damage: 6)
+        super.init(name: "Snake Fire", energy: 2, imageName: "CardAttackImage2", description: "6 Damage", damage: 6)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,12 +64,10 @@ class cardAttack2: AttackCard {
 }
 
 
-//Sword angry
-//Energy 3,
-//Damage enemy hp equals to the player’s hp
+//Attack Card 3 : Sword Angry
 class cardAttack3: AttackCard {
     init() {
-        super.init(name: "Sword angry", energy: 3, imageName: "CardAttackImage3", description: "Damage = Player’s hp")
+        super.init(name: "Sword Angry", energy: 3, imageName: "CardAttackImage3", description: "Damage = Player’s hp")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -84,10 +79,7 @@ class cardAttack3: AttackCard {
     }
 }
 
-//Item4： Goblin Food
-//Energy 2
-//Damage enemy hp 3
-//Heal player hp 2
+//Attack Card 4 Goblin Food
 class cardAttack4: AttackCard {
     init() {
         super.init(name: "Goblin Food", energy: 2, imageName: "CardAttackImage4", description: "3 Damage \n2 Heal")
@@ -103,10 +95,7 @@ class cardAttack4: AttackCard {
     }
 }
 
-//Item5: Palladium Lava
-//Energy 1
-//damage  enemy hp 8
-//Damage player hp 4
+//Attack Card 5: Palladium Lava
 class cardAttack5: AttackCard {
     init() {
         super.init(name: "Palladium Lava", energy: 1, imageName: "CardAttackImage5", description: "8 Damage - Enemay \n4 Damage - Player")
@@ -122,12 +111,10 @@ class cardAttack5: AttackCard {
     }
 }
 
-//Energy 2
-//Damage enemy hp 4
-//Lose 1 card
+//Attack Card 6
 class cardAttack6: AttackCard {
     init() {
-        super.init(name: "Attack", energy: 1, imageName: "CardAttackImage6", description: "4 Damage \n1 Card Lose")
+        super.init(name: "Attack 6", energy: 1, imageName: "CardAttackImage6", description: "4 Damage \n1 Card Lose")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -140,11 +127,10 @@ class cardAttack6: AttackCard {
     }
 }
 
-//Energy 2
-//Random 1-4 damage of the enemy
+//Attack Card 7
 class cardAttack7: AttackCard {
     init() {
-        super.init(name: "Attack", energy: 1, imageName: "CardAttackImage7", description: "1-4 Random Damage  ")
+        super.init(name: "Attack 7", energy: 1, imageName: "CardAttackImage7", description: "1-4 Random Damage  ")
     }
     
     required init?(coder aDecoder: NSCoder) {
