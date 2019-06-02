@@ -11,6 +11,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+//The player picks the card in this scene
 class StrategicScene: SceneClass {
 
     var entities = [GKEntity]()
@@ -34,6 +35,7 @@ class StrategicScene: SceneClass {
         self.lastUpdateTime = 0
     }
 
+    //Display the card and count the selected cards
     override func didMove(to view: SKView) {
         // 1
         super.nodeManager = NodeManager(scene: self)
@@ -63,6 +65,7 @@ class StrategicScene: SceneClass {
         addChild(selectCountNode)
     }
 
+    // function for select card
     func selectCard(card: CardTemplate?) {
         if let index = cardsLeft.index(of: card!) {
             if (selectCount < maxSelectCount) {
@@ -79,7 +82,8 @@ class StrategicScene: SceneClass {
         }
 
     }
-
+    
+    //Interact the card
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // select card on first touch
         if let touch = touches.first {
@@ -128,6 +132,7 @@ class StrategicScene: SceneClass {
         //            let location = touch.location(in: self)
     }
 
+    
     func addCardBeforeStartGame() {
         for cardSelected in playerSelectedCards {
             GameManager.addCardToPlayerHand(card: cardSelected)
