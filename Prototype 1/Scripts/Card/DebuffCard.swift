@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-
+// Sub Class of Card Template
 class DebuffCard: CardTemplate {
 //    var backImage = SKTexture.self
     var used = false
@@ -50,12 +50,10 @@ class DebuffCard: CardTemplate {
 //    }
 //}
 
-//Energy 2
-//Enemy lost 2 hp for 2 round
-//Slient player 1 round
+// Debuff Card 2
 class cardDebuff2: DebuffCard {
     init() {
-        super.init(name: "Debuff2", energy: 2, imageName: "CardDebuffImage2", description: "10 damage 2 times \nSkip player 1 turn")
+        super.init(name: "Debuff 2", energy: 2, imageName: "CardDebuffImage2", description: "10 damage 2 times \nSkip player 1 turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -71,11 +69,10 @@ class cardDebuff2: DebuffCard {
     }
 }
 
-//Energy 3
-//All enemy Sclient 1 round
+//Debuff Card 3 
 class cardDebuff3: DebuffCard {
     init() {
-        super.init(name: "Debuff3", energy: 2, imageName: "CardDebuffImage3", description: "Skip all enemy 1 turn")
+        super.init(name: "Debuff 3", energy: 2, imageName: "CardDebuffImage3", description: "Skip all enemy 1 turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,11 +84,10 @@ class cardDebuff3: DebuffCard {
     }
 }
 
-//Energy 2
-//Reduce the 2hp damage of enemy in next turn
+//Debuff Card 4
 class cardDebuff4: DebuffCard {
     init() {
-        super.init(name: "Debuff4", energy: 2, imageName: "CardDebuffImage4", description: "Reduce 2 damage in next turn")
+        super.init(name: "Debuff 4", energy: 2, imageName: "CardDebuffImage4", description: "Reduce 2 damage in next turn")
     }
     
     required init?(coder aDecoder: NSCoder) {
