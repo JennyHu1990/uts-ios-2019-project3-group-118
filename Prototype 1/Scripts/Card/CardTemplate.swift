@@ -25,7 +25,7 @@ enum CardLevel: CGFloat {
 }
 
 
-// 1
+//Super Class of all the cards
 class CardTemplate: SKSpriteNode {
 
     let cardType: CardType
@@ -178,6 +178,8 @@ class CardTemplate: SKSpriteNode {
         print("Need to be implement")
     }
 
+    
+    // enlarge the card when pressed
     func enlarge() {
         if enlarged {
             let slide = SKAction.move(to: savedPosition, duration: 0.3)
@@ -202,7 +204,8 @@ class CardTemplate: SKSpriteNode {
             }
         }
     }
-
+    
+    //select cards to play the game
     func selectCard() {
         print("Selected")
         isSelected = !isSelected
