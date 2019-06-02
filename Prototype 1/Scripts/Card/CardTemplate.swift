@@ -12,11 +12,10 @@ import GameplayKit
 
 enum CardType: Int {
     case attack,
-         heal,
-         buff,
-         debuff
+    heal,
+    buff,
+    debuff
 }
-
 
 enum CardLevel: CGFloat {
     case board = 10
@@ -24,10 +23,9 @@ enum CardLevel: CGFloat {
     case enlarged = 200
 }
 
-
 //Super Class of all the cards
 class CardTemplate: SKSpriteNode {
-
+    
     let cardType: CardType
     let frontTexture: SKTexture
     let backTexture: SKTexture
@@ -41,25 +39,25 @@ class CardTemplate: SKSpriteNode {
             highLightNode.isHidden = !isSelected
         }
     }
-
+    
     // node
     var energyNode = SKLabelNode(fontNamed: "Chalkduster")
     var nameNode = SKLabelNode(fontNamed: "Chalkduster")
     var imageNode = SKSpriteNode(imageNamed: "CardAttackImage1")
     var highLightNode = SKSpriteNode(imageNamed: "CardShine")
     var descNode = SKLabelNode(fontNamed: "Chalkduster")
-
+    
     // card attribute
     private var energy: Int = 1
     private var cardName: String = ""
     private var cardDescription: String = ""
     private var cardImage: String = ""
-
+    
     init(cardType: CardType) {
         self.cardType = cardType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
         self.cardSize = CGSize(width: 130, height: 190)
-
+        
         switch cardType {
         case .attack:
             frontTexture = SKTexture(imageNamed: "CardAttack")
@@ -78,24 +76,24 @@ class CardTemplate: SKSpriteNode {
         self.physicsBody?.collisionBitMask = Physics.none
         self.initialUINode()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-
+    
     func initialUINode() {
         energyNode.fontSize = 16
         energyNode.fontColor = SKColor.white
         energyNode.position = CGPoint(x: -50, y: 73)
         energyNode.preferredMaxLayoutWidth = 110
         super.addChild(energyNode)
-
+        
         nameNode.fontSize = 12
         nameNode.fontColor = SKColor.black
         nameNode.position = CGPoint(x: 0, y: -20)
         nameNode.preferredMaxLayoutWidth = 90
         super.addChild(nameNode)
-
+        
         descNode.fontSize = 10
         descNode.fontColor = SKColor.black
         descNode.preferredMaxLayoutWidth = 100
@@ -104,42 +102,42 @@ class CardTemplate: SKSpriteNode {
         descNode.position = CGPoint(x: 0, y: -(190 / 5))
         descNode.verticalAlignmentMode = .top
         super.addChild(descNode)
-
+        
         highLightNode.zPosition = -1.5
         highLightNode.position = CGPoint(x: highLightNode.position.x + 2, y: highLightNode.position.y - 7)
         highLightNode.size = CGSize(width: 130, height: 190)
         highLightNode.isHidden = true
         super.addChild(highLightNode)
-
+        
     }
-
+    
     func setEnergy(with value: Int) {
         energyNode.text = "\(value)"
         self.energy = value
     }
-
+    
     func getEnergy() -> Int {
         return self.energy
     }
-
+    
     func setName(with value: String) {
         nameNode.text = "\(value)"
         self.cardName = value
     }
-
+    
     func getName() -> String {
         return self.cardName
     }
-
+    
     func setDescription(with value: String) {
         descNode.text = "\(value)"
         self.cardDescription = value
     }
-
+    
     func getDescription() -> String {
         return self.cardDescription
     }
-
+    
     func setImage(with fileName: String) {
         self.cardImage = fileName
         imageNode = SKSpriteNode(imageNamed: fileName)
@@ -147,18 +145,17 @@ class CardTemplate: SKSpriteNode {
         imageNode.zPosition = -1
         super.addChild(imageNode)
     }
-
+    
     func getImageName() -> String {
         return self.cardImage
     }
-
+    
     func activateCardEnemy(enemy: Enemy) {
         print("Need to be implement")
     }
     func activateCardPlayer(){
         print("Need to be implement")
     }
-
     
     // enlarge the card when pressed
     func enlarge() {
@@ -172,9 +169,9 @@ class CardTemplate: SKSpriteNode {
         } else {
             enlarged = true
             savedPosition = position
-
+            
             zPosition = CardLevel.enlarged.rawValue
-
+            
             if let parent = parent {
                 removeAllActions()
                 zRotation = 0

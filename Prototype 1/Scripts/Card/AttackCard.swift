@@ -12,18 +12,17 @@ import GameplayKit
 
 //The sub class of the cardTemplate
 class AttackCard: CardTemplate {
-//    var backImage = SKTexture.self
     var used = false
     var damage: Int = 0
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-
+    
     init(energy: Int) {
         super.init(cardType: .attack)
     }
-
+    
     init(name: String, energy: Int, imageName: String, description: String, damage:Int = 0) {
         super.init(cardType: .attack)
         self.setImage(with: imageName)
@@ -32,8 +31,7 @@ class AttackCard: CardTemplate {
         self.setDescription(with: description)
         self.damage = damage
     }
-
-    /*try extension*/
+    
     override func activateCardEnemy(enemy: Enemy) {
         GameManager.damageEnemy(with: damage, enemy: enemy)
     }
@@ -62,7 +60,6 @@ class cardAttack2: AttackCard {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 //Attack Card 3 : Sword Angry
 class cardAttack3: AttackCard {

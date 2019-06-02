@@ -10,54 +10,44 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-//
-
 // class to store infos
 class GameManager {
-    // TODO
-//    Use card1 : -2
-//    heal card place in the center of scene should place it in original place
-
+    //    Use card1 : -2
+    //    heal card place in the center of scene should place it in original place
+    
     static var scene: GameScene?
     static var firstRound = false
     // Player
     static var player: Player?
     static var maxHp: Int = 500
     static var hp: Int = 500
-
     static var enemyList: [Enemy] = []
     // Draw 5 new cards each player turn
     static var drawEachTurn = 5
     static var energyEachTurn = 4
     private (set) static var remainEnergy = energyEachTurn
-
-    // may have 2 or more enemy in the future
-//    static var targetEnemy : Enemy?
-
+    
     // will resupply card if there are no remain card and player wanna get one
     private (set) static var remainCards: [CardTemplate] = []
     private (set) static var holdCards: [CardTemplate] = []
     private (set) static var usedCards: [CardTemplate] = []
-
+    
     // player buff
     static var thisRoundDamagePlusOne = false
     static var doubleDamageOfNextCard = false
     static var skipPlayer = false
-    // TODO if need to add more enemy in one scene, the code in enemy state should be modified
     static var skipAllEnemy = false
     static var reduceEnemyTwoDamage = false
     
     // Second Enemy
     static var secondEnemyComeUp = false
-
-
     // set gamesgate
     static var gameState: GKStateMachine?
-
+    
     static var gameIsRunning: Bool {
         return gameState?.currentState is PlayerTurnState || gameState?.currentState is EnemyTurnState
     }
-
+    
     static func damagePlayer(with value: Int) {
         var damage = value
         if damage > 0 {
@@ -73,7 +63,7 @@ class GameManager {
             playerDie()
         }
     }
-
+    
     static func damageEnemy(with value: Int, enemy: Enemy) {
         var damageValue = value
         if thisRoundDamagePlusOne {
@@ -85,11 +75,6 @@ class GameManager {
         if doubleDamageOfNextCard {
             damageValue = damageValue * 2
         }
-
-        // for testing
-//        if enemy.enemyType == .bossFirst{
-//            damageValue = 100
-//        }
         
         if damageValue > 0 {
             if damageValue > enemy.hp {
@@ -125,14 +110,14 @@ class GameManager {
         scene?.enemyHealthBarValue = CGFloat(secondEnemy.hp) / CGFloat(secondEnemy.maxHp)
         secondEnemyComeUp = true
     }
-
+    
     static func addCardToRemainCards(card: CardTemplate) {
         if card.parent != nil {
             throwCardInASecretPlace(card: card)
         }
         remainCards.append(card)
     }
-
+    
     static func addCardToPlayerHand(card: CardTemplate) {
         if card.parent != nil {
             card.removeFromParent()
@@ -140,22 +125,21 @@ class GameManager {
         card.isSelected = false
         holdCards.append(card)
     }
-
+    
     // Slay the spire style
     static func drawCardsOnNewTurn() {
         drawRandomCards(count: drawEachTurn)
         scene?.showPlayerHoldCards()
     }
-
+    
     static func removeCardsOnHand() {
         for card in holdCards {
-            
             throwCardInASecretPlace(card: card)
         }
         usedCards.append(contentsOf: holdCards)
         holdCards = []
     }
-
+    
     static func healPlayer(with value: Int) {
         if value > 0 {
             GameManager.hp = GameManager.hp + value
@@ -163,9 +147,8 @@ class GameManager {
             scene?.showDamageOrHealLabel(value: value, node: player!)
         }
     }
-
+    
     // add card to player's own cards
-    // 
     static func drawRandomCards(count: Int = 1) {
         print("Draw random cards")
         for _ in 0..<count {
@@ -182,9 +165,8 @@ class GameManager {
                 }
             }
         }
-        //scene?.showPlayerHoldCards()
     }
-
+    
     private static func addRandomCardFromRemainCardsToHoldCards() {
         print(remainCards.count)
         let randomCard = remainCards.randomElement()!
@@ -193,7 +175,7 @@ class GameManager {
             remainCards.remove(at: index)
         }
     }
-
+    
     // throw one random card
     static func throwRandomCard() {
         if holdCards.count > 0 {
@@ -201,7 +183,7 @@ class GameManager {
             throwCards(with: [randomCard])
         }
     }
-
+    
     // when player use one card
     static func throwCards(with cards: [CardTemplate]) {
         
@@ -214,14 +196,13 @@ class GameManager {
         }
         scene?.showPlayerHoldCards()
     }
-
+    
     // remove card from scene in order to prevent physical issue
     private static func throwCardInASecretPlace(card: CardTemplate) {
-        
         card.removeFromParent()
     }
-
-    static func useCard(card: CardTemplate, enemy: Enemy? = nil/*, completion: (() -> Void)? = nil*/) {
+    
+    static func useCard(card: CardTemplate, enemy: Enemy? = nil) {
         if card is AttackCard || card is DebuffCard {
             if let enemy = enemy {
                 if isAvailableToUseCard(card: card) {
@@ -239,15 +220,12 @@ class GameManager {
             throwCards(with: [card])
             remainEnergy -= card.getEnergy()
         }
-//        if let callback = completion {
-//            callback()
-//        }
     }
-
+    
     static func isAvailableToUseCard(card: CardTemplate) -> Bool {
         return card.getEnergy() <= remainEnergy
     }
-
+    
     static func isAvailableToUseAnyCardInThisTurn() -> Bool {
         for card in holdCards {
             if remainEnergy >= card.getEnergy() {
@@ -256,15 +234,14 @@ class GameManager {
         }
         return false
     }
-
+    
     static func fillEnergy() {
         remainEnergy = energyEachTurn
     }
-
+    
     static func shakeSprite(target: SKNode, duration: Float) {
-
+        
         let position = target.position
-
         let amplitudeX: Float = 10
         let amplitudeY: Float = 6
         let numberOfShakes = duration / 0.04
@@ -277,13 +254,12 @@ class GameManager {
             actionsArray.append(shakeAction)
             actionsArray.append(shakeAction.reversed())
         }
-
+        
         actionsArray.append(SKAction.move(to: position, duration: 0.0))
-
         let actionSeq = SKAction.sequence(actionsArray)
         target.run(actionSeq)
     }
-
+    
     static func initialGameStateAndStart(scene: GameScene, player: Player, enemy: [Enemy]) {
         gameState = GKStateMachine(states: [PlayerTurnState(scene: scene), EnemyTurnState(scene: scene), EndGameState(scene: scene), LoseGameState(scene: scene)])
         self.player = player
@@ -294,29 +270,28 @@ class GameManager {
         gameState?.enter(PlayerTurnState.self)
         hp = maxHp
     }
-
+    
     static func updateGame(deltaTime: Double) {
         self.gameState?.update(deltaTime: deltaTime)
     }
-
+    
     static func enterEnemyState() {
         self.gameState?.enter(EnemyTurnState.self)
     }
-
-    // ded boi
+    
     static func playerDie() {
         print("player is dead")
         removeAllCardsParent()
         gameState?.enter(LoseGameState.self)
         return
     }
-
+    
     static func playerWin() {
         print("player win")
         removeAllCardsParent()
         gameState?.enter(EndGameState.self)
     }
-
+    
     static func removeAllCardsParent() {
         let allCards: [CardTemplate] = remainCards + usedCards + holdCards
         for card in allCards {

@@ -7,13 +7,11 @@
 //
 
 import Foundation
-
 import SpriteKit
 import GameplayKit
 
 //The player picks the card in this scene
 class StrategicScene: SceneClass {
-
     var entities = [GKEntity]()
     var graphs = [String: GKGraph]()
     private var lastUpdateTime: TimeInterval = 0
@@ -27,21 +25,18 @@ class StrategicScene: SceneClass {
             return playerSelectedCards.count
         }
     }
-
-
+    
     override func sceneDidLoad() {
-
         self.lastUpdateTime = 0
     }
-
+    
     //Display the card and count the selected cards
     override func didMove(to view: SKView) {
         physicsWorld.gravity = .zero
         cardsLeft = []
         cardsLeft.append(contentsOf: [cardAttack1(), cardAttack2(), cardAttack3(), cardAttack4(), cardAttack5(), cardAttack6(), cardAttack7(), cardHeal1(), cardHeal2(), cardHeal3(), cardHeal4(), cardBuff1(), cardBuff2(), cardBuff3(), cardBuff4(),  cardDebuff2(), cardDebuff3(), cardDebuff4()])
-
         cardsLeft.shuffle()
-
+        
         for (index, card) in cardsLeft.enumerated() {
             var gap: CGFloat
             if index < 9 {
@@ -56,12 +51,11 @@ class StrategicScene: SceneClass {
             }
             self.addChild(card)
         }
-
         selectCountNode.position = CGPoint(x: 450, y: -250)
         selectCountNode.text = "Select: 0/\(maxSelectCount)"
         addChild(selectCountNode)
     }
-
+    
     // function for select card
     func selectCard(card: CardTemplate?) {
         if let index = cardsLeft.index(of: card!) {
@@ -77,7 +71,6 @@ class StrategicScene: SceneClass {
             selectCountNode.text = "Select: \(selectCount)/\(maxSelectCount)"
             card?.selectCard()
         }
-
     }
     
     //Interact the card
@@ -97,7 +90,7 @@ class StrategicScene: SceneClass {
                 currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
                 selectCard(card: currentCard)
             }
-            // check for card child i.e the card image, and do silimar thing as above
+                // check for card child i.e the card image, and do silimar thing as above
             else if let card = atPoint(location).parent as? CardTemplate {
                 currentCard = card
                 currentCard?.zPosition = CardLevel.moving.rawValue
@@ -107,23 +100,21 @@ class StrategicScene: SceneClass {
             }
         }
     }
-
     // move the card when the touch position change
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
+        
     }
-
     
     func addCardBeforeStartGame() {
         for cardSelected in playerSelectedCards {
             GameManager.addCardToPlayerHand(card: cardSelected)
         }
-
+        
         for cardLeft in cardsLeft {
             GameManager.addCardToRemainCards(card: cardLeft)
         }
     }
-
+    
     // "drop" the card when the touch end
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -138,18 +129,14 @@ class StrategicScene: SceneClass {
                 // run the card drop animation
                 currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
                 currentCard = nil
-                //                card.removeFromParent()
-                //                addChild(card)
             }
             // do similar things as above, but for start button
             if let button = atPoint(location) as? SKSpriteNode {
                 if button.name == "Start" {
                     if playerSelectedCards.count == maxSelectCount {
                         let revealGameScene = SKTransition.fade(withDuration: 1.5)
-
                         // add cards to game manager
                         addCardBeforeStartGame()
-
                         let goToGameScene = GameScene(fileNamed: "GameScene")
                         goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
                         self.view?.presentScene(goToGameScene!, transition: revealGameScene)
@@ -164,8 +151,5 @@ class StrategicScene: SceneClass {
                 }
             }
         }
-    }
-
-
-    
+    }    
 }

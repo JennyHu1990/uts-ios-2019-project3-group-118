@@ -10,16 +10,15 @@ import SpriteKit
 import GameplayKit
 
 class LoseScene: SceneClass {
-
+    
     private var restartButton: SKSpriteNode = SKSpriteNode(imageNamed: "RestartGame")
-
     override func didMove(to view: SKView) {
         restartButton.name = "RestartGameButton"
         restartButton.size = CGSize(width: 210, height: 60)
         restartButton.position = CGPoint(x: 0, y: -150)
         addChild(restartButton)
     }
-
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             //use the first touch

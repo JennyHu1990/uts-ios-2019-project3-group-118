@@ -12,18 +12,18 @@ import SpriteKit
 // Sub Class of Card Template
 class DebuffCard: CardTemplate {
     var used = false
-
+    
     func defense() {
         print("Defense")
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-
+    
     init(energy: Int) {
         super.init(cardType: .debuff)
     }
-
+    
     init(name: String, energy: Int, imageName: String, description: String) {
         super.init(cardType: .debuff)
         self.setImage(with: imageName)
@@ -32,7 +32,6 @@ class DebuffCard: CardTemplate {
         self.setDescription(with: description)
     }
 }
-
 
 // Debuff Card 2
 class cardDebuff2: DebuffCard {

@@ -18,11 +18,11 @@ class BuffCard: CardTemplate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
-
+    
     init(energy: Int) {
         super.init(cardType: .buff)
     }
-
+    
     init(name: String, energy: Int, imageName: String, description: String) {
         super.init(cardType: .buff)
         self.setImage(with: imageName)

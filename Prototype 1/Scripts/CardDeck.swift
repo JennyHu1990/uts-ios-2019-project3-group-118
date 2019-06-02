@@ -12,13 +12,12 @@ import GameplayKit
 
 class CardDeck: CardTemplate {
     var cardDeck: [CardTemplate] = []
-
+    
     func addCard(card: CardTemplate) {
         cardDeck.append(card)
     }
-
+    
     func returnCardNum() -> Int {
         return cardDeck.count
     }
-
 }

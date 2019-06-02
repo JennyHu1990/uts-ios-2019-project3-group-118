@@ -16,49 +16,31 @@ enum gameTurn: Int {
     case playerTurn, enemyTurn
 }
 
-
 class EnemyTurnState: GKState {
     var scene: GameScene?
     var waitingOnPlayer: Bool
-
+    
     init(scene: GameScene) {
         self.scene = scene
         waitingOnPlayer = false
         super.init()
     }
-
+    
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         return stateClass == EndGameState.self || stateClass == PlayerTurnState.self || stateClass == LoseGameState.self
     }
-
+    
     override func didEnter(from previousState: GKState?) {
         updateGameState()
         self.stateMachine?.enter(PlayerTurnState.self)
     }
-
+    
     override func update(deltaTime: TimeInterval) {
         assert(scene != nil, "Scene must not be nil")
-
-        //        if !waitingOnPlayer{
-        //            waitingOnPlayer = true
-        //            updateGameState()
-        //        }
     }
-
+    
     func updateGameState() {
         assert(scene != nil, "Scene must not be nil")
-
-        //        switch self.scene?.currentTurnOrder() {
-        //        case gameTurn.playerTurn.rawValue:
-        //            self.waitingOnPlayer = false
-        //            self.scene?.isUserInteractionEnabled = true
-        //        case gameTurn.enemyTurn.rawValue:
-        //            self.waitingOnPlayer = true
-        //            self.scene?.isUserInteractionEnabled = false
-        //        default:
-        //            self.waitingOnPlayer = false
-        //            self.scene?.isUserInteractionEnabled = true
-        //        }
         assert(scene?.enemy.hp != nil, "enemy hp must not be nil")
         if GameManager.skipAllEnemy {
             GameManager.skipAllEnemy.toggle()
@@ -73,6 +55,5 @@ class EnemyTurnState: GKState {
             GameManager.damagePlayer(with: 10)
             print("enemy 2 turn")
         }
-
     }
 }

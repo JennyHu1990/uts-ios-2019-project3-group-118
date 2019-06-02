@@ -10,7 +10,6 @@ import Foundation
 import GameplayKit
 import SpriteKit
 
-
 class EndGameState: GKState{
     var scene: GameScene?
     
