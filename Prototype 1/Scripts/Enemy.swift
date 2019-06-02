@@ -10,6 +10,8 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+
+//Super Class of enemy
 enum EnemyType {
     case bossFirst, bossSecond
 }
@@ -54,6 +56,7 @@ class Enemy: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
 
+    //when the enemy is defeated
     func die() {
         print("\(String(describing: self.name)) is dead")
         self.removeFromParent()
