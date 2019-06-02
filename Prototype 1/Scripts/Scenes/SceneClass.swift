@@ -58,7 +58,7 @@ class SceneClass: SKScene {
         let moveAction = SKAction.move(to: pointToMove, duration: 0.1)
         //        if let card = atPoint(pointToMove) as? CardTemplate {
         if currentCard != nil {
-            currentCard?.run(moveAction)
+            currentCard?.run(moveAction,withKey: "move")
         }
         // experimental movement
         //        }

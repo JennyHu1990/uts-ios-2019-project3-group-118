@@ -39,22 +39,7 @@ class PlayerTurnState: GKState {
 //        
 //        self.health = (CGFloat)(currentHp / currentMax)
         updateGameState()
-        if GameManager.skipPlayer {
-            GameManager.skipPlayer.toggle()
-            return
-        }
-        if GameManager.reduceEnemyTwoDamage {
-            GameManager.reduceEnemyTwoDamage.toggle()
-            return
-        }
-
-        if GameManager.firstRound {
-            GameManager.firstRound.toggle()
-        } else {
-            print("remove card and redraw")
-            GameManager.drawCardsOnNewTurn()
-            scene?.showPlayerHoldCards()
-        }
+        
     }
 
     override func update(deltaTime: TimeInterval) {
@@ -78,6 +63,22 @@ class PlayerTurnState: GKState {
         print("player turn")
 
         GameManager.fillEnergy()
+        if GameManager.skipPlayer {
+            GameManager.skipPlayer.toggle()
+            return
+        }
+        if GameManager.reduceEnemyTwoDamage {
+            GameManager.reduceEnemyTwoDamage.toggle()
+            return
+        }
+        
+        if GameManager.firstRound {
+            GameManager.firstRound.toggle()
+        } else {
+            print("remove card and redraw")
+            GameManager.drawCardsOnNewTurn()
+            scene?.showPlayerHoldCards()
+        }
         //if let card1 = GameManager.drawRandomCards()! {
         //let card1 = GameManager.drawRandomCards()!
         // card1.position = (scene?.cardPosition)!
@@ -85,10 +86,6 @@ class PlayerTurnState: GKState {
         //}
     }
 
-
-    func resetGame() {
-
-    }
 }
 
 

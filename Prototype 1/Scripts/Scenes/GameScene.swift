@@ -17,6 +17,7 @@ class GameScene: SceneClass {
     private var label: SKLabelNode?
     private var spinnyNode: SKShapeNode?
     private var endButton: SKSpriteNode = SKSpriteNode(imageNamed: "EndTurnButton")
+    var oldLocation = CGPoint(x: 0, y: 0)
     var healthBarPlayer: SKSpriteNode!
     var energyLabelNode = SKLabelNode(text: "Energy:")
     
@@ -182,10 +183,12 @@ class GameScene: SceneClass {
     func showPlayerHoldCards() {
         print("show player hold cards \(GameManager.holdCards.count)")
         for (index, card) in GameManager.holdCards.enumerated() {
-            card.position = CGPoint(x: cardPosition.x + CGFloat(index) * card.cardSize.width + 20, y: cardPosition.y)
+            card.position = CGPoint(x: -320 + CGFloat(index) * card.cardSize.width + 20, y: -220)
             card.isHidden = false
+            
             if card.parent != nil {
                 card.removeFromParent()
+                print("debug1")
             }
             self.addChild(card)
         }
@@ -226,7 +229,29 @@ class GameScene: SceneClass {
             }
         }
     }
-
+    func activate(card: CardTemplate, enemy: SKSpriteNode) {
+        
+        if card is AttackCard || card is DebuffCard {
+            if currentCard != nil {
+                // change the card floating height
+                currentCard?.zPosition = CardLevel.board.rawValue
+                // remove all animation
+                currentCard?.removeAllActions()
+                // run the card drop animation
+                currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
+                //currentCard?.removeFromParent()
+                //addChild(currentCard!)
+                currentCard = nil
+            }
+            GameManager.shakeSprite(target: enemy, duration: 1.0)
+            showPlayerHoldCards()
+            GameManager.useCard(card: card, enemy: enemy as? Enemy)
+            
+        } else {
+            print("wrong interaction with \(String(describing: card.getName())) desc: \(card.getDescription())")
+            showPlayerHoldCards()
+        }
+    }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             //use the first touch
@@ -239,9 +264,9 @@ class GameScene: SceneClass {
                 currentCard?.removeAction(forKey: "pickup")
                 // run the card drop animation
                 currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
+                //currentCard?.removeFromParent()
+                //addChild(currentCard!)
                 currentCard = nil
-                //                card.removeFromParent()
-                //                addChild(card)
             }
             //do similar things as above, but for start button
             if let button = atPoint(location) as? SKSpriteNode {
@@ -271,16 +296,41 @@ extension GameScene: SKPhysicsContactDelegate {
         if ((firstBody.categoryBitMask & Physics.card != 0) && (secondBody.categoryBitMask & Physics.enemy != 0)) {
             if let card = firstBody.node as? CardTemplate, let enemy = secondBody.node as? SKSpriteNode {
                 if card is AttackCard || card is DebuffCard {
+                    if currentCard != nil {
+                        // change the card floating height
+                        currentCard?.zPosition = CardLevel.board.rawValue
+                        // remove all animation
+                        currentCard?.removeAllActions()
+                        // run the card drop animation
+                        currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
+                        //currentCard?.removeFromParent()
+                        //addChild(currentCard!)
+                        currentCard = nil
+                    }
                     GameManager.shakeSprite(target: enemy, duration: 1.0)
+                    showPlayerHoldCards()
                     GameManager.useCard(card: card, enemy: enemy as? Enemy)
+                    
                 } else {
                     print("wrong interaction with \(String(describing: card.getName())) desc: \(card.getDescription())")
                     showPlayerHoldCards()
                 }
+                
             }
         } else if ((firstBody.categoryBitMask & Physics.card != 0) && (secondBody.categoryBitMask & Physics.player != 0)) {
             if let card = firstBody.node as? CardTemplate, let _ = secondBody.node as? SKSpriteNode {
                 if card is HealCard || card is BuffCard {
+                    if currentCard != nil {
+                        // change the card floating height
+                        currentCard?.zPosition = CardLevel.board.rawValue
+                        // remove all animation
+                        currentCard?.removeAllActions()
+                        // run the card drop animation
+                        currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
+                        //currentCard?.removeFromParent()
+                        //addChild(currentCard!)
+                        currentCard = nil
+                    }
                     GameManager.useCard(card: card)
                 } else {
                     print("wrong interaction with \(String(describing: card.getName())) desc: \(card.getDescription())")

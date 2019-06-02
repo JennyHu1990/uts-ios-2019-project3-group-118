@@ -70,7 +70,7 @@ class EnemyTurnState: GKState {
             GameManager.damagePlayer(with: 5)
             print("enemy 1 turn")
         case .bossSecond:
-            GameManager.damagePlayer(with: 20)
+            GameManager.damagePlayer(with: 10)
             print("enemy 2 turn")
         }
 

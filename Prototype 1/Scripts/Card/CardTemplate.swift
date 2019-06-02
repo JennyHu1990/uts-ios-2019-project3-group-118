@@ -71,31 +71,19 @@ class CardTemplate: SKSpriteNode {
             frontTexture = SKTexture(imageNamed: "CardDeBuff")
         }
         super.init(texture: frontTexture, color: .clear, size: cardSize)
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1 ){
         self.physicsBody = SKPhysicsBody(rectangleOf: self.cardSize)
         self.physicsBody?.isDynamic = true
         self.physicsBody?.categoryBitMask = Physics.card
         self.physicsBody?.contactTestBitMask = Physics.enemy
         self.physicsBody?.collisionBitMask = Physics.none
-        //        }
-
-        //        super.init(texture: frontTexture, color: .clear, size: cardSize)
         self.initialUINode()
     }
-
-//    convenience init(cardType: CardType, name: String, energy: Int, imageName: String) {
-//        self.init(cardType: cardType)
-//        setName(with: name)
-//        setEnergy(with: energy)
-//        setImage(with: imageName)
-//    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
 
     func initialUINode() {
-//        energyNode.text = "1"
         energyNode.fontSize = 16
         energyNode.fontColor = SKColor.white
         energyNode.position = CGPoint(x: -50, y: 73)
@@ -116,12 +104,6 @@ class CardTemplate: SKSpriteNode {
         descNode.position = CGPoint(x: 0, y: -(190 / 5))
         descNode.verticalAlignmentMode = .top
         super.addChild(descNode)
-
-//        imageNode = SKSpriteNode(imageNamed: "CardAttackImage2")
-//        imageNode.position = CGPoint(x: 0, y: 0)
-//        imageNode.zPosition = -1
-////        imageNode.zPosition = -1
-//        super.addChild(imageNode)
 
         highLightNode.zPosition = -1.5
         highLightNode.position = CGPoint(x: highLightNode.position.x + 2, y: highLightNode.position.y - 7)
@@ -164,7 +146,6 @@ class CardTemplate: SKSpriteNode {
         imageNode.position = CGPoint(x: 0, y: 30)
         imageNode.zPosition = -1
         super.addChild(imageNode)
-//        imageNode.isUserInteractionEnabled = false
     }
 
     func getImageName() -> String {

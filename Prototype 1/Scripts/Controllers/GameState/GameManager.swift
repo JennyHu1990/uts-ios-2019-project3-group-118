@@ -22,8 +22,8 @@ class GameManager {
     static var firstRound = false
     // Player
     static var player: Player?
-    static var maxHp: Int = 50
-    static var hp: Int = 50
+    static var maxHp: Int = 500
+    static var hp: Int = 500
 
     static var enemyList: [Enemy] = []
     // Draw 5 new cards each player turn
@@ -144,10 +144,12 @@ class GameManager {
     // Slay the spire style
     static func drawCardsOnNewTurn() {
         drawRandomCards(count: drawEachTurn)
+        scene?.showPlayerHoldCards()
     }
 
     static func removeCardsOnHand() {
         for card in holdCards {
+            card.position = CGPoint(x: 0, y: -1000)
             throwCardInASecretPlace(card: card)
         }
         usedCards.append(contentsOf: holdCards)
@@ -180,11 +182,11 @@ class GameManager {
                 }
             }
         }
-        scene?.showPlayerHoldCards()
+        //scene?.showPlayerHoldCards()
     }
 
     private static func addRandomCardFromRemainCardsToHoldCards() {
-        print("addRandomCardFromRemainCardsToHoldCards")
+        print(remainCards.count)
         let randomCard = remainCards.randomElement()!
         holdCards.append(randomCard)
         if let index = remainCards.index(of: randomCard) {
@@ -202,10 +204,11 @@ class GameManager {
 
     // when player use one card
     static func throwCards(with cards: [CardTemplate]) {
-        usedCards.append(contentsOf: cards)
+        
         for card in cards {
             if let index = holdCards.index(of: card) {
                 throwCardInASecretPlace(card: card)
+                usedCards.append(card)
                 holdCards.remove(at: index)
             }
         }
@@ -214,37 +217,31 @@ class GameManager {
 
     // remove card from scene in order to prevent physical issue
     private static func throwCardInASecretPlace(card: CardTemplate) {
-        card.isHidden = true
+        
         card.removeFromParent()
-        card.position = CGPoint(x: 0, y: -500)
     }
 
-    static func useCard(card: CardTemplate, enemy: Enemy? = nil, completion: (() -> Void)? = nil) {
+    static func useCard(card: CardTemplate, enemy: Enemy? = nil/*, completion: (() -> Void)? = nil*/) {
         if card is AttackCard || card is DebuffCard {
-//            if enemy == nil {
-//                print("Have to assign an enemy")
-//                return
-//            }
-//            card.activateCardEnemy(enemy: targetEnemy!)
             if let enemy = enemy {
                 if isAvailableToUseCard(card: card) {
                     card.activateCardEnemy(enemy: enemy)
-                    throwCards(with: [card])
                     remainEnergy -= card.getEnergy()
                     print("Use card\(card.getName()) remain: \(remainEnergy) energy")
+                    throwCards(with: [card])
                 }
             } else {
                 print("enemy is nil")
             }
         } else if card is HealCard || card is BuffCard {
             card.activateCardPlayer()
+            card.removeFromParent()
             throwCards(with: [card])
             remainEnergy -= card.getEnergy()
         }
-
-        if let callback = completion {
-            callback()
-        }
+//        if let callback = completion {
+//            callback()
+//        }
     }
 
     static func isAvailableToUseCard(card: CardTemplate) -> Bool {
@@ -328,5 +325,6 @@ class GameManager {
         remainCards = []
         usedCards = []
         holdCards = []
+        secondEnemyComeUp = false
     }
 }
