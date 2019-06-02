@@ -1,4 +1,5 @@
-# Project 3
+# Faelurian
+For the iOS assignment3
 The group get inspriation from the game "Slay the Spire"
 
 ## Scenario
