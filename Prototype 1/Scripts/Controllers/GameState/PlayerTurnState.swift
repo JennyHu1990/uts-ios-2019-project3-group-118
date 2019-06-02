@@ -26,26 +26,11 @@ class PlayerTurnState: GKState {
     }
 
     override func didEnter(from previousState: GKState?) {
-//        let currentHp = (Double)(GameManager.hp)
-//        let currentMax = (Double)(GameManager.maxHp)
-//        
-//        // Player die
-//        if currentHp <= 0 {
-//            self.health = 0
-//            print("lose game")
-//            gameState.enter(LoseGameState.self)
-//            return
-//        }
-//        
-//        self.health = (CGFloat)(currentHp / currentMax)
         updateGameState()
         
     }
 
     override func update(deltaTime: TimeInterval) {
-        //resetGame()
-        //print("still player turn")
-        //self.stateMachine?.enter(ActiveGameState.self)
     }
 
     override func willExit(to nextState: GKState) {
@@ -79,11 +64,6 @@ class PlayerTurnState: GKState {
             GameManager.drawCardsOnNewTurn()
             scene?.showPlayerHoldCards()
         }
-        //if let card1 = GameManager.drawRandomCards()! {
-        //let card1 = GameManager.drawRandomCards()!
-        // card1.position = (scene?.cardPosition)!
-        // scene?.addChild(card1)
-        //}
     }
 
 }

@@ -37,10 +37,6 @@ class SceneClass: SKScene {
             // check for card child i.e the card image, and do silimar thing as above
             else if let card = atPoint(location).parent as? CardTemplate {
                 currentCard = card
-//                if touch.tapCount > 1 {
-//                    deck?.addCard(card: currentCard!)
-//                    print("Selected this card")
-//                }
             }
             // change the card floating height
             currentCard?.zPosition = CardLevel.moving.rawValue
@@ -60,11 +56,6 @@ class SceneClass: SKScene {
         if currentCard != nil {
             currentCard?.run(moveAction,withKey: "move")
         }
-        // experimental movement
-        //        }
-        //        node.run(moveAction)
-        //        for touch in touches{
-        //            let location = touch.location(in: self)
     }
 
     // "drop" the card when the touch end
@@ -81,18 +72,8 @@ class SceneClass: SKScene {
                 // run the card drop animation
                 currentCard?.run(SKAction.scale(to: 1.0, duration: 0.25), withKey: "drop")
                 currentCard = nil
-                //                card.removeFromParent()
-                //                addChild(card)
             }
-            // do similar things as above, but for start button
-//            if let button = atPoint(location) as? SKSpriteNode {
-//                if button.name == "Start" {
-//                    let revealGameScene = SKTransition.fade(withDuration: 1.5)
-//                    let goToGameScene = GameScene(fileNamed: "GameScene")
-//                    goToGameScene!.scaleMode = SKSceneScaleMode.aspectFill
-//                    self.view?.presentScene(goToGameScene!, transition: revealGameScene)
-//                }
-//            }
+        
         }
     }
 

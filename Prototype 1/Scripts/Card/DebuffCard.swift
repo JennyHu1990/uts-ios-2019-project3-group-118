@@ -11,7 +11,6 @@ import SpriteKit
 
 // Sub Class of Card Template
 class DebuffCard: CardTemplate {
-//    var backImage = SKTexture.self
     var used = false
 
     func defense() {
@@ -34,21 +33,6 @@ class DebuffCard: CardTemplate {
     }
 }
 
-//Energy 2
-//Enemy sclient 2 rounds
-//class cardDebuff1: DebuffCard {
-//    init() {
-//        super.init(name: "Debuff1", energy: 2, imageName: "CardDebuffImage1", description: "Skip all Enemies 2 turns")
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-//    override func activateCardEnemy(enemy: Enemy) {
-//        // TODO
-//    }
-//}
 
 // Debuff Card 2
 class cardDebuff2: DebuffCard {

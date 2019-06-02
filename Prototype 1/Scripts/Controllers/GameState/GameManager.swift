@@ -70,7 +70,7 @@ class GameManager {
             shakeSprite(target: player!, duration: 1.0)
         }
         if hp <= 0 {
-            playerDied()
+            playerDie()
         }
     }
 
@@ -119,7 +119,7 @@ class GameManager {
         let secondEnemy = Enemy(health: 50, enemyType: .bossSecond)
         secondEnemy.position = CGPoint(x: 320, y: 30)
         secondEnemy.zPosition = 10
-        secondEnemy.size = CGSize(width: 240.0, height: 280.0)
+        secondEnemy.size = CGSize(width: 200.0, height: 200.0)
         scene?.addChild(secondEnemy)
         enemyList.append(secondEnemy)
         scene?.enemyHealthBarValue = CGFloat(secondEnemy.hp) / CGFloat(secondEnemy.maxHp)
@@ -149,7 +149,7 @@ class GameManager {
 
     static func removeCardsOnHand() {
         for card in holdCards {
-            card.position = CGPoint(x: 0, y: -1000)
+            
             throwCardInASecretPlace(card: card)
         }
         usedCards.append(contentsOf: holdCards)
@@ -304,7 +304,7 @@ class GameManager {
     }
 
     // ded boi
-    static func playerDied() {
+    static func playerDie() {
         print("player is dead")
         removeAllCardsParent()
         gameState?.enter(LoseGameState.self)

@@ -21,15 +21,12 @@ class Player: SKSpriteNode {
     let player :PlayerType
     let frontTexture :SKTexture
     let backTexture :SKTexture
-    // hp is stored in game manager
-//    var hp: Int
     var playerSize: CGSize
     
     init(playerType: PlayerType) {
         self.player = playerType
         backTexture = SKTexture(imageNamed: "CardBackgroundShadow")
-//        self.hp = health
-        self.playerSize = CGSize.init(width: 170.0, height: 170.0)
+        self.playerSize = CGSize.init(width: 130.0, height: 130.0)
         switch playerType {
         case .player1:
             frontTexture = SKTexture(imageNamed: "Player1")

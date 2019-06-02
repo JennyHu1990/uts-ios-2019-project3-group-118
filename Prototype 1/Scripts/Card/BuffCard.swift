@@ -11,7 +11,6 @@ import SpriteKit
 
 //Sub class of Card Template
 class BuffCard: CardTemplate {
-//    var backImage = SKTexture.self
     var used = false
     func defense() {
         print("Defense")

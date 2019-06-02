@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2B19F947229A490A00A88E5A /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2B19F946229A490A00A88E5A /* MenuScene.sks */; };
 		2B19F94D229A4A7000A88E5A /* MenuSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19F94C229A4A7000A88E5A /* MenuSceneViewController.swift */; };
-		2B19F94F229A4B9100A88E5A /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19F94E229A4B9100A88E5A /* MenuScene.swift */; };
 		2B601A4D228EE67B003B814C /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B601A4C228EE67B003B814C /* CardDeck.swift */; };
 		2BAC53FE22927EA400B1A4CC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAC53FD22927EA400B1A4CC /* Player.swift */; };
 		2BC7A9D522A2AD1A00456CC3 /* LoseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC7A9D422A2AD1A00456CC3 /* LoseScene.swift */; };
@@ -44,7 +43,6 @@
 /* Begin PBXFileReference section */
 		2B19F946229A490A00A88E5A /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		2B19F94C229A4A7000A88E5A /* MenuSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuSceneViewController.swift; path = ../../../MenuSceneViewController.swift; sourceTree = "<group>"; };
-		2B19F94E229A4B9100A88E5A /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		2B601A4C228EE67B003B814C /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 		2BAC53FD22927EA400B1A4CC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2BC7A9D422A2AD1A00456CC3 /* LoseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseScene.swift; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				2BE1916B228D00EA00694D2F /* GameScene.swift */,
-				2B19F94E229A4B9100A88E5A /* MenuScene.swift */,
 				BACA5194228D2A24009CBE7A /* StrategicScene.swift */,
 				F5681899228EB61700765006 /* SceneClass.swift */,
 				2BC7A9D422A2AD1A00456CC3 /* LoseScene.swift */,
@@ -297,7 +294,6 @@
 				F50AC45B228EBD6800CF5C43 /* AttackCard.swift in Sources */,
 				BACA519D228D3025009CBE7A /* GameManager.swift in Sources */,
 				2BC7A9D522A2AD1A00456CC3 /* LoseScene.swift in Sources */,
-				2B19F94F229A4B9100A88E5A /* MenuScene.swift in Sources */,
 				BACA51A1228D324B009CBE7A /* CardTemplate.swift in Sources */,
 				BA0C6AB422A0F55C0098725B /* LoseGameState.swift in Sources */,
 				F50AC45D228EBD8E00CF5C43 /* HealCard.swift in Sources */,

@@ -24,11 +24,6 @@ class Enemy: SKSpriteNode {
     var hp: Int
     var maxHp: Int
     var enemySize: CGSize
-//    init(imageName: String, name: String, hp: Int) {
-//        
-//        self.hp = hp
-//        self.name = name
-//    }
 
     init(health: Int, enemyType: EnemyType) {
         self.enemyType = enemyType

@@ -28,7 +28,6 @@ class StrategicScene: SceneClass {
         }
     }
 
-    //    var gameManager: GameManager!
 
     override func sceneDidLoad() {
 
@@ -106,10 +105,6 @@ class StrategicScene: SceneClass {
                 currentCard?.zPosition = CardLevel.moving.rawValue
                 currentCard?.removeAction(forKey: "drop")
                 currentCard?.run(SKAction.scale(to: 1.3, duration: 0.25), withKey: "pickup")
-                //                if touch.tapCount > 1 {
-                //                    deck?.addCard(card: currentCard!)
-                //                    print("Selected this card")
-                //                }
                 selectCard(card: currentCard)
             }
         }
@@ -117,19 +112,7 @@ class StrategicScene: SceneClass {
 
     // move the card when the touch position change
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touchedPoint = touches.first!
-//        let pointToMove = touchedPoint.location(in: self)
-//        // animation for card movement
-//        let moveAction = SKAction.move(to: pointToMove, duration: 0.1)
-//        //        if let card = atPoint(pointToMove) as? CardTemplate {
-//        if currentCard != nil {
-//            currentCard?.run(moveAction)
-//        }
-        // experimental movement
-        //        }
-        //        node.run(moveAction)
-        //        for touch in touches{
-        //            let location = touch.location(in: self)
+//
     }
 
     
@@ -186,37 +169,5 @@ class StrategicScene: SceneClass {
     }
 
 
-    //    override func update(_ currentTime: TimeInterval) {
-    //        // Called before each frame is rendered
-    //
-    //        // Initialize _lastUpdateTime if it has not already been
-    //        if (self.lastUpdateTime == 0) {
-    //            self.lastUpdateTime = currentTime
-    //        }
-    //
-    //        // Calculate time since last update
-    //        let dt = currentTime - self.lastUpdateTime
-    //
-    //        // Update entities
-    //        for entity in self.entities {
-    //            entity.update(deltaTime: dt)
-    //        }
-    //
-    //        self.lastUpdateTime = currentTime
-    //    }
+    
 }
-
-
-// Create shape node to use during mouse interaction
-//        let w = (self.size.width + self.size.height) * 0.05
-//        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-
-//        if let spinnyNode = self.spinnyNode {
-//            spinnyNode.lineWidth = 2.5
-//
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                              SKAction.fadeOut(withDuration: 0.5),
-//                                              SKAction.removeFromParent()]))
-//        }
-//    }

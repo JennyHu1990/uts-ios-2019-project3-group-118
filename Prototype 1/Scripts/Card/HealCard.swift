@@ -11,7 +11,6 @@ import SpriteKit
 
 //Sub Class of CardTemplate
 class HealCard: CardTemplate {
-//    var backImage = SKTexture.self
     var used = false
     var heal: Int = 0
 
