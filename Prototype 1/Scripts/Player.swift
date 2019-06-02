@@ -16,6 +16,7 @@ enum PlayerType: Int {
     player3
 }
 
+//Class of player
 class Player: SKSpriteNode {
     let player :PlayerType
     let frontTexture :SKTexture
