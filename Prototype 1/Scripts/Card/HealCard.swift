@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-
+//Sub Class of CardTemplate
 class HealCard: CardTemplate {
 //    var backImage = SKTexture.self
     var used = false
@@ -41,11 +41,10 @@ class HealCard: CardTemplate {
     }
 }
 
-//Energy 2
-//Double player hp
+//Heal Card 1
 class cardHeal1: HealCard {
     init() {
-        super.init(name: "Heal1", energy: 4, imageName: "CardHealImage1", description: "Double player hp")
+        super.init(name: "Heal 1", energy: 4, imageName: "CardHealImage1", description: "Double player hp")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -57,11 +56,10 @@ class cardHeal1: HealCard {
     }
 }
 
-//Energy 2
-//Random 1-4 heal of player
+//Heal Card 2
 class cardHeal2: HealCard {
     init() {
-        super.init(name: "Heal2", energy: 2, imageName: "CardHealImage2", description: "2-6 Random Heal")
+        super.init(name: "Heal 2", energy: 2, imageName: "CardHealImage2", description: "2-6 Random Heal")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -74,12 +72,10 @@ class cardHeal2: HealCard {
     }
 }
 
-//Energy 3
-//Heal player hp 3
-//Damage all the enemy 2 hp
+//Heal Card 3
 class cardHeal3: HealCard {
     init() {
-        super.init(name: "Heal3", energy: 3, imageName: "CardHealImage3", description: "3 Heal \n3 Damage all the enemies")
+        super.init(name: "Heal 3", energy: 3, imageName: "CardHealImage3", description: "3 Heal \n3 Damage all the enemies")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -95,11 +91,10 @@ class cardHeal3: HealCard {
     }
 }
 
-//Energy 1
-//Heal player 1
+//Heal Card 4
 class cardHeal4: HealCard {
     init() {
-        super.init(name: "Heal4", energy: 1, imageName: "CardHealImage4", description: "2 Heal", heal: 2)
+        super.init(name: "Heal 4", energy: 1, imageName: "CardHealImage4", description: "2 Heal", heal: 2)
     }
 
     required init?(coder aDecoder: NSCoder) {
