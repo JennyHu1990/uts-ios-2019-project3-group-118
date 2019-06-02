@@ -65,10 +65,6 @@ class GameScene: SceneClass {
 
     // set up initial view
     override func didMove(to view: SKView) {
-
-        // call node manager to keep track of nodes
-        super.nodeManager = NodeManager(scene: self)
-
         // set physic world
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
@@ -99,7 +95,7 @@ class GameScene: SceneClass {
         let player = Player(playerType: .player1)
         player.position = CGPoint(x: -320, y: 0)
         player.zPosition = 1
-        super.nodeManager.add(player)
+        self.addChild(player)
 
         ///Initiallize health bar
         healthBarPlayer = childNode(withName: "BarPlayer")?.childNode(withName: "healthBarPlayer") as? SKSpriteNode

@@ -322,6 +322,7 @@ class GameManager {
         for card in allCards {
             card.removeFromParent()
         }
+        player?.removeFromParent()
         remainCards = []
         usedCards = []
         holdCards = []

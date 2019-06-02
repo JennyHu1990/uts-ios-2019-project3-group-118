@@ -36,8 +36,6 @@ class StrategicScene: SceneClass {
 
     //Display the card and count the selected cards
     override func didMove(to view: SKView) {
-        // 1
-        super.nodeManager = NodeManager(scene: self)
         physicsWorld.gravity = .zero
         cardsLeft = []
         cardsLeft.append(contentsOf: [cardAttack1(), cardAttack2(), cardAttack3(), cardAttack4(), cardAttack5(), cardAttack6(), cardAttack7(), cardHeal1(), cardHeal2(), cardHeal3(), cardHeal4(), cardBuff1(), cardBuff2(), cardBuff3(), cardBuff4(),  cardDebuff2(), cardDebuff3(), cardDebuff4()])
@@ -56,7 +54,7 @@ class StrategicScene: SceneClass {
                 gap = CGFloat(index - 18 + 1)
                 card.position = CGPoint(x: -size.width / 2 + gap * card.size.width, y: size.height / 2 - 3 * card.size.height)
             }
-            super.nodeManager.add(card)
+            self.addChild(card)
         }
 
         selectCountNode.position = CGPoint(x: 450, y: -250)

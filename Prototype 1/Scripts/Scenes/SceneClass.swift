@@ -16,7 +16,6 @@ import GameplayKit
 class SceneClass: SKScene {
 
     var currentCard: CardTemplate?
-    var nodeManager: NodeManager!
     var deck: CardDeck?
     
     // override touch function
