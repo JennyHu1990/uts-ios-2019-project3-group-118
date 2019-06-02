@@ -1,4 +1,4 @@
-# Faelurian
+# Faeluria
 For the iOS assignment3
 
 The group get inspriation from the game "Slay the Spire"
